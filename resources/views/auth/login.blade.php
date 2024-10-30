@@ -20,6 +20,15 @@
                 </div>
             @endif
 
+
+
+
+
+
+
+
+
+            
             <div class="card-body">
                 <form method="post" action="/">
                     @csrf
