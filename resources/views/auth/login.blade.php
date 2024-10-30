@@ -26,7 +26,7 @@
                       {{-- <label for="email" class="form-label">Email</label> --}}
                       {{-- <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email"> --}}
 
-                      <input type="text" class="form-control @error('email') is-invalid @enderror" placeholder="Email" aria-label="email" aria-describedby="addon-wrapping">
+                      <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" aria-label="email" aria-describedby="addon-wrapping" id="email">
 
                       @error('email')
                         <div class="invalid-feedback">
@@ -38,7 +38,7 @@
                       {{-- <label for="password" class="form-label">Password</label>
                       <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password"> --}}
 
-                      <input type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping">
+                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" aria-label="password" aria-describedby="addon-wrapping" id="password">
 
                       @error('password')
                         <div class="invalid-feedback">
@@ -51,7 +51,7 @@
                         <button type="submit" class="btn " style="text-align: center; color:white ; background-color:#1E56A0; ">Masuk</button>
                     </div>
 
-                    <div style="margin-top: 60px; text-align:center;">
+                    <div style="margin-top: 40px; text-align:center;">
                         <p>
                             Belum mempunyai akun?<b><a href="">Daftar</a></b>
                         </p>
