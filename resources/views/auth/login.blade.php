@@ -4,6 +4,10 @@
     <div class="d-flex justify-content-center align-items-center vh-100">
         <div class="card shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 20rem; height: 30rem; border: 2px solid #1E56A0;">
 
+
+
+
+
             {{-- <div class="card-header text-center">
               Login
             </div> --}}
