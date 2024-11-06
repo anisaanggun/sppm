@@ -7,6 +7,10 @@ use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\DataController;
 
 //  jika user belum login
 Route::group(['middleware' => 'guest'], function() {
@@ -37,4 +41,12 @@ Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
 Route::group(['middleware' => ['auth', 'checkrole:3']], function() {
     Route::get('/customer', [CustomerController::class, 'index']);
 
+});
+
+
+
+
+Route::group(['middleware' => ['auth']], function(){
+    Route::get('/beranda', [BerandaController::class, 'index']);
+    Route::get('/jadwal', [JadwalController::class, 'index']);
 });

@@ -1,4 +1,3 @@
-
 <!-- Main Sidebar Container -->
   <aside class="main-sidebar" >
     <!-- Brand Logo -->
@@ -23,7 +22,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link ">
+            <a href="{{ url('/jadwal') }}" class="nav-link {{ Request::segment(1) == 'jadwal'? 'active-link' : 'nonactive-link' }}">
               <i class="nav-icon fas fa-calendar"></i>
               <p>
                 Jadwal
