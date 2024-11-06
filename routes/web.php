@@ -50,3 +50,4 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/beranda', [BerandaController::class, 'index']);
     Route::get('/jadwal', [JadwalController::class, 'index']);
 });
+
