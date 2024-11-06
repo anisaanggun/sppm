@@ -14,7 +14,7 @@ Route::group(['middleware' => 'guest'], function() {
 
 });
 
-// untuk superadmin dan pegawai
+// untuk admin dan pegawai
 Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/redirect', [RedirectController::class, 'cek']);
