@@ -1,39 +1,49 @@
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <!-- SidebarSearch Form -->
-        <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                    <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-      </li>
 
-    </ul>
+<nav class="header navbar navbar-expand">
+    <!-- Form Pencarian dengan Ikon dalam Tombol -->
+    <div class="search-container">
+        <input type="text" placeholder="Cari..." class="search-input">
+      </div>
 
-    <!-- Right navbar links -->
+    <!-- navigasi header -->
     <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
-      <li class="nav-item">
-        <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="/assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-                <a href="#" class="d-block">Budiman</a>
-            </div>
-        </div>
-      </li>
+        <!-- heder user -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-user"></i>
+            <span class="d-lg-none">
+              <span class="badge badge-pill badge-warning"></span>
+            </span>
+            Budiman
+          </a>
+          <!-- start dropdown -->
+          <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+            <!-- start ubah data pribadi -->
+            <a class="dropdown-item" href="?cs=Ubah-Data" id="mn_ubahdata">
+              <span class="text-primary">
+                <strong>
+                  <i class="fa fa-edit"></i>
+                  Ubah Data Pribadi</strong>
+              </span>
+            </a><!-- end ubah data pribadi -->
 
-
-    </ul>
+            <!-- start ubah sandi -->
+            <a class="dropdown-item" href="?cs=Ubah-Sandi">
+              <span class="text-success">
+                <strong>
+                    <i class="fa-solid fa-key"></i>
+                  Ubah Kata Sandi</strong>
+              </span>
+            </a> <!-- end ubah sandi -->
+            <div class="dropdown-divider"></div> <!-- Divider antara menu -->
+            <form action="/logout" method="post" class="dropdown-item">
+            @csrf
+            <button class="btn text-danger p-0" type="submit">
+                <i class="fa-solid fa-right-from-bracket mr-2"></i> <strong>Logout</strong>
+            </button>
+            </form>
+        <!-- End Logout -->
+          </div><!-- end dropdown -->
+        </li><!-- end header user -->
+      </ul><!-- end navgiasi header -->
   </nav>
-  <!-- /.navbar -->

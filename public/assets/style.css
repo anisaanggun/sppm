@@ -1,8 +1,9 @@
 *{
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Public-Sans' sans-serif;
     padding: 0;
     margin: 0;
 }
+
 
 /* Sidebar */
 .main-sidebar {
@@ -59,8 +60,69 @@
 }
 
 /* Header */
-.main-header{
+.header{
     background-color: #1E56A0;
     color: #FFFFFF;
 }
 
+.header .nav-item .nav-link{
+    color: #FFFFFF;
+}
+
+
+
+
+/* Pencarian */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  /* Input Search dengan desain modern */
+  .search-input {
+    width: 100%;
+    padding: 5px 10px 5px 10px; /* Memberikan ruang untuk ikon di kiri */
+    border: 2px solid #ccc;
+    border-radius: 30px; /* Rounded corners */
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease-in-out; /* Transisi smooth */
+  }
+
+  /* Ikon di dalam input */
+  .search-input::placeholder {
+    color: #aaa;
+  }
+
+  .search-input:focus {
+    border-color: #3498db; /* Warna biru saat fokus */
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.5);
+  }
+
+  /* Ikon di kiri input menggunakan background */
+  .search-input {
+    background-image: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/svgs/solid/search.svg');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 18px;
+  }
+
+  /* Styling saat input difokuskan atau saat hover */
+  .search-input:hover, .search-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 12px rgba(52, 152, 219, 0.3); /* Efek border hover */
+  }
+
+  /* Tambahan untuk mobile responsiveness */
+  @media (max-width: 600px) {
+    .search-container {
+      width: 90%;
+    }
+
+    .search-input {
+      padding: 12px 35px;
+    }
+  }

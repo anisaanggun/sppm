@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Http\Controllers;
@@ -33,7 +34,7 @@ class AuthController extends Controller
             } else {
                 // jika user customer
                 return redirect()->intended('/customer');
-            }  
+            }
         }
 
         // jika email atau password salah
