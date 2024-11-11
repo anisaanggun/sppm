@@ -21,6 +21,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Theme style -->
     <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
 
+
     <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body class="hold-transition sidebar-mini">

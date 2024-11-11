@@ -10,3 +10,4 @@ class DataPerbaikanController extends Controller
         return view('admin.data-perbaikan');
     }
 }
+

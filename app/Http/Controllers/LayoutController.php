@@ -10,3 +10,4 @@ class LayoutController extends Controller
         return view('layout.main');
     }
 }
+
