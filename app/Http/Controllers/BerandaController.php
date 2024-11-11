@@ -10,4 +10,3 @@ class BerandaController extends Controller
         return view('admin.beranda');
     }
 }
-

@@ -10,4 +10,3 @@ class TeknisiController extends Controller
         return view('teknisi.index');
     }
 }
-
