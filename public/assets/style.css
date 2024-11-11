@@ -69,8 +69,10 @@
     color: #FFFFFF;
 }
 
-
-
+/* Login */
+.card-login{
+    border-radius: 30px !important;
+}
 
 /* Pencarian */
 .search-container {
