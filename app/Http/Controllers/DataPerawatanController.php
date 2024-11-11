@@ -8,5 +8,6 @@ class DataPerawatanController extends Controller
 {
     public function index() {
         return view('admin.data-perawatan');
+
     }
 }

@@ -66,6 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
           </div>
           <!-- ./col -->
+
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box">
