@@ -5,23 +5,22 @@
 }
 
 
-/* Sidebar */
-.main-sidebar {
-    background-color: #1E56A0;
-    width: 250px;
-    padding: 16px;
+
+/* Content */
+
+.content-wrapper{
+    background-color: #FFFFFF;
+    flex-grow: 1;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
 }
 
-.wrapper{
+/* Sidebar */
+.main-sidebar {
     background-color: #1E56A0;
-}
-.content-wrapper{
-    background-color: #EEEEEE;
-    flex-grow: 1;
-    border-radius: 25px 0px 0px 0px;
+    width: 250px;
+    padding: 16px;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
@@ -41,14 +40,14 @@
 }
 
 .sidebar .nav-item .nav-link:hover{
-    background: #D6E4F0;
+    background: #297AE6;
     transition: all ease-in .2s;
-    color: #5A5A5A;
+    color: #FFFFFF;
 }
 
 .active-link{
-    background-color: #EEEEEE !important;
-    color: #5A5A5A !important;
+    background-color: #297AE6 !important;
+    color: #FFFFFF !important;
 }
 
 .nonactive-link{
@@ -56,17 +55,30 @@
 }
 
 .nonactive-link:hover{
-    color: #5A5A5A !important;
+    color: #FFFFFF !important;
+}
+
+.nav-item .nav{
+    border-radius: 10px;
 }
 
 /* Header */
-.header{
-    background-color: #1E56A0;
-    color: #FFFFFF;
+.main-header .nav-item .nav-link{
+    color: #000000 !important;
 }
 
-.header .nav-item .nav-link{
-    color: #FFFFFF;
+.main-header .navbar-nav .nav-item{
+    margin-left: 35px !important;
+}
+
+.main-header .search-container{
+    margin-left: 20px !important;
+}
+
+.main-header .navbar-nav .nav-item .nav-links{
+    margin-right: 40px !important;
+    color: #000000;
+    text-decoration: none;
 }
 
 /* Login */
@@ -86,7 +98,7 @@
   /* Input Search dengan desain modern */
   .search-input {
     width: 100%;
-    padding: 5px 10px 5px 10px; /* Memberikan ruang untuk ikon di kiri */
+    padding: 5px 50px 5px 50px; /* Memberikan ruang untuk ikon di kiri */
     border: 2px solid #ccc;
     border-radius: 30px; /* Rounded corners */
     font-size: 16px;
@@ -128,3 +140,22 @@
       padding: 12px 35px;
     }
   }
+
+
+
+/* .large-box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 10px;
+    border-radius: 8px;
+    width: 200px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+} */
+
+.small-box{
+    background-color: #FFFFFF;
+}

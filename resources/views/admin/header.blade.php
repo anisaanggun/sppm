@@ -1,6 +1,11 @@
 
-<nav class="header navbar navbar-expand">
+<nav class="main-header navbar navbar-expand">
     <!-- Form Pencarian dengan Ikon dalam Tombol -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
     <div class="search-container">
         <input type="text" placeholder="Cari..." class="search-input">
       </div>
@@ -9,7 +14,7 @@
     <ul class="navbar-nav ml-auto">
         <!-- heder user -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-links dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fa fa-fw fa-user"></i>
             <span class="d-lg-none">
               <span class="badge badge-pill badge-warning"></span>

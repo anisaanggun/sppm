@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a href="#" class="nav-link ">
+            <a href="{{ url('/data') }}" class="nav-link {{ Request::segment(1) == 'data'? 'active-link' : 'nonactive-link' }}">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Data
@@ -39,19 +39,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('/data-mesin') }}" class="nav-link {{ Request::segment(1) == 'data-mesin'? 'active-link' : 'nonactive-link' }}">
                   <i class="far fa- nav-icon"></i>
                   <p>Mesin</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('/data-perawatan') }}" class="nav-link {{ Request::segment(1) == 'data-perawatan'? 'active-link' : 'nonactive-link' }}">
                   <i class="far fa- nav-icon"></i>
                   <p>Perawatan</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ url('/data-perbaikan') }}" class="nav-link {{ Request::segment(1) == 'data-perbaikan'? 'active-link' : 'nonactive-link' }}">
                   <i class="far fa- nav-icon"></i>
                   <p>Perbaikan</p>
                 </a>
@@ -59,33 +59,12 @@
             </ul>
           </li>
           <li class="nav-item ">
-            <a href="#" class="nav-link ">
+            <a href="{{ url('/laporan') }}" class="nav-link {{ Request::segment(1) == 'laporan'? 'active-link' : 'nonactive-link' }}">
               <i class="nav-icon fas fa-file"></i>
               <p>
                 Laporan
-                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="#" class="nav-link ">
-                  <i class="far fa- nav-icon"></i>
-                  <p>Mesin</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa- nav-icon"></i>
-                  <p>Perawatan</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa- nav-icon"></i>
-                  <p>Perbaikan</p>
-                </a>
-              </li>
-            </ul>
           </li>
         </ul>
       </nav>
