@@ -10,3 +10,4 @@ class DataMesinController extends Controller
         return view('admin.data-mesin');
     }
 }
+

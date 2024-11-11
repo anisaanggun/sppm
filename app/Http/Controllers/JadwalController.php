@@ -10,3 +10,4 @@ class JadwalController extends Controller
         return view('admin.jadwal');
     }
 }
+

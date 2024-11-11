@@ -10,3 +10,4 @@ class DataPerawatanController extends Controller
         return view('admin.data-perawatan');
     }
 }
+

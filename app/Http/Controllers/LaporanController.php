@@ -10,3 +10,4 @@ class LaporanController extends Controller
         return view('admin.laporan');
     }
 }
+

@@ -7,3 +7,4 @@
     <!-- Default to the left -->
     <strong>Copyright &copy; 2024 <a href="">pantaumesin</a>.</strong> All rights reserved.
   </footer>
+
