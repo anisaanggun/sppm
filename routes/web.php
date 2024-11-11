@@ -15,7 +15,6 @@ use App\Http\Controllers\DataPerbaikanController;
 use App\Http\Controllers\LaporanController;
 
 
-
 //  jika user belum login
 Route::group(['middleware' => 'guest'], function() {
     Route::get('/', [AuthController::class, 'login'])->name('login');
