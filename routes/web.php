@@ -31,6 +31,7 @@ use App\Http\Controllers\LaporanController;
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+
 // untuk admin dan pegawai
 // Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
 //     Route::post('/logout', [AuthController::class, 'logout']);

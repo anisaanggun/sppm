@@ -24,6 +24,7 @@ class User extends Authenticatable
         'no_hp',
     ];
 
+
     /**
      * The attributes that should be hidden for serialization.
      *

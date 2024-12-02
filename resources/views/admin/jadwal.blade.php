@@ -221,6 +221,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 {{-- Footer --}}
 @include('admin/footer')
 
+
 <!-- ./wrapper -->
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

@@ -96,6 +96,8 @@ class AuthController extends Controller
 
         }
 
+        
+
         public function logout(Request $request) {
             // Logout pengguna
             auth()->logout();
@@ -110,3 +112,4 @@ class AuthController extends Controller
             return redirect()->route('login')->with('success', 'Anda telah berhasil logout.');
         }
 }
+
