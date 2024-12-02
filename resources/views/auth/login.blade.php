@@ -2,7 +2,7 @@
 
 @section('contents')
     <div class="d-flex justify-content-center align-items-center vh-100" style="padding-top: 5px;">
-        <div class="card shadow p-3 mb-5 bg-body-tertiary" style="width: 90%; max-width:20rem; max-height:75vh; overflow-y:auto; border: 2px solid #1E56A0; border-radius:15px !important;">
+        <div class="card shadow p-3 mb-5 bg-body-tertiary" style="overflow-y:auto; border: 2px solid #1E56A0; border-radius:15px !important;">
 
             {{-- <div class="card-header text-center">
               Login
