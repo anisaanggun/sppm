@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('password');
             // tambahan untuk role id ditable role
-            $table->unsignedBigInteger('role_id');
+            $table->unsignedBigInteger('role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

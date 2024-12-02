@@ -15,35 +15,45 @@ use App\Http\Controllers\DataPerbaikanController;
 use App\Http\Controllers\LaporanController;
 
 //  jika user belum login
-Route::group(['middleware' => 'guest'], function() {
-    Route::get('/', [AuthController::class, 'login'])->name('login');
-    Route::post('/', [AuthController::class, 'dologin']);
+// Route::group(['middleware' => 'guest'], function() {
+//     Route::get('/login', [AuthController::class, 'login'])->name('login');
+//     Route::post('/login-proses', [AuthController::class, 'dologin'])->name('dologin');
+// });
 
-});
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/dologin', [AuthController::class, 'dologin'])->name('dologin');
+
+
+    Route::get('/daftar', [AuthController::class, 'daftar'])->name('daftar');
+    Route::post('/daftar-proses', [AuthController::class, 'daftar_proses'])->name('daftar-proses');
+
+    Route::get('/admin', [AdminController::class, 'index']);
+
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // untuk admin dan pegawai
-Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/redirect', [RedirectController::class, 'cek']);
-});
+// Route::group(['middleware' => ['auth', 'checkrole:1,2']], function() {
+//     Route::post('/logout', [AuthController::class, 'logout']);
+//     Route::get('/redirect', [RedirectController::class, 'cek']);
+// });
 
 
 // untuk admin
-Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
-    Route::get('/admin', [AdminController::class, 'index']);
-});
+// Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
+//     Route::get('/admin', [AdminController::class, 'index']);
+// });
 
 // untuk teknisi
-Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
-    Route::get('/teknisi', [TeknisiController::class, 'index']);
+// Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
+//     Route::get('/teknisi', [TeknisiController::class, 'index']);
 
-});
+// });
 
 // untuk customer
-Route::group(['middleware' => ['auth', 'checkrole:3']], function() {
-    Route::get('/customer', [CustomerController::class, 'index']);
+// Route::group(['middleware' => ['auth', 'checkrole:3']], function() {
+//     Route::get('/customer', [CustomerController::class, 'index']);
 
-});
+// });
 
 
 

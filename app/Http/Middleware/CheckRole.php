@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckRole
 {
@@ -16,6 +17,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, ...$roles)
     {
+
         if (in_array(auth()->user()->role_id, $roles)) {
             return $next($request);
         }

@@ -84,8 +84,8 @@
 }
 
 /* Login */
-.card-login{
-    border-radius: 30px !important;
+.rounded-card{
+    border-radius: 15px;
 }
 
 /* Pencarian */
@@ -161,3 +161,61 @@
 .small-box{
     background-color: #FFFFFF;
 }
+
+/* Style jadwal */
+.card-body{
+    color: white;
+    border-radius: 25px;
+}
+.checkbox{
+    color:black;
+}
+.card{
+  border-radius: 10px;
+}
+.content{
+    font-family:Arial, Helvetica, sans-serif;
+}
+div p {
+    margin: 0;
+}
+.ellipsis {
+    content: "...";
+    font-size: 5px;
+}
+.external-event {
+    height: 110px;
+}
+.external-event .d-flex {
+    align-items: center;
+}
+.dropdown-toggle {
+    padding: 0;
+}
+.div{
+    outline: none;
+}
+.calendar {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+.calendar-header {
+    font-weight: bold;
+    text-align: center;
+}
+.calendar-day {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 2px;
+}
+.calendar-day.highlighted {
+    background-color: orange;
+}
+
+
+
+
+

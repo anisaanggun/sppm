@@ -28,8 +28,8 @@ class DatabaseSeeder extends Seeder
         Role::create([
             'role_name' => 'customer',
         ]);
-        
-        User::factory(5)->create();
+
+
 
     }
 }
