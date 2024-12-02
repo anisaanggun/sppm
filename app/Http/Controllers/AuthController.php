@@ -2,21 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function dologin(Request $request) {
+    public function dologin(Request $request)
+    {
         // validasi
         $credentials = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         if (auth()->attempt($credentials)) {
@@ -27,7 +29,7 @@ class AuthController extends Controller
             if (auth()->user()->role_id === 1) {
                 // jika user admin
                 return redirect()->intended('/admin');
-            } else if (auth()->user()->role_id === 2){
+            } else if (auth()->user()->role_id === 2) {
                 // jika user teknisi
                 return redirect()->intended('/teknisi');
             } else {
@@ -41,7 +43,8 @@ class AuthController extends Controller
         return back()->with('error', 'email atau password salah');
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

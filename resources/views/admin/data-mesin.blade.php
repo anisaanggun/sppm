@@ -1,147 +1,156 @@
 @extends('layouts.main')
 
-
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pantau Mesin</title>
-  <link rel="shortcut icon" type="image/x-icon" href="img/Logo.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Mesin | Pantau Mesin</title>
+    <link rel="shortcut icon" type="image/x-icon" href="img/Logo.png">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+        href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
 
-  <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/style.css">
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+    <div class="wrapper">
 
-{{-- Navbar --}}
-@include('admin/header')
+        {{-- Navbar --}}
+        @include('admin/header')
 
-{{-- Sidebar --}}
-@include('admin/sidebar')
+        {{-- Sidebar --}}
+        @include('admin/sidebar')
 
-{{-- Content --}}
+        {{-- Content --}}
 
 
-<div class="content-wrapper" >
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mt-2">
-           <p>Data Mesin</p>
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="card-title">Responsive Hover Table</h3>
-
-                  <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
-                      <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-default">
-                          <i class="fas fa-search"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>User</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Reason</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>183</td>
-                        <td>John Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-success">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>219</td>
-                        <td>Alexander Pierce</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-warning">Pending</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>657</td>
-                        <td>Bob Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-primary">Approved</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                      <tr>
-                        <td>175</td>
-                        <td>Mike Doe</td>
-                        <td>11-7-2014</td>
-                        <td><span class="tag tag-danger">Denied</span></td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mt-3 " style="margin-left: 26px">
+                        <h4>Data Mesin</h4>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
             </div>
-          </div>
+            <!-- /.content-header -->
 
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="mt-2" style="margin-left: 40px">
+                        <a href="{{ route('data-mesin.create') }}" class="btn btn-md mb-3"
+                            style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah Data</a>
+                    </div>
+                    <div class="row ml-4 mr-4">
+                        <div class="col-12 ml-1 mr-1">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    <i class="fas fa-check-circle mr-1"></i>
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <div class="card border-0 mt-2"
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">Pemilik</th>
+                                                    <th scope="col">Nama Mesin</th>
+                                                    <th scope="col">Brand</th>
+                                                    <th scope="col">Model</th>
+                                                    <th scope="col">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                @forelse ($data_mesins as $data_mesin)
+                                                    <tr>
+                                                        <td>{{ $data_mesin->pemilik }}</td>
+                                                        <td>
+                                                            @php
+                                                                $namaMesin = json_decode($data_mesin->nama_mesin, true);
+                                                            @endphp
+                                                            {{ is_array($namaMesin) ? implode(', ', $namaMesin) : $namaMesin }}
+                                                        </td>
+                                                        <td>{{ $data_mesin->brand }}</td>
+                                                        <td>{{ $data_mesin->model }}</td>
+                                                        <td>
+                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                action="{{ route('data-mesin.destroy', $data_mesin->id) }}"
+                                                                method="POST">
+                                                                <a href="{{ route('data-mesin.edit', $data_mesin->id) }}"
+                                                                    class="btn btn-sm btn-primary mt-1">
+                                                                    <i class="fa-solid fa-pen-to-square"></i></a>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-danger mt-1">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <div class="alert alert-danger">
+                                                        Data Mesin belum Tersedia.
+                                                    </div>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-12">
+                                    @foreach ($data_mesins as $data_mesin)
+                                    @endforeach
+                                    {{ $data_mesins->links('pagination::bootstrap-5') }}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        {{-- Footer --}}
+        @include('admin/footer')
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/assets/dist/js/adminlte.min.js"></script>
+
+    <script src="/assets/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/assets/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/assets/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
 
-
-
-
-
-
-{{-- Footer --}}
-@include('admin/footer')
-
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
-
-<!-- jQuery -->
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="/assets/dist/js/adminlte.min.js"></script>
 </body>
+
 </html>
