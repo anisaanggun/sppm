@@ -1,4 +1,3 @@
-
 @extends('layouts.main')
 
 @section('contents')
@@ -32,7 +31,8 @@
                         {{-- <label for="email" class="form-label">Email</label>
                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" id="email"> --}}
 
-                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email" aria-label="email" id="email" style="border-radius: 8px;">
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
+                            placeholder="Email" aria-label="email" id="email" style="border-radius: 8px;">
 
                         @error('email')
                             <div class="invalid-feedback">
@@ -46,7 +46,8 @@
                         {{-- <label for="password" class="form-label">Password</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password"> --}}
 
-                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" aria-label="password" id="password" style="border-radius: 8px;">
+                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
+                            placeholder="Password" aria-label="password" id="password" style="border-radius: 8px;">
 
                         @error('password')
                             <div class="invalid-feedback">

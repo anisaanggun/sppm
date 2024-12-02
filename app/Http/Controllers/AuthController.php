@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
@@ -10,15 +12,20 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return view('auth.login');
     }
 
-    public function dologin(Request $request) {
+    public function dologin(Request $request)
+    {
         // validasi
         $request->validate([
             'email'     => 'required|email',
             'password' => 'required'
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $data = [
@@ -98,6 +105,22 @@ class AuthController extends Controller
         }
 
 
+            if (auth()->user()->role_id === 1) {
+                // jika user admin
+                return redirect()->intended('/admin');
+            } else if (auth()->user()->role_id === 2) {
+                // jika user teknisi
+                return redirect()->intended('/teknisi');
+            } else {
+                // jika user customer
+                return redirect()->intended('/customer');
+            }
+        }
+
+        // jika email atau password salah
+        // kirimkan session error
+        return back()->with('error', 'email atau password salah');
+    }
 
         public function logout(Request $request) {
             // Logout pengguna
@@ -112,5 +135,12 @@ class AuthController extends Controller
             // Redirect ke halaman login
             return redirect()->route('login')->with('success', 'Anda telah berhasil logout.');
         }
+    public function logout(Request $request)
+    {
+        auth()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
+    }
 }
 
