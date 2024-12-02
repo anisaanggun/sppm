@@ -26,6 +26,7 @@ class AuthController extends Controller
             'password' => $request->password,
         ];
 
+
         // dd($data);die;
 
         if(Auth::attempt($data)){
@@ -96,7 +97,7 @@ class AuthController extends Controller
 
         }
 
-        
+
 
         public function logout(Request $request) {
             // Logout pengguna
