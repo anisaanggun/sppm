@@ -126,10 +126,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         @foreach ($nama_mesin as $value => $label)
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    name="nama_mesin[]" value="{{ $value }}"
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="nama_mesin" value="{{ $value }}"
                                                                     id="nama_mesin{{ $value }}"
-                                                                    {{ in_array($value, explode(',', $data_mesins->nama_mesin)) ? 'checked' : '' }}>
+                                                                    {{ $data_mesins->nama_mesin == $value ? 'checked' : '' }}>
                                                                 <label class="form-check-label"
                                                                     for="nama_mesin{{ $value }}">
                                                                     {{ $label }}

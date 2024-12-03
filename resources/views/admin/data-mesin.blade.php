@@ -84,16 +84,12 @@
                                                 @forelse ($data_mesins as $data_mesin)
                                                     <tr>
                                                         <td>{{ $data_mesin->pemilik }}</td>
-                                                        <td>
-                                                            @php
-                                                                $namaMesin = json_decode($data_mesin->nama_mesin, true);
-                                                            @endphp
-                                                            {{ is_array($namaMesin) ? implode(', ', $namaMesin) : $namaMesin }}
-                                                        </td>
+                                                        <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
                                                         <td>
-                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                            <form
+                                                                onsubmit="event.preventDefault(); confirmDelete(this);"
                                                                 action="{{ route('data-mesin.destroy', $data_mesin->id) }}"
                                                                 method="POST">
                                                                 <a href="{{ route('data-mesin.edit', $data_mesin->id) }}"
@@ -149,6 +145,25 @@
     <script src="/assets/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/assets/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmDelete(form) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); // Jika pengguna mengkonfirmasi, kirim form
+                }
+            });
+        }
+    </script>
 
 
 </body>
