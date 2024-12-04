@@ -84,6 +84,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan nama pemilik">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Brand</label>
+                                                        <input type="text" class="form-control" name="brand"
+                                                            value="{{ old('brand') }}"
+                                                            placeholder="Masukan nama brand">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Model</label>
+                                                        <input type="text" class="form-control" name="model"
+                                                            value="{{ old('model') }}"
+                                                            placeholder="Masukan nama model">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Nama Mesin</label>
+                                                        <input type="text" class="form-control" name="nama_mesin"
+                                                            value="{{ old('nama_mesin') }}"
+                                                            placeholder="Masukan nama mesin">
+                                                    </div>
+                                                    {{-- <div class="col-md-6 form-group mt-3">
                                                         <label for="brand">Brand</label>
                                                         <select class="form-control" id="brand" name="brand"
                                                             required>
@@ -93,8 +111,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <option value="Honeywell">Honeywell</option>
                                                             <option value="Lainnya">Lainnya</option>
                                                         </select>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-6 form-group mt-3">
                                                         <label for="model">Model</label>
                                                         <select class="form-control" id="model" name="model"
                                                             required>
@@ -104,8 +122,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <option value="AC Window">AC Window</option>
                                                             <option value="Lainnya">Lainnya</option>
                                                         </select>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         @foreach ($nama_mesin as $value => $label)
                                                             <div class="form-check">
@@ -118,7 +136,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 </label>
                                                             </div>
                                                         @endforeach
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Buat</button>
