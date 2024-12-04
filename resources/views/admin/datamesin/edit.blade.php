@@ -85,21 +85,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan nama pemilik" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Model</label>
-                                                        <input type="text" class="form-control" name="model"
-                                                            value="{{ old('model', $data_mesins->model) }}"
-                                                            placeholder="Masukan nama model" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Brand</label>
                                                         <input type="text" class="form-control" name="brand"
                                                             value="{{ old('brand', $data_mesins->brand) }}"
                                                             placeholder="Masukan nama brand" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Model</label>
+                                                        <input type="text" class="form-control" name="model"
+                                                            value="{{ old('model', $data_mesins->model) }}"
+                                                            placeholder="Masukan nama model" required>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         <input type="text" class="form-control" name="nama_mesin"
-                                                            value="{{ old('nama_mesin', $data_mesins->pemilik) }}"
+                                                            value="{{ old('nama_mesin', $data_mesins->nama_mesin) }}"
                                                             placeholder="Masukan nama mesin" required>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">

@@ -70,7 +70,7 @@ class DataMesinController extends Controller
         //     'Lainnya' => 'Lainnya',
         // ];
 
-        return view('admin.datamesin.edit', compact('data_mesins', 'nama_mesin'));
+        return view('admin.datamesin.edit', compact('data_mesins'));
     }
 
     public function update(Request $request, $id): RedirectResponse
