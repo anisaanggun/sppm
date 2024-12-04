@@ -20,14 +20,14 @@ class DataMesinController extends Controller
     public function create(): View
     {
         //Daftar nama_mesin untuk radio button
-        $nama_mesin = [
-            'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-            'LG Window AC' => 'LG Window AC',
-            'Honeywell Portable AC' => 'Honeywell Portable AC',
-            'Lainnya' => 'Lainnya',
-        ];
+        // $nama_mesin = [
+        //     'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
+        //     'LG Window AC' => 'LG Window AC',
+        //     'Honeywell Portable AC' => 'Honeywell Portable AC',
+        //     'Lainnya' => 'Lainnya',
+        // ];
 
-        return view('admin.datamesin.create', compact('nama_mesin'));
+        return view('admin.datamesin.create');
     }
 
     public function store(Request $request): RedirectResponse
@@ -63,12 +63,12 @@ class DataMesinController extends Controller
     public function edit(string $id): View
     {
         $data_mesins = DataMesin::findOrFail($id);
-        $nama_mesin = [
-            'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-            'LG Window AC' => 'LG Window AC',
-            'Honeywell Portable AC' => 'Honeywell Portable AC',
-            'Lainnya' => 'Lainnya',
-        ];
+        // $nama_mesin = [
+        //     'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
+        //     'LG Window AC' => 'LG Window AC',
+        //     'Honeywell Portable AC' => 'Honeywell Portable AC',
+        //     'Lainnya' => 'Lainnya',
+        // ];
 
         return view('admin.datamesin.edit', compact('data_mesins', 'nama_mesin'));
     }
