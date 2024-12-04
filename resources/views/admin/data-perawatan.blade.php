@@ -11,7 +11,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-        href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -51,8 +51,87 @@
             </div>
             <!-- /.content-header -->
 
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="mt-2" style="margin-left: 40px">
+                        <a href="{{ route('data-perawatan.create') }}" class="btn btn-md mb-3"
+                            style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah Data</a>
+                    </div>
+                    <div class="row ml-4 mr-4">
+                        <div class="col-12 ml-1 mr-1">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    <i class="fas fa-check-circle mr-1"></i>
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            <div class="card border-0 mt-2"
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th scope="col">Pemilik</th>
+                                                    <th scope="col">Nama Mesin</th>
+                                                    <th scope="col">Tanggal</th>
+                                                    <th scope="col">Teknisi</th>
+                                                    <th scope="col">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-center">
+                                                @forelse ($data_perawatans as $data_perawatan)
+                                                    <tr>
+                                                        <td>{{ $data_perawatan->pemilik }}</td>
+                                                        <td>
+                                                            @php
+                                                                $namaMesin = json_decode($data_perbaikan->nama_mesin, true);
+                                                            @endphp
+                                                            {{ is_array($namaMesin) ? implode(', ', $namaMesin) : $namaMesin }}
+                                                        </td>
+                                                        <td>{{ $data_perawatan->tanggal }}</td>
+                                                        <td>{{ $data_perawatan->teknisi }}</td>
+                                                        <td>{{ $data_perawatan->aktivitas }}</td>
+                                                        <td>{{ $data_perawatan->catatan }}</td>
+                                                        <td>
+                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                action="{{ route('data-perawatan.destroy', $data_perawatan->id) }}"
+                                                                method="POST">
+                                                                <a href="{{ route('data-perawatan.edit', $data_perawatan->id) }}"
+                                                                    class="btn btn-sm btn-primary mt-1">
+                                                                    <i class="fa-solid fa-pen-to-square"></i></a>
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-sm btn-danger mt-1">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <div class="alert alert-danger">
+                                                        Data Perawatan belum Tersedia.
+                                                    </div>
+                                                @endforelse
+                                            </tbody>
+                                        </table>
+                                    </div>
 
+                                </div>
+                                <div class="col-md-12">
+                                    @foreach ($data_perawatans as $data_perawatan)
+                                    @endforeach
+                                    {{ $data_perawatans->links('pagination::bootstrap-5') }}
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
         </div>
         {{-- Footer --}}
         @include('admin/footer')
@@ -72,15 +151,7 @@
     <script src="/assets/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/assets/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script>
-        @if (session()->has('success'))
 
-            toastr.success('{{ session('success') }}', 'BERHASIL!');
-        @elseif (session()->has('error'))
-
-            toastr.error('{{ session('error') }}', 'GAGAL!');
-        @endif
-    </script>
 
 </body>
 
