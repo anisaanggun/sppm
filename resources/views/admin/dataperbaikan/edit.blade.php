@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tambah Data Perbaikan | Pantau Mesin</title>
+    <title>Edit Data Perbaikan | Pantau Mesin</title>
     <link rel="shortcut icon" type="image/x-icon" href="img/Logo.png">
 
     <!-- Google Font: Source Sans Pro -->
@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-perbaikan.store') }}" method="POST"
+                                        <form action="{{ route('data-perbaikan.update', $data_perbaikans->id) }}" method="POST"
                                             enctype="multipart/form-data" class="needs-validation" novalidate>
                                             <div class="container mt-2">
                                                 @csrf
@@ -79,19 +79,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Pemilik</label>
                                                         <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik') }}"
+                                                            value="{{ old('pemilik', $data_perbaikans->pemilik) }}"
                                                             placeholder="Masukan nama pemilik">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <form>
                                                             <input type="date" class="form-control" name="tanggal"
-                                                                value="{{ old('tanggal') }}">
+                                                                value="{{ old('tanggal', $data_perbaikans->tanggal) }}">
                                                         </form>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label for="teknisi">Teknisi</label>
                                                         <select class="form-control" id="teknisi" name="teknisi"
+                                                        value="{{ old('teknisi', $data_perbaikans->teknisi) }}"
                                                             required>
                                                             <option value="">Pilih Teknisi</option>
                                                             <option value="Teknisi 1">Teknisi 1</option>
@@ -102,12 +103,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Kerusakan</label>
                                                         <input type="text" class="form-control" name="kerusakan"
-                                                            value="{{ old('kerusakan') }}"
+                                                            value="{{ old('kerusakan', $data_perbaikans->kerusakan) }}"
                                                             placeholder="Masukan kerusakan">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label for="nama_mesin">Nama Mesin</label>
                                                         <select class="form-control" id="nama_mesin" name="nama_mesin"
+                                                        value="{{ old('nama_mesin', $data_perbaikans->nama_mesin) }}"
                                                             required>
                                                             <option value="">Nama Mesin</option>
                                                             <option value="Mitsubishi Heavy Industries">Mitsubishi Heavy Industries</option>
@@ -119,13 +121,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
-                                                            value="{{ old('catatan') }}"></textarea>
+                                                            value="{{ old('catatan', $data_perbaikans->catatan) }}"></textarea>
                                                     </div>
                                                     <div
                                                         class="text-right
                                                             mt-3 mb-3">
                                                         <button type="submit"
-                                                            class="btn btn-md btn-success">Buat</button>
+                                                            class="btn btn-md btn-success">Edit</button>
                                                         <a href="/data-perbaikan" class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>

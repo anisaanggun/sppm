@@ -95,7 +95,8 @@
                                                         <td>{{ $data_perbaikan->kerusakan }}</td>
                                                         <td>{{ $data_perbaikan->catatan }}</td>
                                                         <td>
-                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                            <form
+                                                                onsubmit="event.preventDefault(); confirmDelete(this);"
                                                                 action="{{ route('data-perbaikan.destroy', $data_perbaikan->id) }}"
                                                                 method="POST">
                                                                 <a href="{{ route('data-perbaikan.edit', $data_perbaikan->id) }}"
@@ -107,6 +108,7 @@
                                                                     class="btn btn-sm btn-danger mt-1">
                                                                     <i class="fas fa-trash"></i>
                                                                 </button>
+                                                            </form>
                                                             </form>
                                                         </td>
                                                     </tr>
