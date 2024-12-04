@@ -76,14 +76,47 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item ">
-                        <a href="{{ url('/laporan') }}"
-                            class="nav-link {{ Request::segment(1) == 'laporan' ? 'active-link' : 'nonactive-link' }}">
+                    <li class="nav-item menu-open">
+                        <a href="{{ url('/') }}"
+                            class="nav-link {{ Request::segment(1) == 'laporan' || Request::segment(1) == 'laporan-mesin' || Request::segment(1) == 'laporan-perawatan' || Request::segment(1) == 'laporan-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:file-document" style="font-size: 24px;"></span>
                             <p>
                                 Laporan
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ url('/laporan-mesin') }}"
+                                    class="nav-link {{ Request::segment(1) == 'laporan-mesin' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                        style="font-size: 20px;"></span>
+                                    <p>
+                                        Mesin
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/laporan-perawatan') }}"
+                                    class="nav-link {{ Request::segment(1) == 'laporan-perawatan' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                        style="font-size: 20px;"></span>
+                                    <p>
+                                        Perawatan
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/laporan-perbaikan') }}"
+                                    class="nav-link {{ Request::segment(1) == 'laporan-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                        style="font-size: 20px;"></span>
+                                    <p>
+                                        Perbaikan
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>

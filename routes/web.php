@@ -7,7 +7,7 @@ use App\Http\Controllers\DataMesinController;
 use App\Http\Controllers\DataPerawatanController;
 use App\Http\Controllers\DataPerbaikanController;
 use App\Http\Controllers\JadwalController;
-use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LaporanMesinController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -38,7 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');
     Route::get('/data-perbaikan/{id}/edit', [DataPerbaikanController::class, 'edit'])->name('data-perbaikan.edit');
     Route::put('/data-perbaikan/{id}', [DataPerbaikanController::class, 'update'])->name('data-perbaikan.update');
-    Route::get('/laporan', [LaporanController::class, 'index']);
+    Route::get('/laporan-mesin', [LaporanMesinController::class, 'index']);
+    Route::post('/laporan-mesin/store', [LaporanMesinController::class, 'store'])->name('laporan-mesin.store');
     Route::get('/admin/create', [DataMesinController::class, 'create'])->name('admin.create');
     Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
 });

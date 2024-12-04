@@ -85,57 +85,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan nama pemilik" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label for="brand">Brand</label>
-                                                        <select class="form-control" id="brand" name="brand"
-                                                            required>
-                                                            <option value="">Pilih Brand Mesin</option>
-                                                            <option value="Mitsubishi"
-                                                                {{ $data_mesins->brand == 'Mitsubishi' ? 'selected' : '' }}>
-                                                                Mitsubishi</option>
-                                                            <option value="LG"
-                                                                {{ $data_mesins->brand == 'LG' ? 'selected' : '' }}>LG
-                                                            </option>
-                                                            <option value="Honeywell"
-                                                                {{ $data_mesins->brand == 'Honeywell' ? 'selected' : '' }}>
-                                                                Honeywell</option>
-                                                            <option value="Lainnya"
-                                                                {{ $data_mesins->brand == 'Lainnya' ? 'selected' : '' }}>
-                                                                Lainnya</option>
-                                                        </select>
+                                                        <label class="font-weight-bold">Model</label>
+                                                        <input type="text" class="form-control" name="model"
+                                                            value="{{ old('model', $data_mesins->model) }}"
+                                                            placeholder="Masukan nama model" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label for="model">Model</label>
-                                                        <select class="form-control" id="model" name="model"
-                                                            required>
-                                                            <option value="">Pilih Model Mesin</option>
-                                                            <option value="Split"
-                                                                {{ $data_mesins->model == 'AC Split' ? 'selected' : '' }}>
-                                                                AC Split</option>
-                                                            <option value="Floor"
-                                                                {{ $data_mesins->model == 'AC Floor Standing' ? 'selected' : '' }}>
-                                                                AC Floor Standing</option>
-                                                            <option value="Window"
-                                                                {{ $data_mesins->model == 'AC Window' ? 'selected' : '' }}>
-                                                                AC Window</option>
-                                                            <option value="Lainnya"
-                                                                {{ $data_mesins->model == 'Lainnya' ? 'selected' : '' }}>
-                                                                Lainnya</option>
-                                                        </select>
+                                                        <label class="font-weight-bold">Brand</label>
+                                                        <input type="text" class="form-control" name="brand"
+                                                            value="{{ old('brand', $data_mesins->brand) }}"
+                                                            placeholder="Masukan nama brand" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        @foreach ($nama_mesin as $value => $label)
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="nama_mesin" value="{{ $value }}"
-                                                                    id="nama_mesin{{ $value }}"
-                                                                    {{ $data_mesins->nama_mesin == $value ? 'checked' : '' }}>
-                                                                <label class="form-check-label"
-                                                                    for="nama_mesin{{ $value }}">
-                                                                    {{ $label }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
+                                                        <input type="text" class="form-control" name="nama_mesin"
+                                                            value="{{ old('nama_mesin', $data_mesins->pemilik) }}"
+                                                            placeholder="Masukan nama mesin" required>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
