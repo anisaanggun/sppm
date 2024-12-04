@@ -13,7 +13,7 @@ class DataPerawatanController extends Controller
     {
         $data_perawatans = DataPerawatan::latest()->paginate(10);
 
-        return view('admin.data-perawatan', compact('data_perawatans'));
+        return view('admin.dataperawatan.data-perawatan', compact('data_perawatans'));
 
     }
 
@@ -27,7 +27,7 @@ class DataPerawatanController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.create', compact('nama_mesin'));
+        return view('admin.dataperawatan.create', compact('nama_mesin'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -35,8 +35,7 @@ class DataPerawatanController extends Controller
         // validasi form
         $request->validate([
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|array|min:1',
-            'nama_mesin.*' => 'string',
+            'nama_mesin' => 'required|string',
             'tanggal' => 'required|date',
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
@@ -44,28 +43,27 @@ class DataPerawatanController extends Controller
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'nama_mesin.min' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
-            'teknisi.required' => 'Silahkan nama teknisi.',
+            'teknisi.required' => 'Silahkan pilih teknisi.',
             'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
-            'catatan.required' => 'Masukkan catatan mesin anda.',
+            'catatan.required' => 'Silahkan masukkan catatan mesin anda.',
         ]);
 
-        //create data perbaikan
+        //create data perawatan
         DataPerawatan::create([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => json_encode($request->nama_mesin),
+            'nama_mesin' => $request->nama_mesin,
             'tanggal' => $request->tanggal,
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin', []);
+        $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . implode(', ', $selectednama_mesin) . ' milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
@@ -78,15 +76,14 @@ class DataPerawatanController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.edit', compact('data_perawatan', 'nama_mesin'));
+        return view('admin.dataperawatan.edit', compact('data_perawatan', 'nama_mesin'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|array|min:1',
-            'nama_mesin.*' => 'string',
+            'nama_mesin' => 'required|string',
             'tanggal' => 'required|date',
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
@@ -94,7 +91,6 @@ class DataPerawatanController extends Controller
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'nama_mesin.min' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
             'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
@@ -105,18 +101,18 @@ class DataPerawatanController extends Controller
 
         $data_perawatans->update([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => json_encode($request->nama_mesin),
+            'nama_mesin' => $request->nama_mesin,
             'tanggal' => $request->tanggal,
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin', []);
+        $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . implode(', ', $selectednama_mesin) . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
@@ -125,6 +121,6 @@ class DataPerawatanController extends Controller
 
         $data_perawatans->delete();
 
-        return redirect()->route('data-perawatan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('data-perawatan.store')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

@@ -13,7 +13,7 @@ class DataMesinController extends Controller
     {
         $data_mesins = DataMesin::latest()->paginate(10);
 
-        return view('admin.data-mesin', compact('data_mesins'));
+        return view('admin.datamesin.data-mesin', compact('data_mesins'));
 
     }
 
@@ -27,7 +27,7 @@ class DataMesinController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.create', compact('nama_mesin'));
+        return view('admin.datamesin.create', compact('nama_mesin'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -70,7 +70,7 @@ class DataMesinController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.edit', compact('data_mesins', 'nama_mesin'));
+        return view('admin.datamesin.edit', compact('data_mesins', 'nama_mesin'));
     }
 
     public function update(Request $request, $id): RedirectResponse

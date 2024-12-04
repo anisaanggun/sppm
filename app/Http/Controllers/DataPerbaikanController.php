@@ -13,7 +13,7 @@ class DataPerbaikanController extends Controller
     {
         $data_perbaikans = DataPerbaikan::latest()->paginate(10);
 
-        return view('admin.data-perbaikan', compact('data_perbaikans'));
+        return view('admin.dataperbaikan.data-perbaikan', compact('data_perbaikans'));
 
     }
 
@@ -27,7 +27,7 @@ class DataPerbaikanController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.create', compact('nama_mesin'));
+        return view('admin.dataperbaikan.create', compact('nama_mesin'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -35,8 +35,7 @@ class DataPerbaikanController extends Controller
         // validasi form
         $request->validate([
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|array|min:1',
-            'nama_mesin.*' => 'string',
+            'nama_mesin' => 'required|string',
             'tanggal' => 'required|date',
             'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
@@ -44,7 +43,6 @@ class DataPerbaikanController extends Controller
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'nama_mesin.min' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
             'teknisi.required' => 'Silahkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
@@ -54,18 +52,18 @@ class DataPerbaikanController extends Controller
         //create data perbaikan
         DataPerbaikan::create([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => json_encode($request->nama_mesin),
+            'nama_mesin' => $request->nama_mesin,
             'tanggal' => $request->tanggal,
             'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin', []);
+        $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan  ' . implode(', ', $selectednama_mesin) . ' milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
@@ -78,15 +76,14 @@ class DataPerbaikanController extends Controller
             'Lainnya' => 'Lainnya',
         ];
 
-        return view('admin.edit', compact('data_perbaikans', 'nama_mesin'));
+        return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'nama_mesin'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|array|min:1',
-            'nama_mesin.*' => 'string',
+            'nama_mesin' => 'required|string',
             'tanggal' => 'required|date',
             'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
@@ -94,7 +91,6 @@ class DataPerbaikanController extends Controller
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'nama_mesin.min' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
             'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
@@ -105,18 +101,18 @@ class DataPerbaikanController extends Controller
 
         $data_perbaikans->update([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => json_encode($request->nama_mesin),
+            'nama_mesin' => $request->nama_mesin,
             'tanggal' => $request->tanggal,
             'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin', []);
+        $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan  ' . implode(', ', $selectednama_mesin) . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
@@ -125,6 +121,6 @@ class DataPerbaikanController extends Controller
 
         $data_perbaikans->delete();
 
-        return redirect()->route('data-perbaikan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('data-perbaikan.store')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
