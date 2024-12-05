@@ -91,13 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label for="teknisi">Teknisi</label>
-                                                        <select class="form-control" id="teknisi" name="teknisi"
-                                                            required>
-                                                            <option value="">Pilih Teknisi</option>
-                                                            <option value="Teknisi 1">Teknisi 1</option>
-                                                            <option value="Teknisi 2">Teknisi 2</option>
-                                                            <option value="Teknisi 3">Teknisi 3</option>
-                                                        </select>
+                                                        <input type="text" class="form-control" name="teknisi"
+                                                            value="{{ old('teknisi') }}"
+                                                            placeholder="Masukan nama teknisi">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Kerusakan</label>
@@ -107,13 +103,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label for="nama_mesin">Nama Mesin</label>
-                                                        <select class="form-control" id="nama_mesin" name="nama_mesin"
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
                                                             required>
-                                                            <option value="">Nama Mesin</option>
-                                                            <option value="Mitsubishi Heavy Industries">Mitsubishi Heavy Industries</option>
-                                                            <option value="LG Window AC">LG Window AC</option>
-                                                            <option value="Honeywell Portable AC">Honeywell Portable AC</option>
-                                                            <option value="Lainnya">Lainnya</option>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -126,7 +123,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Buat</button>
-                                                        <a href="/data-perbaikan" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="/data-perbaikan"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>

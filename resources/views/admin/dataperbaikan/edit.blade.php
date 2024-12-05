@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Data Perbaikan</h4>
+                        <h4>Edit Data Perbaikan</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -71,8 +71,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-perbaikan.update', $data_perbaikans->id) }}" method="POST"
-                                            enctype="multipart/form-data" class="needs-validation" novalidate>
+                                        <form action="{{ route('data-perbaikan.update', $data_perbaikans->id) }}"
+                                            method="POST" enctype="multipart/form-data" class="needs-validation"
+                                            novalidate>
+                                            @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
@@ -80,42 +82,38 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="font-weight-bold">Pemilik</label>
                                                         <input type="text" class="form-control" name="pemilik"
                                                             value="{{ old('pemilik', $data_perbaikans->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik">
+                                                            placeholder="Masukan nama pemilik" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <form>
                                                             <input type="date" class="form-control" name="tanggal"
-                                                                value="{{ old('tanggal', $data_perbaikans->tanggal) }}">
+                                                                value="{{ old('tanggal', $data_perbaikans->tanggal) }}"
+                                                                required>
                                                         </form>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label for="teknisi">Teknisi</label>
-                                                        <select class="form-control" id="teknisi" name="teknisi"
-                                                        value="{{ old('teknisi', $data_perbaikans->teknisi) }}"
-                                                            required>
-                                                            <option value="">Pilih Teknisi</option>
-                                                            <option value="Teknisi 1">Teknisi 1</option>
-                                                            <option value="Teknisi 2">Teknisi 2</option>
-                                                            <option value="Teknisi 3">Teknisi 3</option>
-                                                        </select>
+                                                        <label class="font-weight-bold">Teknisi</label>
+                                                        <input type="text" class="form-control" name="teknisi"
+                                                            value="{{ old('teknisi', $data_perbaikans->teknisi) }}"
+                                                            placeholder="Masukan nama teknisi" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Kerusakan</label>
                                                         <input type="text" class="form-control" name="kerusakan"
                                                             value="{{ old('kerusakan', $data_perbaikans->kerusakan) }}"
-                                                            placeholder="Masukan kerusakan">
+                                                            placeholder="Masukan kerusakan" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label for="nama_mesin">Nama Mesin</label>
-                                                        <select class="form-control" id="nama_mesin" name="nama_mesin"
-                                                        value="{{ old('nama_mesin', $data_perbaikans->nama_mesin) }}"
+                                                        <label class="font-weight-bold">Nama Mesin</label>
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
                                                             required>
-                                                            <option value="">Nama Mesin</option>
-                                                            <option value="Mitsubishi Heavy Industries">Mitsubishi Heavy Industries</option>
-                                                            <option value="LG Window AC">LG Window AC</option>
-                                                            <option value="Honeywell Portable AC">Honeywell Portable AC</option>
-                                                            <option value="Lainnya">Lainnya</option>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -123,12 +121,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
                                                             value="{{ old('catatan', $data_perbaikans->catatan) }}"></textarea>
                                                     </div>
-                                                    <div
-                                                        class="text-right
-                                                            mt-3 mb-3">
+                                                    <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Edit</button>
-                                                        <a href="/data-perbaikan" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="/data-perbaikan"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>

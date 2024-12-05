@@ -65,7 +65,7 @@ class DataPerbaikanController extends Controller
         $data_perbaikans = DataPerbaikan::findOrFail($id);
         $data_mesins = DataMesin::get();
 
-        return view('admin.dataperbaikan.edit', compact('data_perbaikan', 'mesin_id'));
+        return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_mesins'));
     }
 
     public function update(Request $request, $id): RedirectResponse
