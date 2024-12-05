@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\DataMesinController;
+use App\Http\Controllers\DataPerawatanController;
 use App\Http\Controllers\DataPerbaikanController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanMesinController;
@@ -29,12 +30,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-mesin/{id}/edit', [DataMesinController::class, 'edit'])->name('data-mesin.edit');
     Route::put('/data-mesin/{id}', [DataMesinController::class, 'update'])->name('data-mesin.update');
 
-    // Route::get('/data-perawatan', [DataPerawatanController::class, 'index'])->name('data-perawatan.index');
-    // Route::resource('/data-perawatan', [DataPerawatanController::class]);
-    // Route::post('/data-perawatan/store', [DataPerawatanController::class, 'store'])->name('data-perawatan.store');
-    // Route::get('/data-perawatan/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan.edit');
-    // Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
-
+    Route::get('/data-perawatan', [DataPerawatanController::class, 'index'])->name('data-perawatan.index');
+    Route::resource('/data-perawatan', DataPerawatanController::class);
+    Route::post('/data-perawatan/store', [DataPerawatanController::class, 'store'])->name('data-perawatan.store');
+    Route::get('/data-perawatan/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan.edit');
+    Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
+    
     Route::get('/data-perbaikan', [DataPerbaikanController::class, 'index'])->name('data-perbaikan.index');
     Route::get('/data-perbaikan/create', [DataPerbaikanController::class, 'create'])->name('data-perbaikan.create');
     Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');

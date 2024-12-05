@@ -11,8 +11,8 @@ class DataPerawatan extends Model
     protected $fillable = [
         'pemilik',
         'teknisi',
-        'nama_mesin',
-        'tanggal',
+        'mesin_id',
+        'tanggal_perawatan',
         'aktivitas',
         'catatan',
     ];

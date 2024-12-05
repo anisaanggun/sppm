@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('pemilik');
             $table->string('teknisi');
-            $table->string('nama_mesin');
-            $table->date('tanggal');
+            $table->integer('mesin_id');
+            $table->date('tanggal_perawatan');
             $table->string('aktivitas');
             $table->string('catatan');
             $table->timestamps();

@@ -11,7 +11,7 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-    href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -74,9 +74,11 @@
                                             <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">Pemilik</th>
-                                                    <th scope="col">Nama Mesin</th>
+                                                    <th scope="col">ID Mesin</th>
                                                     <th scope="col">Tanggal</th>
                                                     <th scope="col">Teknisi</th>
+                                                    <th scope="col">Aktivitas</th>
+                                                    <th scope="col">Catatan</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -84,18 +86,14 @@
                                                 @forelse ($data_perawatans as $data_perawatan)
                                                     <tr>
                                                         <td>{{ $data_perawatan->pemilik }}</td>
-                                                        <td>
-                                                            @php
-                                                                $namaMesin = json_decode($data_perbaikan->nama_mesin, true);
-                                                            @endphp
-                                                            {{ is_array($namaMesin) ? implode(', ', $namaMesin) : $namaMesin }}
-                                                        </td>
-                                                        <td>{{ $data_perawatan->tanggal }}</td>
+                                                        <td>{{ $data_perawatan->mesin_id }}</td>
+                                                        <td>{{ $data_perawatan->tanggal_perawatan }}</td>
                                                         <td>{{ $data_perawatan->teknisi }}</td>
                                                         <td>{{ $data_perawatan->aktivitas }}</td>
                                                         <td>{{ $data_perawatan->catatan }}</td>
                                                         <td>
-                                                            <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                            <form
+                                                                onsubmit="event.preventDefault(); confirmDelete(this);"
                                                                 action="{{ route('data-perawatan.destroy', $data_perawatan->id) }}"
                                                                 method="POST">
                                                                 <a href="{{ route('data-perawatan.edit', $data_perawatan->id) }}"
@@ -151,7 +149,25 @@
     <script src="/assets/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/assets/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmDelete(form) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data ini akan dihapus!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); // Jika pengguna mengkonfirmasi, kirim form
+                }
+            });
+        }
+    </script>
 
 </body>
 

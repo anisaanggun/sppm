@@ -85,19 +85,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <form>
-                                                            <input type="date" class="form-control" name="tanggal"
-                                                                value="{{ old('tanggal') }}">
+                                                            <input type="date" class="form-control"
+                                                                name="tanggal_perawatan"
+                                                                value="{{ old('tanggal_perawatan') }}">
                                                         </form>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label for="teknisi">Teknisi</label>
-                                                        <select class="form-control" id="teknisi" name="teknisi"
-                                                            required>
-                                                            <option value="">Pilih Teknisi</option>
-                                                            <option value="Teknisi 1">Teknisi 1</option>
-                                                            <option value="Teknisi 2">Teknisi 2</option>
-                                                            <option value="Teknisi 3">Teknisi 3</option>
-                                                        </select>
+                                                        <input type="text" class="form-control" name="teknisi"
+                                                            value="{{ old('teknisi') }}"
+                                                            placeholder="Masukan nama teknisi">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Aktvitas</label>
@@ -107,17 +104,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        @foreach ($nama_mesin as $value => $label)
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="nama_mesin" value="{{ $value }}"
-                                                                    id="nama_mesin{{ $value }}">
-                                                                <label class="form-check-label"
-                                                                    for="nama_mesin{{ $value }}">
-                                                                    {{ $label }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>

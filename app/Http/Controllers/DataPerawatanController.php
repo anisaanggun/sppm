@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataPerawatan;
+use App\Models\DataMesin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -20,14 +21,11 @@ class DataPerawatanController extends Controller
     public function create(): View
     {
         //Daftar nama_mesin untuk checkbox
-        $nama_mesin = [
-            'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-            'LG Window AC' => 'LG Window AC',
-            'Honeywell Portable AC' => 'Honeywell Portable AC',
-            'Lainnya' => 'Lainnya',
-        ];
+        $data_mesins = DataMesin::get();
+        // dd($data_mesins);
 
-        return view('admin.dataperawatan.create', compact('nama_mesin'));
+        return view('admin.dataperawatan.create', compact('data_mesins'));
+
     }
 
     public function store(Request $request): RedirectResponse
@@ -35,15 +33,15 @@ class DataPerawatanController extends Controller
         // validasi form
         $request->validate([
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|string',
-            'tanggal' => 'required|date',
+            'mesin_id' => 'required',
+            'tanggal_perawatan' => 'required|date',
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
             'catatan' => 'required|string',
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
-            'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'tanggal.required' => 'Silahkan masukkan tanggal.',
+            'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
+            'tanggal_perawatan.required' => 'Silahkan masukkan tanggal.',
             'teknisi.required' => 'Silahkan pilih teknisi.',
             'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
             'catatan.required' => 'Silahkan masukkan catatan mesin anda.',
@@ -52,46 +50,40 @@ class DataPerawatanController extends Controller
         //create data perawatan
         DataPerawatan::create([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => $request->nama_mesin,
-            'tanggal' => $request->tanggal,
+            'mesin_id' => $request->mesin_id,
+            'tanggal_perawatan' => $request->tanggal_perawatan,
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin');
-        session()->flash('selectednama_mesin', $request->nama_mesin);
+        session()->flash('selectednama_mesin', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . ' milik ' . $pemilik . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
     {
         $data_perawatans = DataPerawatan::findOrFail($id);
-        $nama_mesin = [
-            'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-            'LG Window AC' => 'LG Window AC',
-            'Honeywell Portable AC' => 'Honeywell Portable AC',
-            'Lainnya' => 'Lainnya',
-        ];
+        $data_mesins = DataMesin::get();
 
-        return view('admin.dataperawatan.edit', compact('data_perawatan', 'nama_mesin'));
+        return view('admin.dataperawatan.edit', compact('data_perawatan', 'mesin_id'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
             'pemilik' => 'required|string|max:255',
-            'nama_mesin' => 'required|string',
-            'tanggal' => 'required|date',
+            'mesin_id' => 'required',
+            'tanggal_perawatan' => 'required|date',
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
             'catatan' => 'required|string',
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
-            'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'tanggal.required' => 'Silahkan masukkan tanggal.',
+            'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
+            'tanggal_perawatan.required' => 'Silahkan masukkan tanggal.',
             'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
@@ -101,15 +93,15 @@ class DataPerawatanController extends Controller
 
         $data_perawatans->update([
             'pemilik' => $request->pemilik,
-            'nama_mesin' => $request->nama_mesin,
-            'tanggal' => $request->tanggal,
+            'mesin_id' => $request->mesin_id,
+            'tanggal_perawatan' => $request->tanggal_perawatan,
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('nama_mesin');
-        session()->flash('selectednama_mesin', $request->nama_mesin);
+        $selectednama_mesin = $request->input('mesin_id');
+        session()->flash('selectednama_mesin', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
         return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil diubah!');
@@ -121,6 +113,6 @@ class DataPerawatanController extends Controller
 
         $data_perawatans->delete();
 
-        return redirect()->route('data-perawatan.store')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('data-perawatan.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
