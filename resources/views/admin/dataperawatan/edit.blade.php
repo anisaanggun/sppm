@@ -72,8 +72,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-perawatan.update', $data_perawatans->id) }}" method="POST"
-                                            enctype="multipart/form-data" class="needs-validation" novalidate>
+                                        <form action="{{ route('data-perawatan.update', $data_perawatans->id) }}"
+                                            method="POST" enctype="multipart/form-data" class="needs-validation"
+                                            novalidate>
                                             @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf
@@ -86,7 +87,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
-                                                        <input type="date" class="form-control" name="tanggal_perawatan"
+                                                        <input type="date" class="form-control"
+                                                            name="tanggal_perawatan"
                                                             value="{{ old('tanggal_perawatan', $data_perawatans->tanggal_perawatan) }}"
                                                             placeholder="Masukan tanggal perawatan" required>
                                                     </div>
@@ -102,22 +104,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             value="{{ old('aktivitas', $data_perawatans->aktivitas) }}"
                                                             placeholder="Masukan aktivitas" required>
                                                     </div>
+
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">ID Mesin</label>
-                                                        <input type="text" class="form-control" name="mesin_id"
-                                                            value="{{ old('mesin_id', $data_perawatans->mesin_id) }}"
-                                                            placeholder="Masukan ID Mesin" required>
+                                                        <label class="font-weight-bold">Nama Mesin</label>
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
-                                                        <input type="text" class="form-control" name="catatan"
-                                                            value="{{ old('catatan', $data_perawatans->catatan) }}"
-                                                            placeholder="Masukan catatan" required>
+                                                        <textarea class="form-control" id="catatan" name="catatan" rows="4" value="{{ old('catatan') }}"
+                                                            placeholder="Masukan catatan mesin anda" required>
+                                                            {{ old('catatan', $data_perawatans->catatan) }}
+                                                        </textarea>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Edit</button>
-                                                        <a href="/data-perawatan" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="/data-perawatan"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>
