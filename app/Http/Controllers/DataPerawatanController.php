@@ -20,7 +20,7 @@ class DataPerawatanController extends Controller
 
     public function create(): View
     {
-        //Daftar nama_mesin untuk checkbox
+        //Daftar nama_mesin untuk select
         $data_mesins = DataMesin::get();
         // dd($data_mesins);
 
@@ -57,7 +57,6 @@ class DataPerawatanController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        session()->flash('selectednama_mesin', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
         return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . ' milik ' . $pemilik . ' berhasil ditambahkan!');
@@ -68,7 +67,7 @@ class DataPerawatanController extends Controller
         $data_perawatans = DataPerawatan::findOrFail($id);
         $data_mesins = DataMesin::get();
 
-        return view('admin.dataperawatan.edit', compact('data_perawatan', 'mesin_id'));
+        return view('admin.dataperawatan.edit', compact('data_perawatans', 'mesin_id'));
     }
 
     public function update(Request $request, $id): RedirectResponse
@@ -100,11 +99,11 @@ class DataPerawatanController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        $selectednama_mesin = $request->input('mesin_id');
-        session()->flash('selectednama_mesin', $request->mesin_id);
+        $selectedID = $request->input('mesin_id');
+        session()->flash('selectedID', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan dengan ID ' . $selectedID . ' milik ' . $pemilik . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse

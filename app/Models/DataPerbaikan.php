@@ -11,7 +11,7 @@ class DataPerbaikan extends Model
 
     protected $fillable = [
         'pemilik',
-        'nama_mesin',
+        'mesin_id',
         'tanggal',
         'teknisi',
         'kerusakan',

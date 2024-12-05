@@ -37,11 +37,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
     
     Route::get('/data-perbaikan', [DataPerbaikanController::class, 'index'])->name('data-perbaikan.index');
-    Route::get('/data-perbaikan/create', [DataPerbaikanController::class, 'create'])->name('data-perbaikan.create');
+    Route::resource('/data-perbaikan', DataPerbaikanController::class);
     Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');
     Route::get('/data-perbaikan/{id}/edit', [DataPerbaikanController::class, 'edit'])->name('data-perbaikan.edit');
     Route::put('/data-perbaikan/{id}', [DataPerbaikanController::class, 'update'])->name('data-perbaikan.update');
-    Route::delete('/data-perbaikan/{id}', [DataPerbaikanController::class, 'destroy'])->name('data-perbaikan.destroy');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
     Route::get('/laporan-mesin', [LaporanMesinController::class, 'index']);
@@ -50,4 +49,4 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
 });
 
-Route::resource('/admin/data-mesin', \App\Http\Controllers\DataMesinController::class);
+// Route::resource('/admin/data-mesin', \App\Http\Controllers\DataMesinController::class);
