@@ -67,7 +67,7 @@ class DataPerawatanController extends Controller
         $data_perawatans = DataPerawatan::findOrFail($id);
         $data_mesins = DataMesin::get();
 
-        return view('admin.dataperawatan.edit', compact('data_perawatans', 'mesin_id'));
+        return view('admin.dataperawatan.edit', compact('data_perawatans', 'data_mesins'));
     }
 
     public function update(Request $request, $id): RedirectResponse
