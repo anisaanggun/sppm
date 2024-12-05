@@ -85,12 +85,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan nama pemilik" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">ID Mesin</label>
-                                                        <input type="text" class="form-control" name="mesin_id"
-                                                            value="{{ old('mesin_id', $data_perawatans->mesin_id) }}"
-                                                            placeholder="Masukan ID Mesin" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <input type="date" class="form-control" name="tanggal_perawatan"
                                                             value="{{ old('tanggal_perawatan', $data_perawatans->tanggal_perawatan) }}"
@@ -109,6 +103,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan aktivitas" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">ID Mesin</label>
+                                                        <input type="text" class="form-control" name="mesin_id"
+                                                            value="{{ old('mesin_id', $data_perawatans->mesin_id) }}"
+                                                            placeholder="Masukan ID Mesin" required>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <input type="text" class="form-control" name="catatan"
                                                             value="{{ old('catatan', $data_perawatans->catatan) }}"
@@ -117,7 +117,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Edit</button>
-                                                        <a href="/data-mesin" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="/data-perawatan" class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>
