@@ -89,7 +89,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/laporan-mesin') }}"
                                     class="nav-link {{ Request::segment(1) == 'laporan-mesin' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                    <span class="iconify mr-2" data-icon="gravity-ui:gear-branches"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Mesin
@@ -99,7 +99,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/laporan-perawatan') }}"
                                     class="nav-link {{ Request::segment(1) == 'laporan-perawatan' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                    <span class="iconify mr-2" data-icon="fa6-solid:gears"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Perawatan
@@ -109,7 +109,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/laporan-perbaikan') }}"
                                     class="nav-link {{ Request::segment(1) == 'laporan-perbaikan' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="mdi:file-document"
+                                    <span class="iconify mr-2" data-icon="tabler:manual-gearbox-filled"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Perbaikan

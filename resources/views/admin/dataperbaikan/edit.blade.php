@@ -106,20 +106,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        <select class="form-control" id="mesin_id" name="mesin_id"
-                                                            required>
-                                                            <option value="" disabled selected>Pilih Mesin
-                                                            </option>
+                                                        <select class="form-control" id="mesin_id" name="mesin_id" required>
+                                                            <option value="" disabled>Pilih Mesin</option>
                                                             @foreach ($data_mesins as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->nama_mesin }}</option>
+                                                                <option value="{{ $item->id }}" @selected(old('data_mesins') == $item || $item->mesin_id == $data_mesins)>
+                                                                    {{ $item->nama_mesin }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
-                                                            value="{{ old('catatan', $data_perbaikans->catatan) }}"></textarea>
+                                                            value="{{ old('catatan') }}">{{ old('catatan', $data_perbaikans->catatan) }}</textarea>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
