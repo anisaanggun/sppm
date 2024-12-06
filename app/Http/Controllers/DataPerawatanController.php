@@ -66,6 +66,8 @@ class DataPerawatanController extends Controller
     {
         $data_perawatans = DataPerawatan::findOrFail($id);
         $data_mesins = DataMesin::get();
+        // dd($data_mesins, $data_perawatans);
+        
 
         return view('admin.dataperawatan.edit', compact('data_perawatans', 'data_mesins'));
     }

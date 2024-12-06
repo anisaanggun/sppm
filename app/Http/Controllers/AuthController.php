@@ -35,7 +35,7 @@ class AuthController extends Controller
         // dd($data);die;
 
         if (Auth::attempt($data)) {
-            return redirect()->intended('/admin')->with('success', 'yey');
+            return redirect()->intended('/admin')->with('success', 'Selamat Datang ');
         } else {
             return redirect()->route('login')->with('failed', 'Error!');
         }
@@ -72,11 +72,13 @@ class AuthController extends Controller
         ];
 
         //Redirect ke halaman login
-        if (Auth::attempt($login)) {
-            return redirect()->intended('/login')->with('success', 'Registrasi berhasil! Silahkan login.');
-        } else {
-            return redirect()->route('daftar')->with('failed', 'Error!');
-        }
+        // if (Auth::attempt($login)) {
+        //     return redirect()->intended('/login')->with('success', 'Registrasi berhasil! Silahkan login.');
+        // } else {
+        //     return redirect()->route('daftar')->with('failed', 'Error!');
+        // }
+
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silahkan login.');
     }
 
     public function logout(Request $request)
