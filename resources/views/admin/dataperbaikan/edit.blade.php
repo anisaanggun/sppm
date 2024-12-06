@@ -115,6 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             @endforeach
                                                         </select>
                                                     </div>
+
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
