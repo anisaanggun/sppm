@@ -42,6 +42,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-perbaikan/{id}/edit', [DataPerbaikanController::class, 'edit'])->name('data-perbaikan.edit');
     Route::put('/data-perbaikan/{id}', [DataPerbaikanController::class, 'update'])->name('data-perbaikan.update');
 
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    Route::resource('/jadwal', JadwalController::class);
+    Route::post('/jadwal/store', [JadwalController::class, 'store'])->name('jadwal.store');
+    Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
+    Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
+
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
     Route::get('/laporan-mesin', [LaporanMesinController::class, 'index']);
     Route::post('/laporan-mesin/store', [LaporanMesinController::class, 'store'])->name('laporan-mesin.store');
