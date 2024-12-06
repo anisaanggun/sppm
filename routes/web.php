@@ -8,6 +8,8 @@ use App\Http\Controllers\DataPerawatanController;
 use App\Http\Controllers\DataPerbaikanController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanMesinController;
+use App\Http\Controllers\LaporanPerawatanController;
+use App\Http\Controllers\LaporanPerbaikanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -35,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/data-perawatan/store', [DataPerawatanController::class, 'store'])->name('data-perawatan.store');
     Route::get('/data-perawatan/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan.edit');
     Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
-    
+
     Route::get('/data-perbaikan', [DataPerbaikanController::class, 'index'])->name('data-perbaikan.index');
     Route::resource('/data-perbaikan', DataPerbaikanController::class);
     Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');
@@ -49,8 +51,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
-    Route::get('/laporan-mesin', [LaporanMesinController::class, 'index']);
+    Route::get('/laporan-mesin', [LaporanMesinController::class, 'index'])->name('laporan-mesin.index');
     Route::post('/laporan-mesin/store', [LaporanMesinController::class, 'store'])->name('laporan-mesin.store');
+
+    Route::get('/laporan-perawatan', [LaporanPerawatanController::class, 'index'])->name('laporan-perawatan.index');
+
+    Route::get('/laporan-perbaikan', [LaporanPerbaikanController::class, 'index'])->name('laporan-perbaikan.index');
     // Route::get('/admin/create', [DataMesinController::class, 'create'])->name('admin.create');
     // Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
 });

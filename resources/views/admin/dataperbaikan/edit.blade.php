@@ -109,7 +109,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <select class="form-control" id="mesin_id" name="mesin_id" required>
                                                             <option value="" disabled>Pilih Mesin</option>
                                                             @foreach ($data_mesins as $item)
-                                                                <option value="{{ $item->id }}" @selected(old('data_mesins') == $item || $item->mesin_id == $data_mesins)>
+                                                                <option value="{{ $item->id }}" @if(old('mesin_id') == $item->id) selected @endif>
                                                                     {{ $item->nama_mesin }}
                                                                 </option>
                                                             @endforeach
