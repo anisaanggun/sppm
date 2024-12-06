@@ -26,29 +26,29 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/beranda', [BerandaController::class, 'index']);
     Route::get('/jadwal', [JadwalController::class, 'index']);
 
-    Route::get('/data-mesin', [DataMesinController::class, 'index'])->name('data-mesin.index');
+    // Route::get('/data-mesin', [DataMesinController::class, 'index'])->name('data-mesin.index');
     Route::resource('/data-mesin', DataMesinController::class);
-    Route::post('/data-mesin/store', [DataMesinController::class, 'store'])->name('data-mesin.store');
-    Route::get('/data-mesin/{id}/edit', [DataMesinController::class, 'edit'])->name('data-mesin.edit');
-    Route::put('/data-mesin/{id}', [DataMesinController::class, 'update'])->name('data-mesin.update');
+    // Route::post('/data-mesin/store', [DataMesinController::class, 'store'])->name('data-mesin.store');
+    // Route::get('/data-mesin/{id}/edit', [DataMesinController::class, 'edit'])->name('data-mesin.edit');
+    // Route::put('/data-mesin/{id}', [DataMesinController::class, 'update'])->name('data-mesin.update');
 
-    Route::get('/data-perawatan', [DataPerawatanController::class, 'index'])->name('data-perawatan.index');
+    // Route::get('/data-perawatan', [DataPerawatanController::class, 'index'])->name('data-perawatan.index');
     Route::resource('/data-perawatan', DataPerawatanController::class);
-    Route::post('/data-perawatan/store', [DataPerawatanController::class, 'store'])->name('data-perawatan.store');
-    Route::get('/data-perawatan/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan.edit');
-    Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
+    // Route::post('/data-perawatan/store', [DataPerawatanController::class, 'store'])->name('data-perawatan.store');
+    // Route::get('/data-perawatan/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan.edit');
+    // Route::put('/data-perawatan/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan.update');
 
-    Route::get('/data-perbaikan', [DataPerbaikanController::class, 'index'])->name('data-perbaikan.index');
+    // Route::get('/data-perbaikan', [DataPerbaikanController::class, 'index'])->name('data-perbaikan.index');
     Route::resource('/data-perbaikan', DataPerbaikanController::class);
-    Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');
-    Route::get('/data-perbaikan/{id}/edit', [DataPerbaikanController::class, 'edit'])->name('data-perbaikan.edit');
-    Route::put('/data-perbaikan/{id}', [DataPerbaikanController::class, 'update'])->name('data-perbaikan.update');
+    // Route::post('/data-perbaikan/store', [DataPerbaikanController::class, 'store'])->name('data-perbaikan.store');
+    // Route::get('/data-perbaikan/{id}/edit', [DataPerbaikanController::class, 'edit'])->name('data-perbaikan.edit');
+    // Route::put('/data-perbaikan/{id}', [DataPerbaikanController::class, 'update'])->name('data-perbaikan.update');
 
-    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    // Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
     Route::resource('/jadwal', JadwalController::class);
-    Route::post('/jadwal/store', [JadwalController::class, 'store'])->name('jadwal.store');
-    Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
-    Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
+    // Route::post('/jadwal/store', [JadwalController::class, 'store'])->name('jadwal.store');
+    // Route::get('/jadwal/{id}/edit', [JadwalController::class, 'edit'])->name('jadwal.edit');
+    // Route::put('/jadwal/{id}', [JadwalController::class, 'update'])->name('jadwal.update');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
     Route::get('/laporan-mesin', [LaporanMesinController::class, 'index'])->name('laporan-mesin.index');

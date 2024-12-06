@@ -17,6 +17,7 @@ class Jadwal extends Model
 
      protected $fillable = [
         'nama_pemilik',
+        'mesin_id',
         'no_hp',
         'tanggal',
         'tempat',

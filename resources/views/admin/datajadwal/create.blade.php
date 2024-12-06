@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Data Mesin</h4>
+                        <h4>Jadwal</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

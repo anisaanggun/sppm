@@ -46,9 +46,18 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ url('/pemilik-mesin') }}"
+                                    class="nav-link {{ Request::segment(1) == 'pemilik-mesin' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2" data-icon="mdi:account" style="font-size: 24px;"></span>
+                                    <p>
+                                        Pemilik Mesin
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('/data-mesin') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-mesin' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="gravity-ui:gear-branches"
+                                    <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Mesin
@@ -58,8 +67,8 @@
                             <li class="nav-item">
                                 <a href="{{ url('/data-perawatan') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-perawatan' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="fa6-solid:gears"
-                                        style="font-size: 20px;"></span>
+                                    <span class="iconify mr-2 ml-1" data-icon="fa6-solid:gears"
+                                        style="font-size: 18px;"></span>
                                     <p>
                                         Perawatan
                                     </p>
@@ -68,7 +77,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/data-perbaikan') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="tabler:manual-gearbox-filled"
+                                    <span class="iconify mr-2 ml-1" data-icon="tabler:manual-gearbox-filled"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Perbaikan
