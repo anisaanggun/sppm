@@ -78,28 +78,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik') }}"
+                                                        <label class="font-weight-bold">Nama Pemilik</label>
+                                                        <input type="text" class="form-control" name="nama_pemilik"
+                                                            value="{{ old('nama_pemilik') }}"
                                                             placeholder="Masukan nama pemilik">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Brand</label>
-                                                        <input type="text" class="form-control" name="brand"
-                                                            value="{{ old('brand') }}"
-                                                            placeholder="Masukan nama brand">
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Model</label>
-                                                        <input type="text" class="form-control" name="model"
-                                                            value="{{ old('model') }}"
-                                                            placeholder="Masukan nama model">
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        <input type="text" class="form-control" name="nama_mesin"
-                                                            value="{{ old('nama_mesin') }}"
-                                                            placeholder="Masukan nama mesin">
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
+
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">No Hp</label>
+                                                        <input type="text" class="form-control" name="no_hp"
+                                                            value="{{ old('no_hp') }}" placeholder="Masukan no hp ">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Tanggal</label>
+                                                        <form>
+                                                            <input type="date" class="form-control" name="tanggal"
+                                                                value="{{ old('tanggal') }}">
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label for="brand">Jenis Jasa</label>
+                                                        <select class="form-control" id="jenis_jasa" name="jenis_jasa"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Jasa
+                                                            </option>
+                                                            <option value="Perawatan">Perawatan</option>
+                                                            <option value="Perbaikan">Perbaikan</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Tempat</label>
+                                                        <textarea class="form-control" id="tempat" name="tempat" rows="4"
+                                                            placeholder="Masukan tempat servis mesin anda" value="{{ old('tempat') }}"></textarea>
                                                     </div>
                                                     {{-- <div class="col-md-6 form-group mt-3">
                                                         <label for="brand">Brand</label>
@@ -140,7 +162,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Buat</button>
-                                                        <a href="/data-mesin" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="{{ route('jadwal.index') }}"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>

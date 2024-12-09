@@ -69,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <h5><b>Tambah Mesin Baru</b></h5>
                                     <p>Tambahkan mesin baru Anda disini</p>
                                 </div>
-                                <a href="/data-mesin" class="small-box-footer text-center">
+                                <a href="{{ route('data-mesin.index') }}" class="small-box-footer text-center">
                                     <span>Tambah</span>
                                 </a>
                             </div>
@@ -85,7 +85,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <h5><b>Catatan Perawatan</b></h5>
                                     <p>Catat perawatan mesin Anda disini</p>
                                 </div>
-                                <a href="/data-perawatan" class="small-box-footer">Catat</a>
+                                <a href="{{ route('data-perawatan.index') }}" class="small-box-footer">Catat</a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -99,7 +99,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <h5><b>Catatan Perbaikan</b></h5>
                                     <p>Catat perbaikan mesin Anda disini</p>
                                 </div>
-                                <a href="/data-perbaikan" class="small-box-footer">Catat</a>
+                                <a href="{{ route('data-perbaikan.index') }}" class="small-box-footer">Catat</a>
                             </div>
                         </div>
                         <!-- ./col -->

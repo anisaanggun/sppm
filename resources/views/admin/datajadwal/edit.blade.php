@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Mesin | Pantau Mesin</title>
+    <title>Tambah Data Mesin | Pantau Mesin</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Data Mesin</h4>
+                        <h4>Jadwal</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -72,43 +72,103 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('jadwal.update', $data_mesins->id) }}" method="POST"
+                                        <form action="{{ route('jadwal.store') }}" method="POST"
                                             enctype="multipart/form-data" class="needs-validation" novalidate>
-                                            @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik', $data_mesins->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Brand</label>
-                                                        <input type="text" class="form-control" name="brand"
-                                                            value="{{ old('brand', $data_mesins->brand) }}"
-                                                            placeholder="Masukan nama brand" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Model</label>
-                                                        <input type="text" class="form-control" name="model"
-                                                            value="{{ old('model', $data_mesins->model) }}"
-                                                            placeholder="Masukan nama model" required>
+                                                        <label class="font-weight-bold">Nama Pemilik</label>
+                                                        <input type="text" class="form-control" name="nama_pemilik"
+                                                            value="{{ old('nama_pemilik') }}"
+                                                            placeholder="Masukan nama pemilik">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        <input type="text" class="form-control" name="nama_mesin"
-                                                            value="{{ old('nama_mesin', $data_mesins->nama_mesin) }}"
-                                                            placeholder="Masukan nama mesin" required>
+                                                        <select class="form-control" id="mesin_id" name="mesin_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Mesin
+                                                            </option>
+                                                            @foreach ($data_mesins as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama_mesin }}</option>
+                                                            @endforeach
+
+                                                        </select>
                                                     </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">No Hp</label>
+                                                        <input type="text" class="form-control" name="no_hp"
+                                                            value="{{ old('no_hp') }}" placeholder="Masukan no hp ">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Tanggal</label>
+                                                        <form>
+                                                            <input type="date" class="form-control" name="tanggal"
+                                                                value="{{ old('tanggal') }}">
+                                                        </form>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label for="brand">Jenis Jasa</label>
+                                                        <select class="form-control" id="jenis_jasa" name="jenis_jasa"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Jasa
+                                                            </option>
+                                                            <option value="Perawatan">Perawatan</option>
+                                                            <option value="Perbaikan">Perbaikan</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Tempat</label>
+                                                        <textarea class="form-control" id="tempat" name="tempat" rows="4"
+                                                            placeholder="Masukan tempat servis mesin anda" value="{{ old('tempat') }}"></textarea>
+                                                    </div>
+                                                    {{-- <div class="col-md-6 form-group mt-3">
+                                                        <label for="brand">Brand</label>
+                                                        <select class="form-control" id="brand" name="brand"
+                                                            required>
+                                                            <option value="">Pilih Brand Mesin</option>
+                                                            <option value="Mitsubishi">Mitsubishi</option>
+                                                            <option value="LG">LG</option>
+                                                            <option value="Honeywell">Honeywell</option>
+                                                            <option value="Lainnya">Lainnya</option>
+                                                        </select>
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-6 form-group mt-3">
+                                                        <label for="model">Model</label>
+                                                        <select class="form-control" id="model" name="model"
+                                                            required>
+                                                            <option value="">Pilih Model Mesin</option>
+                                                            <option value="AC Split">AC Split</option>
+                                                            <option value="AC Floor Standing">AC Floor Standing</option>
+                                                            <option value="AC Window">AC Window</option>
+                                                            <option value="Lainnya">Lainnya</option>
+                                                        </select>
+                                                    </div> --}}
+                                                    {{-- <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Nama Mesin</label>
+                                                        @foreach ($nama_mesin as $value => $label)
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="nama_mesin" value="{{ $value }}"
+                                                                    id="nama_mesin{{ $value }}">
+                                                                <label class="form-check-label"
+                                                                    for="nama_mesin{{ $value }}">
+                                                                    {{ $label }}
+                                                                </label>
+                                                            </div>
+                                                        @endforeach
+                                                    </div> --}}
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
-                                                            class="btn btn-md btn-success">Edit</button>
-                                                        <a href="/data-mesin" class="btn btn-md btn-danger">Batal</a>
+                                                            class="btn btn-md btn-success">Buat</button>
+                                                        <a href="{{ route('jadwal.index') }}"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>
+
+
 
                                         </form>
                                     </div>
@@ -122,7 +182,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </div>
         {{-- Footer --}}
         @include('admin/footer')
-
     </div>
     <!-- ./wrapper -->
 
@@ -139,7 +198,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
 </body>
 
 </html>

@@ -107,7 +107,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Buat</button>
-                                                        <a href="/pemilik-mesin" class="btn btn-md btn-danger">Batal</a>
+                                                        <a href="{{ route('pemilik-mesin.index') }}"
+                                                            class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
                                             </div>

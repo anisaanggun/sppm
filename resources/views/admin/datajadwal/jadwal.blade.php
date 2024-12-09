@@ -59,13 +59,16 @@
                             style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah Data</a>
                     </div> --}}
                     <div class="row ml-4 mr-4">
-                        <div class="col-md-6 form-group mt-3">
+                        <div class="col-md-12 mt-3">
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     <i class="fas fa-check-circle mr-1"></i>
                                     {{ session('success') }}
                                 </div>
                             @endif
+                        </div>
+
+                        <div class="col-md-6 form-group">
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
@@ -130,7 +133,7 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6 form-group mt-3">
+                        <div class="col-md-6 form-group">
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
@@ -145,7 +148,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 form-group mt-3">
-                                        <img src="/img/gambarJ.png" alt="" class="img-fluid ml-5">
+                                        <img src="{{ asset('/img/gambarJ.png') }}" alt=""
+                                            class="img-fluid ml-5">
                                     </div>
                                     <div class="col-md-6 form-group mt-3">
                                         <div>

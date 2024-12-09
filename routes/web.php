@@ -25,7 +25,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/beranda', [BerandaController::class, 'index']);
-    Route::get('/jadwal', [JadwalController::class, 'index']);
+    Route::resource('/jadwal', JadwalController::class);
 
     // Route::get('/data-mesin', [DataMesinController::class, 'index'])->name('data-mesin.index');
     Route::resource('/data-mesin', DataMesinController::class);
