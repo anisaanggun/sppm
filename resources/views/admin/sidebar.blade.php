@@ -4,7 +4,7 @@
     <aside class="main-sidebar">
         <!-- Brand Logo -->
         <a href="" class="brand-link" style="text-align: center;">
-            <img src="/img/Logo2.png" alt="">
+            <img src="{{ asset('/img/Logo2.png') }}" alt="">
         </a>
 
         <!-- Sidebar -->
