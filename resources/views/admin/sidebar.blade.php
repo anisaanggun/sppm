@@ -1,16 +1,10 @@
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <link rel="stylesheet"
-        href="/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <link rel="stylesheet" href="{{ asset('/assets/plugins/fontawesome-free/css/all.min.css') }}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/assets/dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
 
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar">
         <!-- Brand Logo -->
         <a href="" class="brand-link" style="text-align: center;">
-            <img src="{{ aseet('/img/Logo2.png') }}" alt="">
+            <img src="/img/Logo2.png" alt="">
         </a>
 
         <!-- Sidebar -->
