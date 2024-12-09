@@ -145,7 +145,8 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 form-group mt-3">
-                                        <img src="/img/gambarJ.png" alt="" class="img-fluid ml-5">
+                                        <img src="{{ asset('/img/gambarJ.png') }}" alt=""
+                                            class="img-fluid ml-5">
                                     </div>
                                     <div class="col-md-6 form-group mt-3">
                                         <div>
