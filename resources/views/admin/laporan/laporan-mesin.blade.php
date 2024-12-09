@@ -28,20 +28,18 @@
 
         {{-- Content --}}
         <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-md-4">
-                            <div id="month-buttons" style="display: flex; flex-direction: column;">
-                                <!-- Tombol bulan akan ditambahkan di sini -->
-                            </div>
-                        </div>
-                        <div class="col-md-8">
-                            <canvas id="myChart" style="height: 400px;"></canvas>
+                        <div class="col">
+                            <canvas id="myChart"></canvas>
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
+            <!-- /.content-header -->
+        </div>
 
 
             <!-- Main content -->
@@ -87,7 +85,7 @@
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
+        labels: ['Mitsubishi', 'HoneyWell', 'LG Window', 'Mito', 'Samsung', 'Toshiba'],
         datasets: [{
             label: 'Laporan Mesin',
                     data: dataPerBulan['Januari'], // Data awal

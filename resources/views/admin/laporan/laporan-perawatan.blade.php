@@ -76,20 +76,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
           label: 'Laporan Perawatan',
           data: [34, 19, 20, 10, 32, 5],
           backgroundColor: [
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)'
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)'
           ],
           borderColor: [
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)',
-            'rgba(255, 255, 0, 0.2)'
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)',
+            'rgba(0, 123, 255, 0.2)'
           ],
           borderWidth: 1,
           barThickness: 50

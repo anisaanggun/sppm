@@ -25,6 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
@@ -45,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row ">
-                        <div class="col">
+                        <div class="col mb-2">
                             <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid">
                         </div>
                     </div><!-- /.row -->
@@ -116,8 +117,33 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                         </div>
                         <!-- ./col -->
+                        <div class="col-md-6 form-group">
+                            <div class="card border-0"
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body">
+                                    <canvas id="myChart1" width="300" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group ">
+                            <div class="card border-0 "
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body">
+                                    <canvas id="myChart2" width="300" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.row -->
+
+                    <!-- Grafik -->
+                    <div class="row ml-4 mr-4">
+
+                    </div>
+
+
+
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
@@ -134,5 +160,60 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
 </body>
+
+<script>
+    var ctx1 = document.getElementById('myChart1').getContext('2d');
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+
+    // Data untuk grafik pertama
+    var myChart1 = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: 'Laporan Perawatan',
+                data: [30, 20, 15, 10, 25, 5],
+                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Warna biru transparan
+                borderColor: 'rgba(255, 165, 0, 0.2)', // Warna biru solid
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Data untuk grafik kedua
+    var myChart2 = new Chart(ctx2, {
+        type: 'bar', // Tipe grafik kedua, bisa diubah sesuai kebutuhan
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: 'Laporan Perbaikan',
+                data: [15, 25, 10, 30, 20, 5],
+                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Warna merah transparan
+                borderColor: 'rgba(255, 165, 0, 0.2)', // Warna merah solid
+                borderWidth: 1,
+                fill: true // Mengisi area di bawah garis
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
 
 </html>
