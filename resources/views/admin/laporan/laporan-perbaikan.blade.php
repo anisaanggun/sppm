@@ -95,7 +95,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           barThickness: 50
         }]
       },
-      options: {
+        options: {
         responsive:true,
         maintainAspectRatio:false,
         scales: {
