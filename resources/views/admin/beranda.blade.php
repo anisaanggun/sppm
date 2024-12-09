@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row ">
                         <div class="col">
-                            <img src="{{ asset('/assets/img/gambar1.png') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid">
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
