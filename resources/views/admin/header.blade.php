@@ -41,7 +41,7 @@
                     </span>
                 </a> <!-- end ubah sandi -->
                 <div class="dropdown-divider"></div> <!-- Divider antara menu -->
-                <form action="/logout" method="post" class="dropdown-item">
+                <form action="{{ route('logout') }}" method="post" class="dropdown-item">
                     @csrf
                     <button class="btn text-danger p-0" type="submit">
                         <i class="fa-solid fa-right-from-bracket mr-2"></i> <strong>Logout</strong>
