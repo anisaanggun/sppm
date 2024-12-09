@@ -69,6 +69,7 @@
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
 </body>
 
+
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
 

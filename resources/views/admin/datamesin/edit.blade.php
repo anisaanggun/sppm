@@ -128,6 +128,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <!-- REQUIRED SCRIPTS -->
 
+
     <!-- jQuery -->
     <script src="{{ asset('/lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
