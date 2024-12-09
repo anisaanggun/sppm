@@ -24,7 +24,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('/lte/dist/css/adminlte.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}">
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
 </head>
