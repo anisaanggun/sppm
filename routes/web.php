@@ -10,9 +10,10 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanMesinController;
 use App\Http\Controllers\LaporanPerawatanController;
 use App\Http\Controllers\LaporanPerbaikanController;
+use App\Http\Controllers\PemilikMesinController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/dologin', [AuthController::class, 'dologin'])->name('dologin');
 
 Route::get('/daftar', [AuthController::class, 'daftar'])->name('daftar');
@@ -59,6 +60,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/laporan-perbaikan', [LaporanPerbaikanController::class, 'index'])->name('laporan-perbaikan.index');
     // Route::get('/admin/create', [DataMesinController::class, 'create'])->name('admin.create');
     // Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
+
+    Route::resource('/pemilik-mesin', PemilikMesinController::class);
+    
 });
 
 // Route::resource('/admin/data-mesin', \App\Http\Controllers\DataMesinController::class);

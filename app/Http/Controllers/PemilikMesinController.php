@@ -13,7 +13,7 @@ class PemilikMesinController extends Controller
 {
     public function index(): View
     {
-        $pemilik_mesins = PemilikMesin::all();
+        $pemilik_mesins = PemilikMesin::latest()->paginate(10);
 
         return view('admin.pemilik.pemilik-mesin', compact('pemilik_mesins'));
 
@@ -41,7 +41,7 @@ class PemilikMesinController extends Controller
         ]);
 
         //create data perawatan
-        DataPerawatan::create([
+        PemilikMesin::create([
             'user_id' => $request->user_id,
             'mesin_id' => $request->mesin_id,
         ]);
