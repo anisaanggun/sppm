@@ -68,33 +68,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
-        datasets: [{
-          label: 'Laporan Perawatan',
-          data: [12, 19, 3, 10, 40, 25],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1,
-          barThickness: 50
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: 'Laporan Perawatan',
+                data: [12, 19, 3, 10, 40, 25],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
     });
-  </script>
+</script>
+
 </html>
