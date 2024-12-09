@@ -12,7 +12,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Beranda | Pantau Mesin</title>
-    <link rel="shortcut icon" type="image/x-icon" href="/img/Logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <div class="row ">
                         <div class="col">
-                            <img src="/img/gambar1.png" alt="" class="img-fluid">
+                            <img src="{{ asset('/assets/img/gambar1.png') }}" alt="" class="img-fluid">
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->

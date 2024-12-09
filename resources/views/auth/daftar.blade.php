@@ -10,7 +10,7 @@
             </div> --}}
 
             <div style="text-align:center;" style="padding:20px;">
-                <img src="/img/Logo.png" alt="" style="width: 50px; height:auto; margin-top:5px;">
+                <img src="{{ asset('/img/Logo.png') }}" alt="" style="width: 50px; height:auto; margin-top:5px;">
                 <b>
                     <p style="color: #1E56A0;">Daftar</p>
                 </b>
