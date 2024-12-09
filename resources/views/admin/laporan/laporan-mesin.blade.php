@@ -1,38 +1,25 @@
 @extends('layouts.main')
 
-
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>LaporanMesin | Pantau Mesin</title>
-    <link rel="shortcut icon" type="image/x-icon" href="img/Logo.png">
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="/assets/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="/assets/plugins/fontawesome-free/css/all.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="{{ asset('/lte/plugins/fontawesome-free/css/all.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
-
-    <link rel="stylesheet" href="/assets/style.css">
-
+    <link rel="stylesheet" href="{{ asset('/lte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js">
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
         {{-- Navbar --}}
         @include('admin/header')
 
@@ -40,18 +27,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
         @include('admin/sidebar')
 
         {{-- Content --}}
-        <canvas id="myChart"></canvas>
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row 5">
-                        <div class="col 10">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div id="month-buttons" style="display: flex; flex-direction: column;">
+                                <!-- Tombol bulan akan ditambahkan di sini -->
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <canvas id="myChart" style="height: 400px;"></canvas>
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
-            <!-- /.content-header -->
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="mt-2" style="margin-left: 40px">
+                    </div>
+                    <div class="row ml-4 mr-4">
+                        <div class="col-12 ml-1 mr-1">
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
         {{-- Footer --}}
         @include('admin/footer')
@@ -59,36 +62,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
     <!-- jQuery -->
-    <script src="/assets/plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('/lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="/assets/dist/js/adminlte.min.js"></script>
+    <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
 </body>
+
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
+
+    //Data untuk setiap bulan
+    var dataPerBulan = {
+            'Januari': [12, 19, 3, 10, 40, 25],
+            'Februari': [15, 10, 5, 20, 30, 15],
+            'Maret': [20, 25, 15, 10, 5, 30],
+            'April': [10, 15, 20, 25, 30, 35],
+            'Mei': [5, 10, 15, 20, 25, 30],
+            'Juni': [30, 25, 20, 15, 10, 5]
+    };
+
+    //inisialisasi grafik
     var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['1', '2', '3', '4', '5', '6'],
         datasets: [{
-          label: 'Laporan Perawatan',
-          data: [12, 19, 3, 10, 40, 25],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)'
-          ],
-          borderWidth: 1,
-          barThickness: 50
+            label: 'Laporan Mesin',
+                    data: dataPerBulan['Januari'], // Data awal
+                    backgroundColor: 'rgba(255, 165, 0, 0.2)',
+                    borderColor: 'rgba(255, 165, 0, 0.2)',
+                    borderWidth: 1,
+                    barThickness: 50
         }]
-      },
-      options: {
+    },
+
+        options: {
+        responsive:true,
+        maintainAspectRatio:false,
         scales: {
           y: {
             beginAtZero: true
@@ -96,5 +107,30 @@ scratch. This page gets rid of all links and provides the needed markup only.
         }
       }
     });
+
+        // Fungsi untuk memperbarui grafik
+        function updateChart(month) {
+            myChart.data.datasets[0].data = dataPerBulan[month];
+            myChart.update();
+        }
+
+        // Event listener untuk mengklik bulan
+        document.addEventListener('click', function(event) {
+            const monthClicked = event.target.innerText; // Ambil teks dari elemen yang diklik
+            if (dataPerBulan[monthClicked]) {
+                updateChart(monthClicked);
+            }
+        });
+
+        // Menampilkan bulan sebagai tombol
+        const months = Object.keys(dataPerBulan);
+        months.forEach(month => {
+            const button = document.createElement('button');
+            button.innerText = month;
+            button.onclick = function() {
+                updateChart(month);
+            };
+            document.getElementById('month-buttons').appendChild(button);
+        });
   </script>
 </html>

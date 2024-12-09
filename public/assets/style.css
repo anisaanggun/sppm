@@ -16,6 +16,29 @@
     flex-direction: column;
 }
 
+#myChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+#month-buttons {
+    margin-right: 20px; /* Jarak antara tombol dan grafik */
+}
+
+#month-buttons button {
+    margin-bottom: 10px; /* Jarak antar tombol */
+    padding: 10px; /* Padding untuk tombol */
+    background-color: #007bff; /* Warna latar belakang tombol */
+    color: white; /* Warna teks tombol */
+    border: none; /* Menghilangkan border */
+    border-radius: 5px; /* Sudut melengkung */
+    cursor: pointer; /* Menunjukkan bahwa tombol dapat diklik */
+}
+
+#month-buttons button:hover {
+    background-color: #0056b3; /* Warna latar belakang saat hover */
+}
+
 /* Sidebar */
 .main-sidebar {
     background-color: #1E56A0;
