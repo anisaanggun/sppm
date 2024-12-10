@@ -80,7 +80,7 @@
                                     <div class="sticky-top mb-2 external-event"
                                         style="background-color:#FF9B50; border-radius: 10px;">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            {{-- @forelse ($jadwals as $item)
+                                            @forelse ($jadwals as $item)
                                                 <td>{{ $item->nama_pemilik }}</td>
                                                 <td>{{ $item->no_hp }}</td>
                                                 <td>{{ $item->tanggal }}</td>
@@ -90,14 +90,14 @@
                                                 <div class="alert alert-danger">
                                                     Data Mesin belum Tersedia.
                                                 </div>
-                                            @endforelse --}}
-                                            <div>
+                                            @endforelse
+                                            {{-- <div>
                                                 <span class="name"
                                                     style="margin-left: 7px; font-size: 17px font-weight: normal;">Radiman</span>
                                                 <span class="phone-number"
                                                     style="font-weight: normal; font-size: 14px">+62
                                                     8123456789</span>
-                                            </div>
+                                            </div> --}}
                                             <div class="dropdown">
                                                 <a class="" href="#" role="button" id="dropdownMenuLink"
                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -119,7 +119,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div style="margin-top: 10px; display: flex; flex-direction: column;">
+                                        {{-- <div style="margin-top: 10px; display: flex; flex-direction: column;">
                                             <p><span style="margin-left: 7px; font-size: 14px">AC
                                                     Midea</span><span
                                                     style="margin-left: 80px; font-size: 14px">Perawatan</span>
@@ -127,7 +127,7 @@
                                             <p><span style="margin-left: 7px; font-size: 14px">MSAF-05CRN2</span><span
                                                     style="margin-left: 42px; font-size: 14px">Jl. Kartini no 10
                                                     Sidoarjo</span></p>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
 

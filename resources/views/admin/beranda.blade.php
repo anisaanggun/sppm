@@ -45,7 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row ">
+                    <div class="row">
                         <div class="col mb-2">
                             <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid">
                         </div>
