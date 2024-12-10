@@ -173,8 +173,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             datasets: [{
                 label: 'Laporan Perawatan',
                 data: [30, 20, 15, 10, 25, 5],
-                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Warna biru transparan
-                borderColor: 'rgba(255, 165, 0, 0.2)', // Warna biru solid
+                backgroundColor: '#FF9B50',
+                borderColor: '#FF9B50',
                 borderWidth: 1,
                 barThickness: 50
             }]
@@ -198,8 +198,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             datasets: [{
                 label: 'Laporan Perbaikan',
                 data: [15, 25, 10, 30, 20, 5],
-                backgroundColor: 'rgba(255, 165, 0, 0.2)', // Warna merah transparan
-                borderColor: 'rgba(255, 165, 0, 0.2)', // Warna merah solid
+                backgroundColor: '#FF9B50',
+                borderColor: '#FF9B50',
                 borderWidth: 1,
                 fill: true // Mengisi area di bawah garis
             }]
