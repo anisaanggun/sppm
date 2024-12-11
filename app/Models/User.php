@@ -46,8 +46,8 @@ class User extends Authenticatable
 
 
     // inverse one to Many ke tabel role
-    public function role() {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+    // public function role() {
+    //     return $this->belongsTo(Role::class, 'role_id');
+    // }
 
 }

@@ -12,7 +12,7 @@ class DataPerawatanController extends Controller
 {
     public function index(): View
     {
-        $data_perawatans = DataPerawatan::latest()->paginate(10);
+        $data_perawatans = DataPerawatan::select('data_perawatans.*', 'data_mesins.nama_mesin')->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')->latest()->paginate(10);
 
         return view('admin.dataperawatan.data-perawatan', compact('data_perawatans'));
 

@@ -14,12 +14,12 @@
         <!-- heder user -->
         <li class="nav-item dropdown">
             <a class="nav-links dropdown-toggle mr-lg-2" href="#" id="alertsDropdown" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+                aria-haspopup="true" aria-expanded="false" style="font-weight:bold;">
                 <i class="fa fa-fw fa-user"></i>
                 <span class="d-lg-none">
                     <span class="badge badge-pill badge-warning"></span>
                 </span>
-                Budiman
+                {{ auth()->user()->name }}
             </a>
             <!-- start dropdown -->
             <div class="dropdown-menu mr-5 mt-3" aria-labelledby="alertsDropdown"

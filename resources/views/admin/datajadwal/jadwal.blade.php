@@ -81,11 +81,11 @@
                                         style="background-color:#FF9B50; border-radius: 10px;">
                                         <div class="d-flex justify-content-between align-items-center">
                                             @forelse ($jadwals as $item)
-                                                <td>{{ $item->nama_pemilik }}</td>
-                                                <td>{{ $item->no_hp }}</td>
-                                                <td>{{ $item->tanggal }}</td>
-                                                <td>{{ $item->tempat }}</td>
-                                                <td>{{ $item->jenis_jasa }}</td>
+                                                {{ $item->nama_pemilik }}
+                                                {{ $item->no_hp }}
+                                                {{ $item->tanggal }}
+                                                {{ $item->tempat }}
+                                                {{ $item->jenis_jasa }}<br>
                                             @empty
                                                 <div class="alert alert-danger">
                                                     Data Mesin belum Tersedia.
