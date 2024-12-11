@@ -74,8 +74,8 @@
                                             <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">ID</th>
-                                                    <th scope="col">User ID</th>
-                                                    <th scope="col">Mesin ID</th>
+                                                    <th scope="col">Nama User</th>
+                                                    <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -83,8 +83,8 @@
                                                 @forelse ($pemilik_mesins as $item)
                                                     <tr>
                                                         <td>{{ $item->id }}</td>
-                                                        <td>{{ $item->user_id }}</td>
-                                                        <td>{{ $item->mesin_id }}</td>
+                                                        <td>{{ $item->name }}</td>
+                                                        <td>{{ $item->nama_mesin }}</td>
                                                         <td>
                                                             <form
                                                                 onsubmit="event.preventDefault(); confirmDelete(this);"

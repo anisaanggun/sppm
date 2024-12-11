@@ -13,7 +13,10 @@ class PemilikMesinController extends Controller
 {
     public function index(): View
     {
-        $pemilik_mesins = PemilikMesin::latest()->paginate(10);
+        $pemilik_mesins = PemilikMesin::select('pemilik_mesins.*', 'data_mesins.nama_mesin', 'users.name')
+        ->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')
+        ->leftJoin('users', 'user_id', '=', 'users.id')
+        ->latest()->paginate(10);
 
         return view('admin.pemilik.pemilik-mesin', compact('pemilik_mesins'));
 
