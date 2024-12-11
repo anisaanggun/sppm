@@ -40,20 +40,6 @@
             </div>
             <!-- /.content-header -->
         </div>
-
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="mt-2" style="margin-left: 40px">
-                    </div>
-                    <div class="row ml-4 mr-4">
-                        <div class="col-12 ml-1 mr-1">
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
         {{-- Footer --}}
         @include('admin/footer')
     </div>
