@@ -35,7 +35,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <a href="{{ url('/') }}"
                             class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'pemilik-mesin' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
@@ -86,7 +86,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <a href="{{ url('/') }}"
                             class="nav-link {{ Request::segment(1) == 'laporan' || Request::segment(1) == 'laporan-mesin' || Request::segment(1) == 'laporan-perawatan' || Request::segment(1) == 'laporan-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:file-document" style="font-size: 24px;"></span>
