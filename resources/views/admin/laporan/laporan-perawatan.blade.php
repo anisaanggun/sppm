@@ -45,10 +45,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col">
-                            <canvas id="myChart"></canvas>
+                    <div class="row mt-3 " style="margin-left: 26px">
+                        <h4>Laporan Perawatan</h4>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row ml-4 mr-4 mt-4">
+                        <div class="col-md-12 form-group">
+                            <div class="card border-0"
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body ml-4 mr-4 mt-5">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
                         </div>
+
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -69,41 +84,42 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script>
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['1', '2', '3', '4', '5', '6'],
-        datasets: [{
-          label: 'Laporan Perawatan',
-          data: [34, 19, 20, 10, 32, 5],
-          backgroundColor: [
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)'
-          ],
-          borderColor: [
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)',
-            'rgba(0, 123, 255, 0.2)'
-          ],
-          borderWidth: 1,
-          barThickness: 50
-        }]
-      },
-      options: {
-        responsive:true,
-        maintainAspectRatio:false,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        type: 'bar',
+        data: {
+            labels: ['1', '2', '3', '4', '5', '6'],
+            datasets: [{
+                label: 'Laporan Perawatan',
+                data: [34, 19, 20, 10, 32, 5],
+                backgroundColor: [
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)',
+                    'rgba(0, 123, 255, 0.2)'
+                ],
+                borderWidth: 1,
+                barThickness: 50
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
-      }
     });
-  </script>
+</script>
+
 </html>

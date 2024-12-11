@@ -32,10 +32,25 @@
             <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col">
-                            <canvas id="myChart"></canvas>
+                    <div class="row mt-3 " style="margin-left: 26px">
+                        <h4>Laporan Mesin</h4>
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row ml-4 mr-4 mt-4">
+                        <div class="col-md-12 form-group">
+                            <div class="card border-0"
+                                style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
+                                <div class="card-body ml-4 mr-4 mt-5">
+                                    <canvas id="myChart"></canvas>
+                                </div>
+                            </div>
                         </div>
+
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

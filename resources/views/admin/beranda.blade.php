@@ -133,17 +133,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- /.row -->
-
-                    <!-- Grafik -->
-                    <div class="row ml-4 mr-4">
-
-                    </div>
-
-
-
                 </div><!-- /.container-fluid -->
             </section>
             <!-- /.content -->
