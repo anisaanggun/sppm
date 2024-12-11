@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="lingkaran">
                                         <span class="iconify" data-icon="gravity-ui:gear-branches"></span>
                                     </div>
-                                    <h5><b>Tambah Mesin Baru</b></h5>
+                                    <h5><b>Tambah Mesin</b></h5>
                                     <p>Tambahkan mesin baru Anda disini</p>
                                 </div>
                                 <a href="{{ route('data-mesin.index') }}" class="small-box-footer text-center">
@@ -172,11 +172,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
             labels: ['1', '2', '3', '4', '5', '6'],
             datasets: [{
                 label: 'Laporan Perawatan',
-                data: [30, 20, 15, 10, 25, 5],
+                data: [30, 10, 21, 15, 35, 5],
                 backgroundColor: '#FF9B50',
                 borderColor: '#FF9B50',
                 borderWidth: 1,
-                barThickness: 50
+                fill: true // Mengisi area di bawah garis
             }]
         },
         options: {

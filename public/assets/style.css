@@ -196,7 +196,7 @@
 
 /* beranda */
 .small-box {
-    background-color: #FFFFFF;
+    background-image: url('img/ya.png');
     border-radius: 15px !important;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
     display: block;
@@ -215,6 +215,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.small-box .inner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+@media (max-width:768px){
+    .lingkaran{
+        width: 40px;
+        height: 40px;
+    }
 }
 
 .small-box-footer:hover,

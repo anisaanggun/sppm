@@ -12,7 +12,7 @@ class DataPerbaikanController extends Controller
 {
     public function index(): View
     {
-        $data_perbaikans = DataPerbaikan::latest()->paginate(10);
+        $data_perbaikans = DataPerbaikan::select('data_perbaikans.*', 'data_mesins.nama_mesin')->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')->latest()->paginate(10);
 
         return view('admin.dataperbaikan.data-perbaikan', compact('data_perbaikans'));
 

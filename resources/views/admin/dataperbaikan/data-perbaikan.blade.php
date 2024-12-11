@@ -74,7 +74,7 @@
                                             <thead>
                                                 <tr class="text-center">
                                                     <th scope="col">Pemilik</th>
-                                                    <th scope="col">ID Mesin</th>
+                                                    <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Tanggal</th>
                                                     <th scope="col">Teknisi</th>
                                                     <th scope="col">Kerusakan</th>
@@ -86,7 +86,7 @@
                                                 @forelse ($data_perbaikans as $data_perbaikan)
                                                     <tr>
                                                         <td>{{ $data_perbaikan->pemilik }}</td>
-                                                        <td>{{ $data_perbaikan->mesin_id }}</td>
+                                                        <td>{{ $data_perbaikan->nama_mesin}}</td>
                                                         <td>{{ $data_perbaikan->tanggal }}</td>
                                                         <td>{{ $data_perbaikan->teknisi }}</td>
                                                         <td>{{ $data_perbaikan->kerusakan }}</td>
