@@ -1,9 +1,10 @@
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
+
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar">
         <!-- Brand Logo -->
-        <a href="" class="brand-link" style="text-align: center;">
+        <a href="#" class="brand-link" style="text-align: center;">
             <img src="{{ asset('/img/Logo2.png') }}" alt="">
         </a>
 

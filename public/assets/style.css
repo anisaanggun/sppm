@@ -65,6 +65,26 @@
     color: #FFFFFF;
 }
 
+.main.sidebar{
+    width: 250px;
+    transition: width 0.3s;
+}
+
+.main.sidebar.closed{
+    width:60px;
+}
+
+.brand-link img{
+    max-width: 150%;
+    height: auto;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.main.sidebar.closed .brand-link img{
+    width: 50%;
+    opacity: 0.5;
+}
+
 .active-link {
     background-color: #297AE6 !important;
     color: #FFFFFF !important;
