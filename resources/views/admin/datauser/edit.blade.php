@@ -71,62 +71,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-perbaikan.update', $data_perbaikans->id) }}"
-                                            method="POST" enctype="multipart/form-data" class="needs-validation"
-                                            novalidate>
+                                        <form action="{{ route('', $users->id) }}" method="POST"
+                                            enctype="multipart/form-data" class="needs-validation" novalidate>
                                             @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik', $data_perbaikans->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik" required>
+                                                        <label class="font-weight-bold">Nama</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            value="{{ old('name', $users->name) }}"
+                                                            placeholder="Masukan nama" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Tanggal</label>
-                                                        <form>
-                                                            <input type="date" class="form-control" name="tanggal"
-                                                                value="{{ old('tanggal', $data_perbaikans->tanggal) }}"
-                                                                required>
-                                                        </form>
+                                                        <label class="font-weight-bold">E-mail</label>
+                                                        <input type="text" class="form-control" name="email"
+                                                            value="{{ old('email', $users->email) }}"
+                                                            placeholder="Masukan email" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Teknisi</label>
-                                                        <input type="text" class="form-control" name="teknisi"
-                                                            value="{{ old('teknisi', $data_perbaikans->teknisi) }}"
-                                                            placeholder="Masukan nama teknisi" required>
+                                                        <label class="font-weight-bold">No HP</label>
+                                                        <input type="text" class="form-control" name="no_hp"
+                                                            value="{{ old('no_hp', $users->no_hp) }}"
+                                                            placeholder="Masukan no hp" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Kerusakan</label>
-                                                        <input type="text" class="form-control" name="kerusakan"
-                                                            value="{{ old('kerusakan', $data_perbaikans->kerusakan) }}"
-                                                            placeholder="Masukan kerusakan" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Nama Mesin</label>
-                                                        <select class="form-control" id="mesin_id" name="mesin_id"
-                                                            required>
-                                                            <option value="" disabled>Pilih Mesin</option>
-                                                            @foreach ($data_mesins as $item)
-                                                                <option value="{{ $item->id }}"
-                                                                    {{ old('mesin_id', $data_perbaikans->id) == $item->id ? 'selected' : '' }}>
-                                                                    {{ $item->nama_mesin }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Catatan</label>
-                                                        <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
-                                                            value="{{ old('catatan') }}">{{ old('catatan', $data_perbaikans->catatan) }}</textarea>
+                                                        <label class="font-weight-bold">Alamat</label>
+                                                        <textarea class="form-control" id="alamat" name="alamat" rows="4" placeholder="Masukan alamat anda"
+                                                            value="{{ old('alamat') }}">{{ old('alamat', $users->alamat) }}</textarea>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Edit</button>
-                                                        <a href="{{ route('data-perbaikan.index') }}"
+                                                        <a href="{{ route('') }}"
                                                             class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>

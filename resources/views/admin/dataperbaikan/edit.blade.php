@@ -111,7 +111,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <option value="" disabled>Pilih Mesin</option>
                                                             @foreach ($data_mesins as $item)
                                                                 <option value="{{ $item->id }}"
-                                                                    {{ old('mesin_id', $data_perbaikans->id) == $item->id ? 'selected' : '' }}>
+                                                                    {{ old('mesin_id', $data_perbaikans->mesin_id) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->nama_mesin }}
                                                                 </option>
                                                             @endforeach

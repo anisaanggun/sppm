@@ -57,7 +57,7 @@ class DataPerbaikanController extends Controller
 
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan  ' . ' milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
@@ -97,11 +97,9 @@ class DataPerbaikanController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        $selectedID = $request->input('mesin_id');
-        session()->flash('selectedID', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan dengan ID  ' . $selectedID . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse

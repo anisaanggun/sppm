@@ -86,7 +86,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             </option>
                                                             @foreach ($data_users as $item)
                                                                 <option value="{{ $item->id }}"
-                                                                    @if (old('user_id') == $item->id) selected @endif>
+                                                                    {{ old('user_id', $pemilik_mesins->user_id) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->name }}
                                                                 </option>
                                                             @endforeach
@@ -100,8 +100,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             </option>
                                                             @foreach ($data_mesins as $item)
                                                                 <option value="{{ $item->id }}"
-                                                                    @if (old('mesin_id') == $item->id) selected @endif>
-                                                                    {{ $item->nama_mesin }}</option>
+                                                                    {{ old('mesin_id', $pemilik_mesins->mesin_id) == $item->id ? 'selected' : '' }}>
+                                                                    {{ $item->nama_mesin }}
+                                                                </option>
                                                             @endforeach
 
                                                         </select>

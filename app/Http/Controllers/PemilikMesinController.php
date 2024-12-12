@@ -39,7 +39,7 @@ class PemilikMesinController extends Controller
             'user_id' => 'required',
             'mesin_id' => 'required',
         ], [
-            'user_id.required' => 'Silahkan pilih nama anda.',
+            'user_id.required' => 'Silahkan pilih nama user.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
         ]);
 

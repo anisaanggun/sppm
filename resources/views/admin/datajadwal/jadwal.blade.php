@@ -23,9 +23,9 @@
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -211,8 +211,6 @@
             });
         }
     </script>
-
-
 </body>
 
 </html>

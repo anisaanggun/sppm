@@ -103,11 +103,9 @@ class DataPerawatanController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        $selectedID = $request->input('mesin_id');
-        session()->flash('selectedID', $request->mesin_id);
         $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan dengan ID ' . $selectedID . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan milik ' . $pemilik . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
