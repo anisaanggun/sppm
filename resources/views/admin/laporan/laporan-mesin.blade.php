@@ -39,6 +39,7 @@
             </div>
             <!-- /.content-header -->
 
+
             <div class="content">
                 <div class="container-fluid">
                     <div class="row ml-4 mr-4 mt-4">
@@ -91,10 +92,11 @@
             datasets: [{
                 label: 'Laporan Mesin',
                 data: dataPerBulan['Januari'], // Data awal
-                backgroundColor: 'rgba(255, 165, 0, 0.2)',
-                borderColor: 'rgba(255, 165, 0, 0.2)',
+                backgroundColor: '#FF9B50',
+                borderColor: '#FF9B50',
                 borderWidth: 1,
-                barThickness: 50
+                fill: true // Mengisi area di bawah garis
+
             }]
         },
 

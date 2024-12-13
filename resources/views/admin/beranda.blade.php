@@ -189,8 +189,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             datasets: [{
                 label: 'Laporan Perbaikan',
                 data: [15, 25, 10, 30, 20, 5],
-                backgroundColor: '#FF9B50',
-                borderColor: '#FF9B50',
+                backgroundColor: '#FFBB5C',
+                borderColor: '#FFBB5C',
                 borderWidth: 1,
                 fill: true // Mengisi area di bawah garis
             }]
