@@ -91,23 +91,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 label: 'Laporan Perawatan',
                 data: [34, 19, 20, 10, 32, 5],
                 backgroundColor: [
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)'
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50'
                 ],
                 borderColor: [
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)',
-                    'rgba(0, 123, 255, 0.2)'
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50',
+                    '#FF9B50'
                 ],
                 borderWidth: 1,
-                barThickness: 50
+                fill: true // Mengisi area di bawah garis
             }]
         },
         options: {
