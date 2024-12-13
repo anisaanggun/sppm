@@ -29,7 +29,7 @@
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
-    transition: width 0.3s ease;
+    transition: width 0.5s ease;
 }
 
 .sidebar .nav-item .nav-link {
@@ -61,28 +61,39 @@
 
 .sidebar .nav-item .nav-link:hover {
     background: #297AE6;
-    transition: all ease-in .2s;
+    transition: all ease-in .3s;
     color: #FFFFFF;
 }
 
-.main.sidebar{
+.main.sidebar {
     width: 250px;
     transition: width 0.3s;
 }
 
-.main.sidebar.closed{
-    width:60px;
+.main.sidebar.closed {
+    width: 60px;
 }
 
-.brand-link img{
+.brand-link img {
     max-width: 150%;
     height: auto;
     transition: opacity 0.3s ease-in-out;
 }
 
-.main.sidebar.closed .brand-link img{
+.main.sidebar.closed .brand-link img {
     width: 50%;
     opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .content-header img {
+        width: 300px;
+        /* Atur lebar gambar pada perangkat mobile */
+        height: auto;
+        object-fit: cover;
+        max-width: 100%;
+        /* Pastikan gambar tidak melebihi lebar kontainer */
+    }
 }
 
 .active-link {
@@ -144,14 +155,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 500px;
+    max-width: 300px;
     margin: auto;
     width: 100%;
 }
 
 .search-input {
     width: 100%;
-    padding: 5px 15px 5px 15px;
+    padding: 2px 10px 2px 10px;
     /* Memberikan ruang untuk ikon di kiri */
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -190,7 +201,7 @@
 }
 
 /* Tambahan untuk mobile responsiveness */
-@media (max-width: 600px) {
+@media (max-width: 300px) {
     .search-container {
         width: 90%;
     }
@@ -228,26 +239,27 @@
 
 
 .lingkaran {
-    width: 35px;
-    height: 35px;
-    float: right;
+
+
+    width: 40px;
+    height: 40px;
+    /* float: right; */
     border-radius: 50%;
     background-color: #FFBB5C;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
 }
 
-.small-box .inner{
+.small-box .inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-@media (max-width:768px){
-    .lingkaran{
+@media (max-width:768px) {
+    .lingkaran {
         width: 40px;
         height: 40px;
     }

@@ -44,10 +44,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
-                <div class="container-fluid">
+                <div class="container-fluid" style="display: block; margin: 0 auto;">
                     <div class="row">
                         <div class="col mb-2">
-                            <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid">
+                            <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid"
+                                style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
