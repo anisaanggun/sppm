@@ -10,7 +10,7 @@
 
         <!-- Sidebar -->
         <div class="sidebar">
-        
+
 
             <!-- Sidebar Menu -->
             <nav class="mt-4">

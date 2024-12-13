@@ -32,14 +32,6 @@
                             Ubah Data Pribadi</strong>
                     </span>
                 </a><!-- end ubah data pribadi -->
-                <!-- start ubah sandi -->
-                <a class="dropdown-item" href="?cs=Ubah-Sandi">
-                    <span class="text-success">
-                        <strong>
-                            <i class="fa-solid fa-key"></i>
-                            Ubah Kata Sandi</strong>
-                    </span>
-                </a> <!-- end ubah sandi -->
                 <div class="dropdown-divider"></div> <!-- Divider antara menu -->
                 <form action="{{ route('logout') }}" method="post" class="dropdown-item">
                     @csrf
