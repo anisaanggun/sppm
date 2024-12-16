@@ -3,7 +3,7 @@
 @section('contents')
     <div class="d-flex justify-content-center align-items-center vh-100" style="padding-top: 5px;">
         <div class="card  p-3 mb-5 bg-body-tertiary rounded"
-            style="overflow-y:auto; border: 2px solid #1E56A0; border-radius:15px !important;">
+            style="overflow-y:auto; border: 2px solid #1E56A0; border-radius:15px !important; width:325px;">
 
             {{-- <div class="card-header text-center">
               Login

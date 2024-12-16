@@ -28,6 +28,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -71,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('', $users->id) }}" method="POST"
+                                        <form action="{{ route('profil.update', Auth::user()) }}" method="POST"
                                             enctype="multipart/form-data" class="needs-validation" novalidate>
                                             @method('PUT')
                                             <div class="container mt-2">
@@ -80,30 +82,50 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama</label>
                                                         <input type="text" class="form-control" name="name"
-                                                            value="{{ old('name', $users->name) }}"
-                                                            placeholder="Masukan nama" required>
+                                                            value="{{ old('name', Auth::user()->name) }}"
+                                                            placeholder="">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Alamat</label>
+                                                        <input type="text" class="form-control" name="alamat"
+                                                            placeholder="Masukan alamat anda"
+                                                            value="{{ old('alamat', Auth::user()->alamat) }}">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">E-mail</label>
-                                                        <input type="text" class="form-control" name="email"
-                                                            value="{{ old('email', $users->email) }}"
-                                                            placeholder="Masukan email" required>
+                                                        <input type="email" class="form-control" name="email"
+                                                            value="{{ old('email', Auth::user()->email) }}"
+                                                            placeholder="">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">No HP</label>
                                                         <input type="text" class="form-control" name="no_hp"
-                                                            value="{{ old('no_hp', $users->no_hp) }}"
-                                                            placeholder="Masukan no hp" required>
+                                                            value="{{ old('no_hp', Auth::user()->no_hp) }}"
+                                                            placeholder="">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Alamat</label>
-                                                        <textarea class="form-control" id="alamat" name="alamat" rows="4" placeholder="Masukan alamat anda"
-                                                            value="{{ old('alamat') }}">{{ old('alamat', $users->alamat) }}</textarea>
+                                                        <label class="font-weight-bold">Password Lama</label>
+                                                        <div class="password-wrapper">
+                                                            <input type="password" id="passLama" class="form-control"
+                                                                name="password"
+                                                                value="{{ old('password', Auth::user()->ulangi_password) }}"><i
+                                                                id="eyeIconLama" class="fa fa-eye password-icon"
+                                                                onclick="showPass()"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Password Baru</label>
+                                                        <div class="password-wrapper">
+                                                            <input type="password" id="passBaru" class="form-control"
+                                                                name="password_baru" value="">
+                                                            <i id="eyeIconBaru" class="fa fa-eye password-icon"
+                                                                onclick="showPassBaru()"></i>
+                                                        </div>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
-                                                        <button type="submit"
-                                                            class="btn btn-md btn-success">Edit</button>
-                                                        <a href="{{ route('') }}"
+                                                        <button type="submit" class="btn btn-md btn-success"
+                                                            onclick="showSuccessMessage()">Edit</button>
+                                                        <a href="{{ url('/beranda') }}"
                                                             class="btn btn-md btn-danger">Batal</a>
                                                     </div>
                                                 </div>
@@ -135,6 +157,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        function showPass() {
+            const passwordInput = document.getElementById('passLama');
+            const eyeIcon = document.getElementById('eyeIconLama');
+
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle the eye icon
+            eyeIcon.classList.toggle('fa-eye'); // Ganti ikon mata terbuka
+            eyeIcon.classList.toggle('fa-eye-slash'); // Ganti ikon mata tertutup
+        }
+    </script>
+    <script>
+        function showPassBaru() {
+            const passwordInput = document.getElementById('passBaru');
+            const eyeIcon = document.getElementById('eyeIconBaru');
+
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Toggle the eye icon
+            eyeIcon.classList.toggle('fa-eye'); // Ganti ikon mata terbuka
+            eyeIcon.classList.toggle('fa-eye-slash'); // Ganti ikon mata tertutup
+        }
+    </script>
+    <script>
+        function showSuccessMessage() {
+            Swal.fire({
+                title: 'Sukses!',
+                text: 'Data telah berhasil diubah.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#FF9B50'
+            });
+        }
+    </script>
 </body>
 
 </html>

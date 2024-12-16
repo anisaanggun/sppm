@@ -149,6 +149,8 @@
     border-radius: 30px !important;
 }
 
+
+
 /* Pencarian */
 .search-container {
     padding-top: 10px;
@@ -288,4 +290,16 @@
 
 .textarea {
     float: left !important;
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }

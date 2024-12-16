@@ -25,7 +25,7 @@
             <div class="dropdown-menu mr-5 mt-3" aria-labelledby="alertsDropdown"
                 style="border-radius: 10px; border:0;">
                 <!-- start ubah data pribadi -->
-                <a class="dropdown-item" href="?cs=Ubah-Data" id="mn_ubahdata">
+                <a class="dropdown-item" href="{{ url('profil') }}" id="mn_ubahdata">
                     <span class="text-primary">
                         <strong>
                             <i class="fa fa-edit"></i>

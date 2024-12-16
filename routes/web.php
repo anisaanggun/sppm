@@ -11,6 +11,7 @@ use App\Http\Controllers\LaporanMesinController;
 use App\Http\Controllers\LaporanPerawatanController;
 use App\Http\Controllers\LaporanPerbaikanController;
 use App\Http\Controllers\PemilikMesinController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -62,6 +63,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
 
     Route::resource('/pemilik-mesin', PemilikMesinController::class);
+    Route::resource('/profil', ProfilController::class);
+
     
 });
 

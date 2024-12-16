@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="col-md-6 form-group">
-                            <div class="card border-0 mt-2"
+                            <div class="card border-0 mt-2 mb-0"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <div class="row mt-1">
@@ -77,7 +77,7 @@
                                         <p>Rabu, 29 Oktober 2024</p>
                                     </div>
 
-                                    <div class="sticky-top mb-2 external-event"
+                                    <div class="sticky-top external-event"
                                         style="background-color:#FF9B50; border-radius: 10px;">
                                         <div class="d-flex justify-content-between align-items-center">
                                             @forelse ($jadwals as $item)
@@ -134,7 +134,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <div class="card border-0 mt-2"
+                            <div class="card border-0 mt-2 mb-4"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <h5>Kalender</h5>
@@ -145,26 +145,28 @@
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <h5>Buat Jadwal</h5>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 form-group mt-3">
-                                        <img src="{{ asset('/img/gambarJ.png') }}" alt=""
-                                            class="img-fluid ml-5">
-                                    </div>
-                                    <div class="col-md-6 form-group mt-3">
-                                        <div>
-                                            <b>
-                                                <h5 class="text-center">BUAT JADWAL <br> SERVIS ANDA!</h>
-                                            </b>
+                                    <div class="row">
+                                        <div class="col-md-6 form-group mt-3 text-center">
+                                            <img src="{{ asset('/img/gambarJ.png') }}" alt=""
+                                                class="img-fluid">
+                                        </div>
+                                        <div class="col-md-6 form-group mt-3">
+                                            <div>
+                                                <b>
+                                                    <h5 class="text-center">BUAT JADWAL <br> SERVIS ANDA!</h>
+                                                </b>
 
-                                        </div>
-                                        <div class="mt-4 text-center">
-                                            <a href="{{ route('jadwal.create') }}" class="btn btn-success btn-md mb-3"
-                                                style=" color: #FFFFFF; border-radius: 25px;">Tambah
-                                                Data</a>
+                                            </div>
+                                            <div class="mt-4 text-center">
+                                                <a href="{{ route('jadwal.create') }}"
+                                                    class="btn btn-success btn-md mb-3"
+                                                    style=" color: #FFFFFF; border-radius: 25px;">Tambah
+                                                    Data</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
 
                             </div>
                         </div>
