@@ -48,15 +48,6 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="{{ url('/pemilik-mesin') }}"
-                                    class="nav-link {{ Request::segment(1) == 'pemilik-mesin' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2" data-icon="mdi:account" style="font-size: 24px;"></span>
-                                    <p>
-                                        Pemilik Mesin
-                                    </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="{{ url('/data-mesin') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-mesin' ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"

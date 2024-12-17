@@ -106,7 +106,6 @@
                                                                     <i class="fas fa-trash"></i>
                                                                 </button>
                                                             </form>
-                                                            </form>
                                                         </td>
                                                     </tr>
                                                 @empty

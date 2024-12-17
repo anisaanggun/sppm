@@ -1,4 +1,5 @@
-* {
+*
+{
     font-family: 'Public-Sans' sans-serif;
     padding: 0;
     margin: 0;
@@ -15,6 +16,7 @@
     box-sizing: border-box;
     flex-direction: column;
 }
+
 
 #myChart {
     width: 100% !important;
@@ -63,6 +65,13 @@
     background: #297AE6;
     transition: all ease-in .3s;
     color: #FFFFFF;
+
+}
+
+.sidebar {
+    display: flex; /* Menggunakan flexbox untuk sidebar */
+    flex-direction: column; /* Mengatur arah kolom */
+    align-items: center; /* Menengahkan secara horizontal */
 }
 
 .main.sidebar {
@@ -70,8 +79,30 @@
     transition: width 0.3s;
 }
 
+.nav-item {
+    flex-direction: column; /* Mengatur arah kolom */
+    justify-content: center !important; /* Menengahkan secara vertikal */
+    align-items: center !important; /* Menengahkan secara horizontal */
+    cursor: pointer; /* Menunjukkan bahwa item dapat diklik */
+}
+
+.iconify {
+    display: flex;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+.main-sidebar.closed .nav-item {
+    justify-content: center; /* Menengahkan ikon saat sidebar ditutup */
+    align-items: center; /* Menengahkan ikon secara vertikal */
+}
+
 .main.sidebar.closed {
     width: 60px;
+    justify-content: center;
+    align-items: center;
 }
 
 .brand-link img {
@@ -83,6 +114,8 @@
 .main.sidebar.closed .brand-link img {
     width: 50%;
     opacity: 0.5;
+    justify-content: center;
+    align-items: center;
 }
 
 @media (max-width: 768px) {
@@ -212,8 +245,6 @@
         padding: 12px 35px;
     }
 }
-
-
 
 /* .large-box{
     display: flex;
