@@ -87,7 +87,6 @@
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr class="text">
-                                                    <th scope="col">Pemilik</th>
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Model</th>
@@ -97,7 +96,6 @@
                                             <tbody class="text">
                                                 @forelse ($data_mesins as $data_mesin)
                                                     <tr>
-                                                        <td>{{ $data_mesin->pemilik }}</td>
                                                         <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand }}</td>
                                                         <td>{{ $data_mesin->model }}</td>

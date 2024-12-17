@@ -78,13 +78,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik') }}"
-                                                            placeholder="Masukan nama pemilik">
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Brand</label>
+                                                        <select class="form-control" id="" name="brand_name" required>
+                                                            <option value="" disabled selected>Pilih Brand</option>
+                                                            @foreach ( as )
+                                                            <option value="{{  }}">
+                                                                {{  }}
+                                                            </option>
+
+                                                            @endforeach
+                                                        </select>
                                                         <input type="text" class="form-control" name="brand"
                                                             value="{{ old('brand') }}"
                                                             placeholder="Masukan nama brand">

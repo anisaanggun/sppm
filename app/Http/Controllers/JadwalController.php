@@ -56,7 +56,7 @@ class JadwalController extends Controller
         return redirect()->route('jadwal.index')->with('success', 'Jadwal berhasil ditambahkan!');
     }
 
-    public function edit(string $id): View 
+    public function edit(string $id): View
     {
         $jadwals = Jadwal::findOrFail($id);
 

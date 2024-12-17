@@ -79,12 +79,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik', $data_mesins->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Brand</label>
                                                         <input type="text" class="form-control" name="brand"
                                                             value="{{ old('brand', $data_mesins->brand) }}"
