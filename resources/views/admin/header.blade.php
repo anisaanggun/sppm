@@ -5,9 +5,9 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
-    <div class="search-container">
+    {{-- <div class="search-container">
         <input type="text" placeholder="Cari..." class="search-input">
-    </div>
+    </div> --}}
 
     <!-- navigasi header -->
     <ul class="navbar-nav ml-auto">

@@ -68,6 +68,7 @@
 
 }
 
+
 .sidebar {
     display: flex; /* Menggunakan flexbox untuk sidebar */
     flex-direction: column; /* Mengatur arah kolom */

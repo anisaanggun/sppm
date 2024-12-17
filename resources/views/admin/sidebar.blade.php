@@ -37,6 +37,7 @@
                         </a>
                     </li>
 
+
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
                             class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'pemilik-mesin' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
