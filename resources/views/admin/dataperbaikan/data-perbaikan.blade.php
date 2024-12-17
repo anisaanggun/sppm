@@ -54,10 +54,6 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="mt-2" style="margin-left: 40px">
-                        <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-3"
-                            style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah Data</a>
-                    </div>
                     <div class="row ml-4 mr-4">
                         <div class="col-12 ml-1 mr-1">
                             @if (session('success'))
@@ -69,10 +65,23 @@
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-0 mt-1"
+                                                style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah
+                                                Data
+                                            </a>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="search-container mb-3" style="float: right">
+                                                <input type="text" placeholder="Cari..." class="search-input">
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover">
                                             <thead>
-                                                <tr class="text-center">
+                                                <tr class="text">
                                                     <th scope="col">Pemilik</th>
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Tanggal</th>
@@ -82,11 +91,11 @@
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
-                                            <tbody class="text-center">
+                                            <tbody class="text">
                                                 @forelse ($data_perbaikans as $data_perbaikan)
                                                     <tr>
                                                         <td>{{ $data_perbaikan->pemilik }}</td>
-                                                        <td>{{ $data_perbaikan->nama_mesin}}</td>
+                                                        <td>{{ $data_perbaikan->nama_mesin }}</td>
                                                         <td>{{ $data_perbaikan->tanggal }}</td>
                                                         <td>{{ $data_perbaikan->teknisi }}</td>
                                                         <td>{{ $data_perbaikan->kerusakan }}</td>
