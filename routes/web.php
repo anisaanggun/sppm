@@ -10,9 +10,10 @@ use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanMesinController;
 use App\Http\Controllers\LaporanPerawatanController;
 use App\Http\Controllers\LaporanPerbaikanController;
-use App\Http\Controllers\PemilikMesinController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SearchController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/dologin', [AuthController::class, 'dologin'])->name('dologin');
@@ -62,9 +63,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/admin/create', [DataMesinController::class, 'create'])->name('admin.create');
     // Route::post('/admin/store', [DataMesinController::class, 'store'])->name('admin.store');
 
-    Route::resource('/pemilik-mesin', PemilikMesinController::class);
+    Route::resource('/brand', BrandController::class);
     Route::resource('/profil', ProfilController::class);
-
+    Route::get('/search', [SearchController::class, 'search'])->name('search');
     
 });
 

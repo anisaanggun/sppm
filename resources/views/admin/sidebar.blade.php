@@ -49,6 +49,16 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ url('/brand') }}"
+                                    class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"
+                                        style="font-size: 20px;"></span>
+                                    <p>
+                                        Brand
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ url('/data-mesin') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-mesin' ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"
