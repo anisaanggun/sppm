@@ -19,8 +19,8 @@
                     <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                     <li class="nav-item">
-                        <a href="{{ url('/admin') }}"
-                            class="nav-link {{ Request::segment(1) == 'admin' ? 'active-link' : 'nonactive-link' }}">
+                        <a href="{{ url('/beranda') }}"
+                            class="nav-link {{ Request::segment(1) == 'beranda' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:home" style="font-size: 24px;"></span>
                             <p>
                                 Beranda
@@ -40,7 +40,7 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'pemilik-mesin' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
