@@ -1,11 +1,19 @@
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar">
+    <aside class="main-sidebar" id="sidebar">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link" style="text-align: center;">
-            <img src="{{ asset('/img/Logo2.png') }}" alt="">
+        <a href="#" class="brand-link" >
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{ asset('/img/logo4.png') }}" alt="">
+                </div>
+                <div class="col-md-9" id="sidebar-text">
+                    <img src="{{ asset('/img/teks.png') }}" alt="">
+                </div>
+            </div>
         </a>
 
         <!-- Sidebar -->
@@ -51,7 +59,7 @@
                             <li class="nav-item">
                                 <a href="{{ url('/brand') }}"
                                     class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"
+                                    <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Brand
@@ -138,3 +146,30 @@
         </div>
         <!-- /.sidebar -->
     </aside>
+
+    <script>
+        $(document).ready(function() {
+    // Event untuk toggle sidebar
+            $('#sidebar-text').on('click', function() {
+                // Menambah/menghapus kelas 'closed' pada sidebar
+                $('#sidebar').toggleClass('closed');
+            });
+        });
+    </script>
+
+    <script>
+    $(document).ready(function(){
+        $('[data-widget="pushmenu"]').on('click', function(){
+            const text = $("#sidebar-text");
+            const currentSrc = $text.attr('src');
+
+            if(currentSrc === "{{ asset('/img/teks.png') }}"){
+                $text.removeAttr('src', "{{ asset('/img/teks.png') }}");
+            }else{
+                $text.attr('src', "{{ asset('/img/teks.png') }}");
+            }
+        });
+    });
+</script>
+
+

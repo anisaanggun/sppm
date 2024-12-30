@@ -19,8 +19,13 @@
     <link rel="stylesheet" href="{{ asset('/lte/dist/css/adminlte.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
 
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -68,7 +73,7 @@
                             @endif
                         </div>
 
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-5 form-group">
                             <div class="card border-0 mt-2 mb-0"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
@@ -133,13 +138,13 @@
 
                             </div>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-7">
                             <div class="card border-0 mt-2 mb-4"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <h5>Kalender</h5>
+                                    <div id='calendar'></div>
                                 </div>
-
                             </div>
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
@@ -155,13 +160,41 @@
                                                 <b>
                                                     <h5 class="text-center">BUAT JADWAL <br> SERVIS ANDA!</h>
                                                 </b>
-
                                             </div>
                                             <div class="mt-4 text-center">
-                                                <a href="{{ route('jadwal.create') }}"
+                                                <li class="dropdown">
+                                                    <a class="nav-links dropdown-toggle mr-lg-2 btn btn-success btn-md mb-3" href="#" id="alertsDropdown" data-toggle="dropdown"
+                                                        aria-haspopup="true" aria-expanded="false" style=" color: #FFFFFF; border-radius: 25px;">
+                                                    Tambah Data
+                                                    </a>
+                                                <!-- start dropdown -->
+                                                <div class="dropdown-menu mr-5 mt-3" aria-labelledby="alertsDropdown"
+                                                    style="border-radius: 10px; border:0;">
+                                                    <a class="dropdown-item" href="{{ route('data-perawatan.create') }}" id="data_perawatan">
+                                                        <span class="text-primary">
+                                                            <strong>
+                                                                <i class="fas fa-plus"></i>
+                                                                Data Perawatan</strong>
+                                                        </span>
+                                                    </a>
+                                                    <a class="dropdown-item" href="{{ route('data-perbaikan.create') }}" id="data_perawatan">
+                                                        <span class="text-primary">
+                                                            <strong>
+                                                                <i class="fas fa-plus"></i>
+                                                                Data Perbaikan</strong>
+                                                        </span>
+                                                    </a>
+                                                </div><!-- end dropdown -->
+                                            </li>
+
+
+                                                {{-- <a href="{{ route('data-perawatan.create') }}"
                                                     class="btn btn-success btn-md mb-3"
-                                                    style=" color: #FFFFFF; border-radius: 25px;">Tambah
-                                                    Data</a>
+                                                    style=" color: #FFFFFF; border-radius: 25px;">Tambah Data Perawatan</a>
+                                                <a href="{{ route('data-perbaikan.create') }}"
+                                                    class="btn btn-success btn-md mb-3"
+                                                    style=" color: #FFFFFF; border-radius: 25px;">Tambah Data Perbaikan</a> --}}
+
                                             </div>
                                         </div>
                                     </div>
@@ -213,6 +246,115 @@
             });
         }
     </script>
-</body>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                navLinks: true,
+                editable: true,
+                // events: [
+                //     {
+                //         title: 'Event 1',
+                //         start: '2023-10-01',
+                //         description: 'Description for Event 1'
+                //     },
+                //     {
+                //         title: 'Event 2',
+                //         start: '2023-10-07',
+                //         end: '2023-10-10',
+                //         description: 'Description for Event 2'
+                //     },
+                //     {
+                //         title: 'Event 3',
+                //         start: '2023-10-09T16:00:00',
+                //         description: 'Description for Event 3'
+                //     },
+                //     {
+                //         title: 'Event 4',
+                //         start: '2023-10-16T16:00:00',
+                //         description: 'Description for Event 4'
+                //     },
+                //     {
+                //         title: 'Event 5',
+                //         start: '2023-10-11',
+                //         description: 'Description for Event 5'
+                //     },
+                //     {
+                //         title: 'Event 6',
+                //         start: '2023-10-12',
+                //         description: 'Description for Event 6'
+                //     },
+                //     {
+                //         title: 'Event 7',
+                //         start: '2023-10-13',
+                //         description: 'Description for Event 7'
+                //     },
+                //     {
+                //         title: 'Event 8',
+                //         start: '2023-10-14',
+                //         description: 'Description for Event 8'
+                //     },
+                //     {
+                //         title: 'Event 9',
+                //         start: '2023-10-15',
+                //         description: 'Description for Event 9'
+                //     },
+                //     {
+                //         title: 'Event 10',
+                //         start: '2023-10-16',
+                //         description: 'Description for Event 10'
+                //     },
+                //     {
+                //         title: 'Event 11',
+                //         start: '2023-10-17',
+                //         description: 'Description for Event 11'
+                //     },
+                //     {
+                //         title: 'Event 12',
+                //         start: '2023-10-18',
+                //         description: 'Description for Event 12'
+                //     },
+                //     {
+                //         title: 'Event 13',
+                //         start: '2023-10-19',
+                //         description: 'Description for Event 13'
+                //     },
+                //     {
+                //         title: 'Event 14',
+                //         start: '2023-10-20',
+                //         description: 'Description for Event 14'
+                //     },
+                //     {
+                //         title: 'Event 15',
+                //         start: '2023-10-21',
+                //         description: 'Description for Event 15'
+                //     }
+                // ],
+                eventClick: function(info) {
+                    alert('Event: ' + info.event.title + '\nDescription: ' + info.event.extendedProps.description);
+                }
+            });
+            calendar.render();
+        });
+    </script>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
