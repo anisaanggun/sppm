@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\DataPerbaikan;
 use App\Models\DataMesin;
 use Illuminate\Http\RedirectResponse;
@@ -10,9 +12,13 @@ use Illuminate\View\View;
 
 class DataPerbaikanController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $data_perbaikans = DataPerbaikan::select('data_perbaikans.*', 'data_mesins.nama_mesin')->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')->latest()->paginate(10);
+        $query = DataPerbaikan::select('data_perbaikans.*', 'data_mesins.nama_mesin')
+        ->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')
+        ->where('data_perbaikans.user_id', Auth::user()->id);
+
+        $data_perbaikans = $query->get();
 
         return view('admin.dataperbaikan.data-perbaikan', compact('data_perbaikans'));
 
@@ -21,7 +27,7 @@ class DataPerbaikanController extends Controller
     public function create(): View
     {
         //Daftar nama_mesin untuk select
-        $data_mesins = DataMesin::get();
+        $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
         // dd($data_mesins);
         return view('admin.dataperbaikan.create', compact('data_mesins'));
     }
@@ -47,6 +53,7 @@ class DataPerbaikanController extends Controller
 
         //create data perbaikan
         DataPerbaikan::create([
+            'user_id' => Auth::user()->id,
             'pemilik' => $request->pemilik,
             'mesin_id' => $request->mesin_id,
             'tanggal' => $request->tanggal,
@@ -63,7 +70,7 @@ class DataPerbaikanController extends Controller
     public function edit(string $id): View
     {
         $data_perbaikans = DataPerbaikan::findOrFail($id);
-        $data_mesins = DataMesin::get();
+        $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
 
         return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_mesins'));
     }

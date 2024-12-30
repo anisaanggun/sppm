@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LaporanPerbaikan | Pantau Mesin</title>
+    <title>Laporan Perbaikan | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -57,7 +57,39 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="col-md-12 form-group">
                             <div class="card border-0"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
-                                <div class="card-body ml-4 mr-4 mt-5">
+                                <div class="card-body ml-4 mr-4 mt-3">
+                                    <div class="container">
+                                        <h3 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Berdasarkan
+                                            Tanggal</h3>
+                                        <form method="GET" action="{{ route('laporan-perbaikan.index') }}"
+                                            class="form-inline" style="margin-bottom:2%">
+                                            <div class="form-group mb-2 mr-3">
+                                                <label for="bulan" class="mr-2">Bulan:</label>
+                                                <select name="bulan" id="bulan" class="form-control">
+                                                    @for ($i = 1; $i <= 12; $i++)
+                                                        <option value="{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}"
+                                                            {{ $i == $bulan ? 'selected' : '' }}>
+                                                            {{ date('F', mktime(0, 0, 0, $i, 1)) }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group mb-2 mr-3">
+                                                <label for="tahun" class="mr-2">Tahun:</label>
+                                                <select name="tahun" id="tahun" class="form-control">
+                                                    @for ($j = date('Y') - 5; $j <= date('Y'); $j++)
+                                                        <option value="{{ $j }}"
+                                                            {{ $j == $tahun ? 'selected' : '' }}>
+                                                            {{ $j }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mb-2">Tampilkan</button>
+                                        </form>
+                                    </div>
                                     <canvas id="myChart"></canvas>
                                 </div>
                             </div>
@@ -79,47 +111,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
-</body>
 
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['1', '2', '3', '4', '5', '6'],
-            datasets: [{
-                label: 'Laporan Perbaikan',
-                data: [30, 21, 16, 49, 30, 22],
-                backgroundColor: [
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50'
-                ],
-                borderColor: [
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50',
-                    '#FF9B50'
-                ],
-                borderWidth: 1,
-                fill: true // Mengisi area di bawah garis
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Data untuk diagram batang
+        const labels = {!! json_encode(array_keys($jumlah_perbaikan_per_tanggal)) !!}; // Mengambil tanggal
+        const data = {!! json_encode(array_values($jumlah_perbaikan_per_tanggal)) !!}; // Mengambil jumlah perbaikan
+
+        // Debugging data
+        console.log(labels);
+        console.log(data);
+
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Perbaikan',
+                    data: data,
+                    backgroundColor: '#FF9B50',
+                    borderColor: '#FF9B50',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            // Mengatur agar hanya menampilkan angka bulat
+                            callback: function(value) {
+                                return Math.floor(value); // Mengembalikan nilai sebagai bilangan bulat
+                            }
+                        },
+                        // Mengatur batas minimum dan maksimum
+                        min: 0, // Batas minimum
+                        max: Math.max(...data) + 10 // Batas maksimum, sesuaikan dengan data Anda
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
+</body>
 
 </html>

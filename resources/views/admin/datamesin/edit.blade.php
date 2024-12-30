@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Mesin | Pantau Mesin</title>
+    <title>Edit Data Mesin | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Data Mesin</h4>
+                        <h4>Edit Data Mesin</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -80,9 +80,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Brand</label>
-                                                        <input type="text" class="form-control" name="brand"
-                                                            value="{{ old('brand', $data_mesins->brand) }}"
-                                                            placeholder="Masukan nama brand" required>
+                                                        <select class="form-control" id="brand_id" name="brand_id"
+                                                            required>
+                                                            <option value="" disabled>Pilih Brand</option>
+                                                            @foreach ($brands as $item)
+                                                                <option value="{{ $item->id }}"
+                                                                    {{ old('brand_id', $data_mesins->brand_id) == $item->id ? 'selected' : '' }}>
+                                                                    {{ $item->brand_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Model</label>

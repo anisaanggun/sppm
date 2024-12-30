@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Pribadi | Pantau Mesin</title>
+    <title>Edit Data Pribadi | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -123,8 +123,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </div>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
-                                                        <button type="submit" class="btn btn-md btn-success"
-                                                            onclick="showSuccessMessage()">Edit</button>
+                                                        <button type="submit"
+                                                            class="btn btn-md btn-success">Edit</button>
                                                         <a href="{{ url('/beranda') }}"
                                                             class="btn btn-md btn-danger">Batal</a>
                                                     </div>

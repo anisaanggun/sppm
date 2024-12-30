@@ -12,6 +12,7 @@ class DataPerawatan extends Model
         'pemilik',
         'teknisi',
         'mesin_id',
+        'user_id',
         'tanggal_perawatan',
         'aktivitas',
         'catatan',

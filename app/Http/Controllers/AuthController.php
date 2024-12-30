@@ -35,7 +35,7 @@ class AuthController extends Controller
         // dd($data);die;
 
         if (Auth::attempt($data)) {
-            return redirect()->intended('/admin')->with('success', 'Selamat Datang ');
+            return redirect()->intended('/beranda')->with('success', 'Selamat Datang ');
         } else {
             return redirect()->route('login')->with('failed', 'Error!');
         }

@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tambah Data Perawatan | Pantau Mesin</title>
+    <title>Tambah Data Perawatan | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Data Perawatan</h4>
+                        <h4>Tambah Data Perawatan</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>

@@ -6,26 +6,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Data Perbaikan | Pantau Mesin</title>
+    <title>Data Perbaikan | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
-        href="/https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('/lte/plugins/fontawesome-free/css/all.min.css') }}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/lte/dist/css/adminlte.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
-
-    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -38,20 +33,15 @@
         @include('admin/sidebar')
 
         {{-- Content --}}
-
-
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <div class="content-header">
                 <div class="container-fluid">
-                    <div class="row mt-3 " style="margin-left: 26px">
+                    <div class="row mt-3" style="margin-left: 26px">
                         <h4>Data Perbaikan</h4>
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
+                    </div>
+                </div>
             </div>
-            <!-- /.content-header -->
 
-            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
                     <div class="row ml-4 mr-4">
@@ -65,21 +55,15 @@
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-6">
+                                    <div class="row mb-3">
+                                        <div class="col-12 col-md-6">
                                             <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-0 mt-1"
                                                 style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah
-                                                Data
-                                            </a>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="search-container mb-3" style="float: right">
-                                                <input type="text" placeholder="Cari..." class="search-input">
-                                            </div>
+                                                Data</a>
                                         </div>
                                     </div>
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover" id="dataPerbaikanTable">
                                             <thead>
                                                 <tr class="text">
                                                     <th scope="col">Pemilik</th>
@@ -107,7 +91,8 @@
                                                                 method="POST">
                                                                 <a href="{{ route('data-perbaikan.edit', $data_perbaikan->id) }}"
                                                                     class="btn btn-sm btn-primary mt-1">
-                                                                    <i class="fa-solid fa-pen-to-square"></i></a>
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </a>
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit"
@@ -118,21 +103,15 @@
                                                         </td>
                                                     </tr>
                                                 @empty
-                                                    <div class="alert alert-danger">
-                                                        Data Perbaikan belum Tersedia.
-                                                    </div>
+                                                    <tr>
+                                                        <td colspan="7" class="text-center">Data Perbaikan belum
+                                                            Tersedia.</td>
+                                                    </tr>
                                                 @endforelse
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
-                                <div class="col-md-12">
-                                    @foreach ($data_perbaikans as $data_perbaikan)
-                                    @endforeach
-                                    {{ $data_perbaikans->links('pagination::bootstrap-5') }}
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -146,19 +125,16 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
     <!-- jQuery -->
     <script src="{{ asset('/lte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
-
-    <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script>
         function confirmDelete(form) {
             Swal.fire({
@@ -176,8 +152,20 @@
                 }
             });
         }
-    </script>
 
+        $(document).ready(function() {
+            $('#dataPerbaikanTable').DataTable({
+                "paging": true, // Untuk tampilan Previous, angka, dan Next
+                "ordering": true,
+                "searching": true,
+                "info": true,
+                "lengthChange": true,
+                "order": [
+                    [2, 'desc'] // Mengurutkan berdasarkan kolom Tanggal (indeks 2)
+                ],
+            });
+        });
+    </script>
 
 </body>
 

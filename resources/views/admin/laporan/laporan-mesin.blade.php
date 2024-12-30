@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LaporanMesin | Pantau Mesin</title>
+    <title>Laporan Mesin | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -46,8 +46,10 @@
                         <div class="col-md-12 form-group">
                             <div class="card border-0"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
-                                <div class="card-body ml-4 mr-4 mt-5">
-                                    <canvas id="myChart"></canvas>
+                                <div class="card-body ml-4 mr-4 mt-3">
+                                    <h3 style="text-align: center; margin-bottom:4%">Jumlah Mesin Berdasarkan
+                                        Brand</h3>
+                                    <canvas id="myChart" width="400" height="200"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -68,73 +70,45 @@
     <script src="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
-</body>
 
 
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
 
-    //Data untuk setiap bulan
-    var dataPerBulan = {
-        'Januari': [12, 19, 3, 10, 40, 25],
-        'Februari': [15, 10, 5, 20, 30, 15],
-        'Maret': [20, 25, 15, 10, 5, 30],
-        'April': [10, 15, 20, 25, 30, 35],
-        'Mei': [5, 10, 15, 20, 25, 30],
-        'Juni': [30, 25, 20, 15, 10, 5]
-    };
+        // Data untuk diagram batang
+        const labels = {!! json_encode(array_keys($jumlah_mesin_per_brand)) !!}; // Mengambil nama brand
+        const data = {!! json_encode(array_values($jumlah_mesin_per_brand)) !!}; // Mengambil jumlah mesin per brand
 
-    //inisialisasi grafik
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Mitsubishi', 'HoneyWell', 'LG Window', 'Mito', 'Samsung', 'Toshiba'],
-            datasets: [{
-                label: 'Laporan Mesin',
-                data: dataPerBulan['Januari'], // Data awal
-                backgroundColor: '#FF9B50',
-                borderColor: '#FF9B50',
-                borderWidth: 1,
-                fill: true // Mengisi area di bawah garis
-
-            }]
-        },
-
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    beginAtZero: true
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Jumlah Mesin',
+                    data: data,
+                    backgroundColor: '#FF9B50',
+                    borderColor: '#FF9B50',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            // Mengatur agar hanya menampilkan angka bulat
+                            callback: function(value) {
+                                return Math.floor(value); // Mengembalikan nilai sebagai bilangan bulat
+                            }
+                        },
+                        // Mengatur batas minimum dan maksimum
+                        min: 0, // Batas minimum
+                        max: Math.max(...data) + 10 // Batas maksimum, sesuaikan dengan data Anda
+                    }
                 }
             }
-        }
-    });
-
-    // Fungsi untuk memperbarui grafik
-    function updateChart(month) {
-        myChart.data.datasets[0].data = dataPerBulan[month];
-        myChart.update();
-    }
-
-    // Event listener untuk mengklik bulan
-    document.addEventListener('click', function(event) {
-        const monthClicked = event.target.innerText; // Ambil teks dari elemen yang diklik
-        if (dataPerBulan[monthClicked]) {
-            updateChart(monthClicked);
-        }
-    });
-
-    // Menampilkan bulan sebagai tombol
-    const months = Object.keys(dataPerBulan);
-    months.forEach(month => {
-        const button = document.createElement('button');
-        button.innerText = month;
-        button.onclick = function() {
-            updateChart(month);
-        };
-        document.getElementById('month-buttons').appendChild(button);
-    });
-</script>
+        });
+    </script>
+</body>
 
 </html>

@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\DataMesin;
+use App\Models\Brand;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class DataMesinController extends Controller
 {
-    public function index(): View
+    public function index(Request $request): View
     {
-        $data_mesins = DataMesin::latest()->paginate(10);
+        $query = DataMesin::select('data_mesins.*', 'brands.brand_name')
+        ->leftJoin('brands', 'brand_id', '=', 'brands.id')
+        ->where('user_id', Auth::user()->id);
+        
+        $data_mesins = $query->get();
 
         return view('admin.datamesin.data-mesin', compact('data_mesins'));
 
@@ -19,88 +26,71 @@ class DataMesinController extends Controller
 
     public function create(): View
     {
-        //Daftar nama_mesin untuk radio button
-        // $nama_mesin = [
-        //     'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-        //     'LG Window AC' => 'LG Window AC',
-        //     'Honeywell Portable AC' => 'Honeywell Portable AC',
-        //     'Lainnya' => 'Lainnya',
-        // ];
+        //Daftar brand_name untuk select
+        $brands = Brand::get();
 
-        return view('admin.datamesin.create');
+        return view('admin.datamesin.create', compact('brands'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         // validasi form
         $request->validate([
-            'pemilik' => 'required|string|max:255',
             'nama_mesin' => 'required|string',
-            'brand' => 'required|string',
+            'brand_id' => 'required',
             'model' => 'required|string',
         ], [
-            'pemilik.required' => 'Silahkan masukkan nama anda.',
-            'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'brand.required' => 'Silahkan pilih nama brand mesin.',
+            'brand_id.required' => 'Silahkan pilih nama brand mesin.',
+            'nama_mesin.required' => 'Silahkan masukan nama mesin.',
             'model.required' => 'Silahkan pilih nama model mesin.',
         ]);
 
         //create data mesin
         DataMesin::create([
-            'pemilik' => $request->pemilik,
+            'user_id' => Auth::user()->id,
             'nama_mesin' => $request->nama_mesin,
-            'brand' => $request->brand,
+            'brand_id' => $request->brand_id,
             'model' => $request->model,
         ]);
 
         $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
-        $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
     {
         $data_mesins = DataMesin::findOrFail($id);
-        // $nama_mesin = [
-        //     'Mitsubishi Heavy Industries' => 'Mitsubishi Heavy Industries',
-        //     'LG Window AC' => 'LG Window AC',
-        //     'Honeywell Portable AC' => 'Honeywell Portable AC',
-        //     'Lainnya' => 'Lainnya',
-        // ];
+        $brands = Brand::get();
 
-        return view('admin.datamesin.edit', compact('data_mesins'));
+        return view('admin.datamesin.edit', compact('data_mesins', 'brands'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'pemilik' => 'required|string|max:255',
             'nama_mesin' => 'required|string',
-            'brand' => 'required|string',
+            'brand_id' => 'required',
             'model' => 'required|string',
         ], [
-            'pemilik.required' => 'Silahkan masukkan nama anda.',
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
-            'brand.required' => 'Silahkan pilih nama brand mesin.',
+            'brand_id.required' => 'Silahkan pilih nama brand mesin.',
             'model.required' => 'Silahkan pilih nama model mesin.',
         ]);
 
         $data_mesins = DataMesin::findOrFail($id);
 
         $data_mesins->update([
-            'pemilik' => $request->pemilik,
             'nama_mesin' => $request->nama_mesin,
-            'brand' => $request->brand,
+            'brand_id' => $request->brand_id,
             'model' => $request->model,
         ]);
 
         $selectednama_mesin = $request->input('nama_mesin');
         session()->flash('selectednama_mesin', $request->nama_mesin);
-        $pemilik = $request->input('pemilik');
 
-        return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
@@ -111,4 +101,12 @@ class DataMesinController extends Controller
 
         return redirect()->route('data-mesin.store')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+
+    // public function search(Request $request)
+    // {
+    //     $keyword = $request->input('cari');
+    //     $data_mesins = DataMesin::where('nama_mesin', 'like', "%" . $keyword . "%")->paginate(10);
+
+    //     return view('admin.datamesin.data-mesin', compact('data_mesins'));
+    // }
 }

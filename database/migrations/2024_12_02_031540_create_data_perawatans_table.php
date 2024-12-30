@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('data_perawatans', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('pemilik');
             $table->string('teknisi');
             $table->integer('mesin_id');

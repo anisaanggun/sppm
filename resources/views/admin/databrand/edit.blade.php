@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Brand | Pantau Mesin</title>
+    <title>Edit Data Brand | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -47,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Brand</h4>
+                        <h4>Edit Data Brand</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -77,7 +77,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
-                                                    <div class="col-md-6 form-group mt-3">
+                                                    <div class="col-md-12 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Brand</label>
                                                         <input type="text" class="form-control" name="brand_name"
                                                             value="{{ old('brand_name', $brands->brand_name) }}"
