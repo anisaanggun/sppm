@@ -89,19 +89,8 @@
     white-space: nowrap;
 }
 
-/* Sembunyikan logo teks saat sidebar tertutup */
-.sidebar.closed #sidebar-text {
-    display: none;
-}
-
-  /* Contoh media query untuk layar kecil */
-  @media (max-width: 768px) {
-    .sidebar.closed {
-      width: 0;
-    }
-    .sidebar.closed #sidebar-text {
-      display: none;
-    }
+.sidebar-collapse #sidebar-text {
+    display: none !important;
 }
 
 .active-link {
@@ -331,4 +320,34 @@ li::marker {
     #calendar {
         font-size: 0.8em; /* Adjust font size for smaller screens */
     }
+}
+
+/* Gaya untuk gambar desktop */
+.desktop-image {
+    border: 2px;
+    transition: transform 0.3s; /* Contoh: efek transisi */
+}
+
+/* Gaya untuk gambar mobile */
+.mobile-image {
+    border: 2px;
+}
+
+/* Media query untuk gambar desktop */
+@media (min-width: 768px) {
+    .mobile-image {
+        display: none; /* Sembunyikan gambar mobile pada layar lebih besar dari 768px */
+    }
+}
+
+/* Media query untuk gambar mobile */
+@media (max-width: 767px) {
+    .desktop-image {
+        display: none; /* Sembunyikan gambar desktop pada layar lebih kecil dari 768px */
+    }
+}
+
+.fc-toolbar .form-select {
+    width: auto; /* Atur lebar dropdown sesuai kebutuhan */
+    margin-left: 10px; /* Jarak antara dropdown dan elemen lain */
 }
