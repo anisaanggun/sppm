@@ -7,14 +7,17 @@ use App\Models\DataMesin;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Carbon\Carbon;
 
 class JadwalController extends Controller
 {
     public function index(): View
     {
         $jadwals = Jadwal::latest()->paginate(10);
+        Carbon::setLocale('id');
+        $today = now()->locale('id')->isoFormat('dddd, D MMMM Y'); 
 
-        return view('admin.datajadwal.jadwal', compact('jadwals'));
+        return view('admin.datajadwal.jadwal', compact('jadwals', 'today'));
     }
 
     public function create(): View
