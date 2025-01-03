@@ -1,5 +1,4 @@
-*
-{
+* {
     font-family: 'Public-Sans' sans-serif;
     padding: 0;
     margin: 0;
@@ -56,8 +55,10 @@
 
 
 .sidebar {
-    display: flex; /* Menggunakan flexbox untuk sidebar */
-    flex-direction: column; /* Mengatur arah kolom */
+    display: flex;
+    /* Menggunakan flexbox untuk sidebar */
+    flex-direction: column;
+    /* Mengatur arah kolom */
 }
 
 .main.sidebar {
@@ -66,17 +67,24 @@
 }
 
 .nav-item {
-    flex-direction: column; /* Mengatur arah kolom */
-    justify-content: center; /* Menengahkan secara vertikal */
-    align-items: center; /* Menengahkan secara horizontal */
-    cursor: pointer; /* Menunjukkan bahwa item dapat diklik */
+    flex-direction: column;
+    /* Mengatur arah kolom */
+    justify-content: center;
+    /* Menengahkan secara vertikal */
+    align-items: center;
+    /* Menengahkan secara horizontal */
+    cursor: pointer;
+    /* Menunjukkan bahwa item dapat diklik */
 }
 
 .main-sidebar {
     width: 250px;
-    padding: 10px; /* Padding di dalam sidebar */
-    transition: width 0.3s; /* Transisi untuk efek animasi */
-    overflow: hidden; /* Menghindari konten meluap */
+    padding: 10px;
+    /* Padding di dalam sidebar */
+    transition: width 0.3s;
+    /* Transisi untuk efek animasi */
+    overflow: hidden;
+    /* Menghindari konten meluap */
 }
 
 .main-sidebar .brand-link .img {
@@ -300,32 +308,39 @@
 }
 
 li::marker {
-    content: none; /* Menghapus marker */
+    content: none;
+    /* Menghapus marker */
 }
 
 .container-fluid {
-    display: flex; /* Menggunakan flexbox */
-    flex-direction: column; /* Atur arah kolom */
-    width: 100%; /* Lebar penuh */
+    display: flex;
+    /* Menggunakan flexbox */
+    flex-direction: column;
+    /* Atur arah kolom */
+    width: 100%;
+    /* Lebar penuh */
 }
 
 #calendar {
     background-color: #fff;
     border-radius: 10px;
     max-width: 100%;
-    margin: 0 auto; /* Center the calendar */
+    margin: 0 auto;
+    /* Center the calendar */
 }
 
 @media (max-width: 768px) {
     #calendar {
-        font-size: 0.8em; /* Adjust font size for smaller screens */
+        font-size: 0.8em;
+        /* Adjust font size for smaller screens */
     }
 }
 
 /* Gaya untuk gambar desktop */
 .desktop-image {
     border: 2px;
-    transition: transform 0.3s; /* Contoh: efek transisi */
+    transition: transform 0.3s;
+    /* Contoh: efek transisi */
 }
 
 /* Gaya untuk gambar mobile */
@@ -336,18 +351,46 @@ li::marker {
 /* Media query untuk gambar desktop */
 @media (min-width: 768px) {
     .mobile-image {
-        display: none; /* Sembunyikan gambar mobile pada layar lebih besar dari 768px */
+        display: none;
+        /* Sembunyikan gambar mobile pada layar lebih besar dari 768px */
     }
 }
 
 /* Media query untuk gambar mobile */
 @media (max-width: 767px) {
     .desktop-image {
-        display: none; /* Sembunyikan gambar desktop pada layar lebih kecil dari 768px */
+        display: none;
+        /* Sembunyikan gambar desktop pada layar lebih kecil dari 768px */
     }
 }
 
 .fc-toolbar .form-select {
-    width: auto; /* Atur lebar dropdown sesuai kebutuhan */
-    margin-left: 10px; /* Jarak antara dropdown dan elemen lain */
+    width: auto;
+    /* Atur lebar dropdown sesuai kebutuhan */
+    margin-left: 10px;
+    /* Jarak antara dropdown dan elemen lain */
+}
+
+.status-container {
+    display: flex;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 100px;
+
+}
+
+.status-menunggu {
+    background-color: #FFDDC1;
+    /* Warna untuk Menunggu Konfirmasi */
+}
+
+.status-diproses {
+    background-color: #FFABAB;
+    /* Warna untuk Sedang Diproses */
+}
+
+.status-selesai {
+    background-color: #C1FFC1;
+    /* Warna untuk Selesai */
 }
