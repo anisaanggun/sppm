@@ -54,7 +54,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="row">
                         <div class="col mb-2">
-                            <img src="{{ asset('/img/gambar1.png') }}" alt="" class="img-fluid"
+                                <!-- Gambar untuk tampilan desktop -->
+                            <img src="{{ asset('/img/gambar1.png') }}" alt="gambar1" class="img-fluid desktop-image"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+
+                                <!-- Gambar untuk tampilan mobile -->
+                            <img src="{{ asset('/img/minigambar3.png') }}" alt="minigambar2" class="img-fluid mobile-image d-block d-md-none"
                                 style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div><!-- /.row -->
@@ -130,8 +135,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <div class="container ">
-                                        <h5 style="text-align: center; margin-bottom:4%">Jumlah Perawatan Berdasarkan
-                                            Tanggal</h5>
+                                        <h5 style="text-align: center; margin-bottom:4%">Jumlah Perawatan Per
+                                            Bulan</h5>
                                         <form method="GET" action="{{ route('beranda.index') }}" class="form-inline"
                                             style="margin-bottom:2%">
                                             <div class="form-group mb-2 mr-3">
@@ -172,8 +177,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <div class="container">
-                                        <h5 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Berdasarkan
-                                            Tanggal</h5>
+                                        <h5 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Per
+                                            Bulan</h5>
                                         <form method="GET" action="{{ route('beranda.index') }}"
                                             class="form-inline" style="margin-bottom:2%">
                                             <div class="form-group mb-2 mr-3">
@@ -310,7 +315,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
             }
         });
     </script>
+    <script>
+        $(document).ready(function() {
+        $('[data-widget="pushmenu"]').on('click', function() {
+          const sidebar = $('.main-sidebar'); // Assuming your sidebar has the class 'main-sidebar'
+          const text = $("#sidebar-text");
+
+          sidebar.toggleClass('closed');
+
+          if (sidebar.hasClass('sidebar-collapse')) {
+            text.hide();
+          } else {
+            text.show();
+          }
+        });
+      });
+    </script>
+
 </body>
-
-
 </html>
