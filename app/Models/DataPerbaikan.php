@@ -17,5 +17,6 @@ class DataPerbaikan extends Model
         'teknisi',
         'kerusakan',
         'catatan',
+        'status_perbaikan',
     ];
 }

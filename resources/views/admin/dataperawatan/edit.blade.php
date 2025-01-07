@@ -119,6 +119,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Status Perawatan</label>
+                                                        <select class="form-control" id="status_perawatan"
+                                                            name="status_perawatan" required>
+                                                            <option value="" disabled>Pilih Status</option>
+                                                            <option value="3"
+                                                                {{ old('status_perawatan', $data_perawatans->status_perawatan) == 3 ? 'selected' : '' }}>
+                                                                Menunggu Konfirmasi</option>
+                                                            <option value="2"
+                                                                {{ old('status_perawatan', $data_perawatans->status_perawatan) == 2 ? 'selected' : '' }}>
+                                                                Sedang Diproses</option>
+                                                            <option value="1"
+                                                                {{ old('status_perawatan', $data_perawatans->status_perawatan) == 1 ? 'selected' : '' }}>
+                                                                Selesai</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
                                                             value="{{ old('catatan') }}">{{ old('catatan', $data_perawatans->catatan) }}</textarea>

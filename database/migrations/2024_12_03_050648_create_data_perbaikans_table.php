@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('teknisi');
             $table->string('kerusakan');
             $table->string('catatan');
+            $table->integer('status_perbaikan');
             $table->timestamps();
         });
     }

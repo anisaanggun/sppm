@@ -52,16 +52,17 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-6">
+                                    <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-0 mt-1"
+                                        style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
+                                        Data</a>
+                                </div>
+                            </div>
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-6">
-                                            <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-0 mt-1"
-                                                style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah
-                                                Data</a>
-                                        </div>
-                                    </div>
+
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover" id="dataPerbaikanTable">
                                             <thead>
@@ -72,6 +73,7 @@
                                                     <th scope="col">Teknisi</th>
                                                     <th scope="col">Kerusakan</th>
                                                     <th scope="col">Catatan</th>
+                                                    <th scope="col">Status Perbaikan</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -84,6 +86,33 @@
                                                         <td>{{ $data_perbaikan->teknisi }}</td>
                                                         <td>{{ $data_perbaikan->kerusakan }}</td>
                                                         <td>{{ $data_perbaikan->catatan }}</td>
+                                                        <td>
+                                                            @php
+                                                                $statusClasses = [
+                                                                    3 => [
+                                                                        'class' => 'badge-secondary',
+                                                                        'text' => 'Pending',
+                                                                    ],
+                                                                    2 => [
+                                                                        'class' => 'badge-primary',
+                                                                        'text' => 'Diproses',
+                                                                    ],
+                                                                    1 => [
+                                                                        'class' => 'badge-success',
+                                                                        'text' => 'Selesai',
+                                                                    ],
+                                                                ];
+
+                                                                $status = $statusClasses[
+                                                                    $data_perbaikan->status_perbaikan
+                                                                ] ?? [
+                                                                    'class' => 'badge-light',
+                                                                    'text' => 'Status tidak diketahui',
+                                                                ];
+                                                            @endphp
+                                                            <span
+                                                                class="badge {{ $status['class'] }}">{{ $status['text'] }}</span>
+                                                        </td>
                                                         <td>
                                                             <form
                                                                 onsubmit="event.preventDefault(); confirmDelete(this);"

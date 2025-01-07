@@ -117,7 +117,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             @endforeach
                                                         </select>
                                                     </div>
-
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Status Perbaikan</label>
+                                                        <select class="form-control" id="status_perbaikan"
+                                                            name="status_perbaikan" required>
+                                                            <option value="" disabled>Pilih Status</option>
+                                                            <option value="3"
+                                                                {{ old('status_perbaikan', $data_perbaikans->status_perbaikan) == 3 ? 'selected' : '' }}>
+                                                                Menunggu Konfirmasi</option>
+                                                            <option value="2"
+                                                                {{ old('status_perbaikan', $data_perbaikans->status_perbaikan) == 2 ? 'selected' : '' }}>
+                                                                Sedang Diproses</option>
+                                                            <option value="1"
+                                                                {{ old('status_perbaikan', $data_perbaikans->status_perbaikan) == 1 ? 'selected' : '' }}>
+                                                                Selesai</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"

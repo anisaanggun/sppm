@@ -11,4 +11,10 @@ class Brand extends Model
     protected $fillable = [
         'brand_name',
     ];
+
+    // Definisikan relasi dengan model DataMesin
+    public function dataMesins()
+    {
+        return $this->hasMany(DataMesin::class, 'brand_id');
+    }
 }

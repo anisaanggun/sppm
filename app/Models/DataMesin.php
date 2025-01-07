@@ -15,4 +15,10 @@ class DataMesin extends Model
         'brand_id',
         'model',
     ];
+
+    // Definisikan relasi dengan model Brand
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class, 'brand_id');
+    }
 }

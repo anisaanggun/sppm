@@ -16,5 +16,6 @@ class DataPerawatan extends Model
         'tanggal_perawatan',
         'aktivitas',
         'catatan',
+        'status_perawatan',
     ];
 }

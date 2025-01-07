@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DataMesin;
@@ -15,13 +16,23 @@ class DataMesinController extends Controller
     public function index(Request $request): View
     {
         $query = DataMesin::select('data_mesins.*', 'brands.brand_name')
-        ->leftJoin('brands', 'brand_id', '=', 'brands.id')
-        ->where('user_id', Auth::user()->id);
+            ->leftJoin('brands', 'brand_id', '=', 'brands.id')
+            ->where('user_id', Auth::user()->id);
         
         $data_mesins = $query->get();
 
-        return view('admin.datamesin.data-mesin', compact('data_mesins'));
+        // Array untuk menyimpan QR Code
+        $qrCode = [];
 
+        // Generate QR Code untuk setiap mesin
+        foreach ($data_mesins as $data_mesin) {
+            $url = route('data-mesin.show', $data_mesin->id); // Pastikan route ini ada
+            $dataToEncode = $url; 
+
+            // Generate QR Code
+            $qrCode[$data_mesin->id] = QrCode::size(300)->generate($dataToEncode);
+        }
+        return view('admin.datamesin.data-mesin', compact('data_mesins', 'qrCode'));
     }
 
     public function create(): View
@@ -109,4 +120,10 @@ class DataMesinController extends Controller
 
     //     return view('admin.datamesin.data-mesin', compact('data_mesins'));
     // }
+
+    public function show($id)
+    {
+        $data_mesin = DataMesin::with('brand')->findOrFail($id);
+        return view('admin.datamesin.show', compact('data_mesin'));
+    }
 }

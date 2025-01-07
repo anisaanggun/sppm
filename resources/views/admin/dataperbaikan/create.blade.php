@@ -114,6 +114,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Status Perbaikan</label>
+                                                        <select class="form-control" id="status_perbaikan"
+                                                            name="status_perbaikan" required>
+                                                            <option value="" disabled selected>Pilih Status
+                                                            </option>
+                                                            <option value="3">Menunggu Konfirmasi</option>
+                                                            <option value="2">Sedang Diproses</option>
+                                                            <option value="1">Selesai</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Catatan</label>
                                                         <textarea class="form-control" id="catatan" name="catatan" rows="4" placeholder="Masukan catatan mesin anda"
                                                             value="{{ old('catatan') }}"></textarea>

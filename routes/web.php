@@ -32,6 +32,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/jadwal', JadwalController::class);
 
     Route::resource('/data-mesin', DataMesinController::class);
+    Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
+
     Route::resource('/data-perawatan', DataPerawatanController::class);
     Route::resource('/data-perbaikan', DataPerbaikanController::class);
 

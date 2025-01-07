@@ -52,16 +52,17 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-6">
+                                    <a href="{{ route('data-perawatan.create') }}" class="btn btn-md mb-0 mt-1"
+                                        style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
+                                        Data</a>
+                                </div>
+                            </div>
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-6">
-                                            <a href="{{ route('data-perawatan.create') }}" class="btn btn-md mb-0 mt-1"
-                                                style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah
-                                                Data</a>
-                                        </div>
-                                    </div>
+
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover" id="dataPerawatanTable">
                                             <thead>
@@ -72,6 +73,7 @@
                                                     <th scope="col">Teknisi</th>
                                                     <th scope="col">Aktivitas</th>
                                                     <th scope="col">Catatan</th>
+                                                    <th scope="col">Status Perawatan</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -84,6 +86,33 @@
                                                         <td>{{ $data_perawatan->teknisi }}</td>
                                                         <td>{{ $data_perawatan->aktivitas }}</td>
                                                         <td>{{ $data_perawatan->catatan }}</td>
+                                                        <td>
+                                                            @php
+                                                                $statusClasses = [
+                                                                    3 => [
+                                                                        'class' => 'badge-secondary',
+                                                                        'text' => 'Pending',
+                                                                    ],
+                                                                    2 => [
+                                                                        'class' => 'badge-primary',
+                                                                        'text' => 'Diproses',
+                                                                    ],
+                                                                    1 => [
+                                                                        'class' => 'badge-success',
+                                                                        'text' => 'Selesai',
+                                                                    ],
+                                                                ];
+
+                                                                $status = $statusClasses[
+                                                                    $data_perawatan->status_perawatan
+                                                                ] ?? [
+                                                                    'class' => 'badge-light',
+                                                                    'text' => 'Status tidak diketahui',
+                                                                ];
+                                                            @endphp
+                                                            <span
+                                                                class="badge {{ $status['class'] }}">{{ $status['text'] }}</span>
+                                                        </td>
                                                         <td>
                                                             <form
                                                                 onsubmit="event.preventDefault(); confirmDelete(this);"
@@ -104,7 +133,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="7" class="text-center">Data Perawatan belum
+                                                        <td colspan="8" class="text-center">Data Perawatan belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse
@@ -154,6 +183,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#dataPerawatanTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,

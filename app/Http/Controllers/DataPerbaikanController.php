@@ -42,6 +42,7 @@ class DataPerbaikanController extends Controller
             'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
             'catatan' => 'required|string',
+            'status_perbaikan' => 'required',
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
@@ -49,6 +50,7 @@ class DataPerbaikanController extends Controller
             'teknisi.required' => 'Silahkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
+            'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
         //create data perbaikan
@@ -60,6 +62,7 @@ class DataPerbaikanController extends Controller
             'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
+            'status_perbaikan' => $request->status_perbaikan,
         ]);
 
         $pemilik = $request->input('pemilik');
@@ -84,6 +87,7 @@ class DataPerbaikanController extends Controller
             'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
             'catatan' => 'required|string',
+            'status_perbaikan' => 'required',
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
@@ -91,6 +95,7 @@ class DataPerbaikanController extends Controller
             'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
+            'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
         $data_perbaikans = DataPerbaikan::findOrFail($id);
@@ -102,6 +107,7 @@ class DataPerbaikanController extends Controller
             'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
+            'status_perbaikan' => $request->status_perbaikan,
         ]);
 
         $pemilik = $request->input('pemilik');

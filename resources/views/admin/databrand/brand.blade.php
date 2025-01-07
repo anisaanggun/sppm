@@ -52,16 +52,16 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
+                            <div class="row">
+                                <div class="col-6 mb-3">
+                                    <a href="{{ route('brand.create') }}" class="btn btn-md mb-0 mt-1"
+                                        style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
+                                        Data</a>
+                                </div>
+                            </div>
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-6 mb-3">
-                                            <a href="{{ route('brand.create') }}" class="btn btn-md mb-0 mt-1"
-                                                style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
-                                                Data</a>
-                                        </div>
-                                    </div>
 
                                     <div class="table-responsive">
                                         <table id="brandTable" class="table table-striped table-hover">

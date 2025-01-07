@@ -44,13 +44,15 @@ class DataPerawatanController extends Controller
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
             'catatan' => 'required|string',
+            'status_perawatan' => 'required',
         ], [
-            'pemilik.required' => 'Silahkan masukkan nama anda.',
+            'pemilik.required' => 'Silahkan masukkan nama Pemilik.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal_perawatan.required' => 'Silahkan masukkan tanggal.',
-            'teknisi.required' => 'Silahkan pilih teknisi.',
-            'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
-            'catatan.required' => 'Silahkan masukkan catatan mesin anda.',
+            'teknisi.required' => 'Silahkan masukkan nama Teknisi.',
+            'aktivitas.required' => 'Silahkan masukkan aktivitas mesin Pemilik.',
+            'catatan.required' => 'Silahkan masukkan catatan mesin Pemilik.',
+            'status_perawatan.required' => 'Silahkan pilih status perawatan.',
         ]);
 
         //create data perawatan
@@ -62,6 +64,7 @@ class DataPerawatanController extends Controller
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
+            'status_perawatan' => $request->status_perawatan,
         ]);
 
         $pemilik = $request->input('pemilik');
@@ -88,6 +91,7 @@ class DataPerawatanController extends Controller
             'teknisi' => 'required|string',
             'aktivitas' => 'required|string',
             'catatan' => 'required|string',
+            'status_perawatan' => 'required',
         ], [
             'pemilik.required' => 'Silahkan masukkan nama anda.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
@@ -95,6 +99,7 @@ class DataPerawatanController extends Controller
             'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
+            'status_perawatan.required' => 'Silahkan pilih status perawatan.',
         ]);
 
         $data_perawatans = DataPerawatan::findOrFail($id);
@@ -106,6 +111,7 @@ class DataPerawatanController extends Controller
             'teknisi' => $request->teknisi,
             'aktivitas' => $request->aktivitas,
             'catatan' => $request->catatan,
+            'status_perawatan' => $request->status_perawatan,
         ]);
 
         $pemilik = $request->input('pemilik');

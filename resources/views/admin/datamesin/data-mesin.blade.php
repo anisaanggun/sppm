@@ -52,16 +52,16 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
+                            <div class="row mb-3">
+                                <div class="col-12 col-md-6">
+                                    <a href="{{ route('data-mesin.create') }}" class="btn btn-md mb-0 mt-1"
+                                        style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
+                                        Data</a>
+                                </div>
+                            </div>
                             <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
-                                    <div class="row mb-3">
-                                        <div class="col-12 col-md-6">
-                                            <a href="{{ route('data-mesin.create') }}" class="btn btn-md mb-0 mt-1"
-                                                style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah
-                                                Data</a>
-                                        </div>
-                                    </div>
 
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover" id="myTable">
@@ -70,6 +70,7 @@
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Model</th>
+                                                    <th scope="col">QR Code</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
@@ -79,6 +80,43 @@
                                                         <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
+                                                        <td>
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal"
+                                                                data-target="#qrModal{{ $data_mesin->id }}">
+                                                                Lihat
+                                                            </button>
+
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="qrModal{{ $data_mesin->id }}"
+                                                                tabindex="-1"
+                                                                aria-labelledby="ModalLabel{{ $data_mesin->id }}"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title"
+                                                                                id="ModalLabel{{ $data_mesin->id }}">QR
+                                                                                Code {{ $data_mesin->nama_mesin }}</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body text-center">
+                                                                            {!! $qrCode[$data_mesin->id] !!}
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td>
                                                             <form
                                                                 onsubmit="event.preventDefault(); confirmDelete(this);"
@@ -99,7 +137,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="4" class="text-center">Data Mesin belum
+                                                        <td colspan="5" class="text-center">Data Mesin belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse

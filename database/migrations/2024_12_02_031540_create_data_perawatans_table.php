@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal_perawatan');
             $table->string('aktivitas');
             $table->string('catatan');
+            $table->integer('status_perawatan');
             $table->timestamps();
         });
     }

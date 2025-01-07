@@ -54,12 +54,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </div>
                     <div class="row">
                         <div class="col mb-2">
-                                <!-- Gambar untuk tampilan desktop -->
+                            <!-- Gambar untuk tampilan desktop -->
                             <img src="{{ asset('/img/gambar1.png') }}" alt="gambar1" class="img-fluid desktop-image"
                                 style="width: 100%; height: 100%; object-fit: cover;">
 
-                                <!-- Gambar untuk tampilan mobile -->
-                            <img src="{{ asset('/img/minigambar3.png') }}" alt="minigambar2" class="img-fluid mobile-image d-block d-md-none"
+                            <!-- Gambar untuk tampilan mobile -->
+                            <img src="{{ asset('/img/minigambar3.png') }}" alt="minigambar2"
+                                class="img-fluid mobile-image d-block d-md-none"
                                 style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                     </div><!-- /.row -->
@@ -317,20 +318,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </script>
     <script>
         $(document).ready(function() {
-        $('[data-widget="pushmenu"]').on('click', function() {
-          const sidebar = $('.main-sidebar'); // Assuming your sidebar has the class 'main-sidebar'
-          const text = $("#sidebar-text");
+            $('[data-widget="pushmenu"]').on('click', function() {
+                const sidebar = $('.main-sidebar'); // Assuming your sidebar has the class 'main-sidebar'
+                const text = $("#sidebar-text");
 
-          sidebar.toggleClass('closed');
+                sidebar.toggleClass('closed');
 
-          if (sidebar.hasClass('sidebar-collapse')) {
-            text.hide();
-          } else {
-            text.show();
-          }
+                if (sidebar.hasClass('sidebar-collapse')) {
+                    text.hide();
+                } else {
+                    text.show();
+                }
+            });
         });
-      });
     </script>
 
 </body>
+
 </html>
