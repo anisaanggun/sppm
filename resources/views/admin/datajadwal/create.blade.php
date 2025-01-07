@@ -84,16 +84,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukan nama pemilik">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Nama Mesin</label>
-                                                        <select class="form-control" id="mesin_id" name="mesin_id"
-                                                            required>
-                                                            <option value="" disabled selected>Pilih Mesin
-                                                            </option>
-                                                            @foreach ($data_mesins as $item)
-                                                                <option value="{{ $item->id }}">
-                                                                    {{ $item->nama_mesin }}</option>
+                                                        <label class="font-weight-bold">Pilih Mesin</label>
+                                                        <select name="mesin_id" id="mesin_id" class="form-control">
+                                                            <option value="">Pilih Mesin</option>
+                                                            @foreach($data_mesins as $mesin)
+                                                                <option value="{{ $mesin->id }}">{{ $mesin->nama_mesin }}</option>
                                                             @endforeach
-
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">

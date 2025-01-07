@@ -22,11 +22,11 @@ class LaporanPerawatanController extends Controller
         $jumlah_hari = cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun); // Menghitung jumlah hari
 
         // Ambil data perawatan dari database berdasarkan user yang sedang login
-        $data_perawatans = DataPerawatan::where('user_id', Auth::user()->id)
+        $data_perawatans = DataPerawatan::where('user_id', '>=', Auth::user()->id)
             ->whereYear('tanggal_perawatan', $tahun) // Filter berdasarkan tahun
             ->whereMonth('tanggal_perawatan', $bulan) // Filter berdasarkan bulan
             ->get();
-        
+
         // Siapkan array untuk menyimpan jumlah perawatan per tanggal
         $jumlah_perawatan_per_tanggal = array_fill(1, $jumlah_hari, 0); // Inisialisasi array dengan jumlah hari
 

@@ -59,8 +59,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body ml-4 mr-4 mt-3">
                                     <div class="container">
-                                        <h3 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Berdasarkan
-                                            Tanggal</h3>
+                                        <h3 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Per
+                                            Bulan</h3>
                                         <form method="GET" action="{{ route('laporan-perbaikan.index') }}"
                                             class="form-inline" style="margin-bottom:2%">
                                             <div class="form-group mb-2 mr-3">

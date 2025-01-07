@@ -5,7 +5,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar" id="sidebar">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link" >
+        <a href="#" class="brand-link mb-2 mt-3" >
             <div class="row">
                 <div class="col-md-3">
                     <img src="{{ asset('/img/logo4.png') }}" alt="">
@@ -157,19 +157,6 @@
         });
     </script>
 
-    <script>
-    $(document).ready(function(){
-        $('[data-widget="pushmenu"]').on('click', function(){
-            const text = $("#sidebar-text");
-            const currentSrc = $text.attr('src');
 
-            if(currentSrc === "{{ asset('/img/teks.png') }}"){
-                $text.removeAttr('src', "{{ asset('/img/teks.png') }}");
-            }else{
-                $text.attr('src', "{{ asset('/img/teks.png') }}");
-            }
-        });
-    });
-</script>
 
 
