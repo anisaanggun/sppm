@@ -29,7 +29,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda.index');
     Route::post('/beranda/store', [BerandaController::class, 'store'])->name('beranda.store');
 
-    Route::resource('/jadwal', JadwalController::class);
+    // Route::resource('/jadwal', JadwalController::class);
+    // Route::get('/calendar', [JadwalController::class, 'index']);
+    // Route::get('/events', [JadwalController::class, 'getEvents']);
+    Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+    Route::get('/jadwal/events', [JadwalController::class, 'getEvents'])->name('jadwal.events');
+
 
     Route::resource('/data-mesin', DataMesinController::class);
     Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
