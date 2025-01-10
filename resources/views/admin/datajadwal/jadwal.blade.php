@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jadwal | Pantau Mesin</title>
+    <title>Jadwal | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -17,21 +17,22 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/lte/dist/css/adminlte.min.css') }}">
-
     <link rel="stylesheet" href="{{ asset('/assets/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js'></script>
-
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
-
+    <style>
+        .fc-dot {
+            background-color: blue !important;
+            border-radius: 50% !important;
+            width: 10px !important;
+            height: 10px !important;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -44,35 +45,24 @@
         @include('admin/sidebar')
 
         {{-- Content --}}
-
-
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            {{-- <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mt-3 " style="margin-left: 26px">
-                        <h4>Data Mesin</h4>
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div> --}}
-            <!-- /.content-header -->
-
-            <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    {{-- <div class="mt-2" style="margin-left: 40px">
-                        <a href="{{ route('jadwal.create') }}" class="btn btn-md mb-3"
-                            style="background-color: #FF9B50; color: #FFFFFF; border-radius: 25px;">Tambah Data</a>
-                    </div> --}}
                     <div class="row ml-4 mr-4">
-                        <div class="col-md-12 mt-3">
+                        {{-- <div class="col-md-12 mt-3">
                             @if (session('success'))
                                 <div class="alert alert-success">
                                     <i class="fas fa-check-circle mr-1"></i>
                                     {{ session('success') }}
                                 </div>
                             @endif
-                        </div>
+                            @if (isset($error))
+                                <div class="alert alert-danger">
+                                    {{ $error }}
+                                </div>
+                            @endif
+
+                        </div> --}}
 
                         <div class="col-md-12">
                             <div class="card border-0 mt-2 mb-4"
@@ -80,30 +70,65 @@
                                 <div class="card-body">
                                     <h5>Kalender</h5>
 
-                                    <!-- Dropdown Filter Pilih Mesin -->
+                                    <!-- Tombol untuk membuka modal -->
+                                    <button type="button" class="btn btn-success mt-3" data-toggle="modal"
+                                        data-target="#filterModal">
+                                        Filter Jadwal
+                                    </button>
 
-                                    <div class="col-md-6 form-group mt-3">
-                                        <label class="font-weight-bold">Pilih Mesin</label>
-                                        <select class="form-control" id="mesin_id" name="mesin_id" required>
-                                            <option value="" disabled selected>Pilih Mesin</option>
-                                            @foreach ($data_mesins as $item)
-                                                <option value="{{ $item->id }}">{{ $item->nama_mesin }}</option>
-                                            @endforeach
-                                        </select>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="filterModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="filterModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="filterModalLabel">Filter Jadwal</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="GET" action="{{ route('jadwal.index') }}">
+                                                        <div class="form-group">
+                                                            <label for="mesin_id">Pilih Mesin:</label>
+                                                            <select name="mesin_id" id="mesin_id" class="form-control">
+                                                                <option value="">Semua Mesin</option>
+                                                                @foreach ($data_mesins as $mesin)
+                                                                    <option value="{{ $mesin->id }}"
+                                                                        {{ isset($mesin_id) && $mesin_id == $mesin->id ? 'selected' : '' }}>
+                                                                        {{ $mesin->nama_mesin }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
 
-                                        <label class="font-weight-bold mt-2">Pilih Tanggal</label>
-                                        <input type="date" class="form-control" id="event_date" required>
+                                                        <div class="form-group">
+                                                            <label for="tgl_mulai">Tanggal Mulai:</label>
+                                                            <input type="date" name="tgl_mulai" id="tgl_mulai"
+                                                                class="form-control" value="{{ $tgl_mulai }}">
+                                                        </div>
 
-                                        <label class="font-weight-bold mt-2">Jenis Jasa</label>
-                                        <select class="form-control" id="service_type" required>
-                                            <option value="" disabled selected>Pilih Jenis Jasa</option>
-                                            <option value="maintenance">Perawatan</option>
-                                            <option value="repair">Perbaikan</option>
-                                        </select>
+                                                        <div class="form-group">
+                                                            <label for="tgl_selesai">Tanggal Selesai:</label>
+                                                            <input type="date" name="tgl_selesai" id="tgl_selesai"
+                                                                class="form-control" value="{{ $tgl_selesai }}">
+                                                        </div>
 
-                                        <button type="button" class="btn btn-primary mb-2 mt-2" id="tampilkanBtn">Tampilkan</button>
+
+
+                                                        <button type="submit" class="btn btn-primary"
+                                                            id="applyFilter">Terapkan
+                                                            Filter</button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div id='calendar'></div>
+
+                                    <div id="calendar"></div>
+
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
@@ -119,7 +144,7 @@
                                         <div class="col-md-6 form-group mt-3">
                                             <div>
                                                 <b>
-                                                    <h5 class="text-center">BUAT JADWAL <br> SERVIS ANDA!</h>
+                                                    <h5 class="text-center">BUAT JADWAL <br> SERVIS ANDA!</h5>
                                                 </b>
                                             </div>
                                             <div class="mt-4 text-center">
@@ -127,40 +152,34 @@
                                                     <a class="nav-links dropdown-toggle mr-lg-2 btn btn-success btn-md mb-3"
                                                         href="#" id="alertsDropdown" data-toggle="dropdown"
                                                         aria-haspopup="true" aria-expanded="false"
-                                                        style=" color: #FFFFFF; border-radius: 25px;">
+                                                        style="color: #FFFFFF; border-radius: 25px;">
                                                         Tambah Data
                                                     </a>
-                                                    <!-- start dropdown -->
                                                     <div class="dropdown-menu mr-5 mt-3"
                                                         aria-labelledby="alertsDropdown"
                                                         style="border-radius: 10px; border:0;">
                                                         <a class="dropdown-item"
-                                                            href="{{ route('data-perawatan.create') }}"
-                                                            id="data_perawatan">
+                                                            href="{{ route('data-perawatan.create') }}">
                                                             <span class="text-primary">
                                                                 <strong>
-                                                                    <i class="fas fa-plus"></i>
-                                                                    Data Perawatan</strong>
+                                                                    <i class="fas fa-plus"></i> Data Perawatan
+                                                                </strong>
                                                             </span>
                                                         </a>
                                                         <a class="dropdown-item"
-                                                            href="{{ route('data-perbaikan.create') }}"
-                                                            id="data_perawatan">
+                                                            href="{{ route('data-perbaikan.create') }}">
                                                             <span class="text-primary">
                                                                 <strong>
-                                                                    <i class="fas fa-plus"></i>
-                                                                    Data Perbaikan</strong>
+                                                                    <i class="fas fa-plus"></i> Data Perbaikan
+                                                                </strong>
                                                             </span>
                                                         </a>
-                                                    </div><!-- end dropdown -->
+                                                    </div>
                                                 </li>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -174,122 +193,117 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-
-
-    <!-- jQuery -->
     <script src="{{ asset('/lte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- Bootstrap 4 -->
     <script src="{{ asset('/lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- AdminLTE App -->
     <script src="{{ asset('/lte/dist/js/adminlte.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
 
-    <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
-        function confirmDelete(form) {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Data ini akan dihapus!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Hapus',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit(); // Jika pengguna mengkonfirmasi, kirim form
-                }
+        var calendar;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+
+            calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                navLinks: true, // Enable link for opening events
+                editable: true,
+                events: @json($events)
+                // events: function(fetchInfo, successCallback, failureCallback) {
+                //     // Ambil filter dari input di modal
+                //     var mesin_id = document.getElementById('mesin_id').value;
+                //     var tgl_mulai = document.getElementById('tgl_mulai').value;
+                //     var tgl_selesai = document.getElementById('tgl_selesai').value;
+
+                //     // Siapkan URL dengan query parameters untuk filter
+                //     var url = '{{ route('jadwal.events') }}' + '?mesin_id=' + mesin_id +
+                //         '&tgl_mulai=' + tgl_mulai + '&tgl_selesai=' + tgl_selesai;
+
+                //     // Ambil data jadwal dari server
+                //     fetch(url)
+                //         .then(response => response.json())
+                //         .then(data => {
+                //             // console.log(data, 'data_jadwal')
+                //             var events = data.map(jadwal => {
+                //                 // Periksa apakah tanggal ada
+                //                 var startDate = jadwal.start ? moment(jadwal.start).format(
+                //                     'YYYY-MM-DDTHH:mm:ss') : null;
+                //                 var endDate = jadwal.start ? moment(jadwal.start).format(
+                //                     'YYYY-MM-DDTHH:mm:ss') : null;
+
+                //                 return {
+                //                     title: 'Jadwal untuk Mesin ' + jadwal.title,
+                //                     start: startDate,
+                //                     end: endDate,
+                //                     extendedProps: {
+                //                         description: 'Pemilik: ' + jadwal.extendedProps
+                //                             .description
+                //                     },
+                //                     className: 'dot-event'
+                //                 };
+                //             });
+
+                //             successCallback(events); // Kirim events yang sudah diformat
+                //         })
+                //         .catch(error => {
+                //             failureCallback(error); // Tangani jika ada error
+                //         });
+                // },
+
+                // eventClassNames: function(event) {
+                //     // Periksa apakah class 'dot-event' ada dalam array classNames
+                //     if (event.classNames.includes('dot-event')) {
+                //         return [
+                //             'fc-dot'
+                //         ]; // Kelas 'fc-dot' akan ditambahkan untuk acara yang diberi 'dot-event'
+                //     }
+                //     return [];
+                // }
+
+                // eventClassNames: function(event) {
+                //     return event.extendedProps.className ? ['fc-dot'] : [];
+                // }
+
+                // eventClassNames: function(event) {
+                //     return event.classNames.includes('dot-event') ? ['fc-dot'] : [];
+                // }
+
             });
-        }
+
+            // Render the calendar
+            calendar.render();
+        });
+
+
+        // Event listener untuk tombol 'Terapkan Filter'
+        document.getElementById('applyFilter').addEventListener('click', function() {
+            // Ambil nilai dari input di modal filter
+            var mesin_id = document.getElementById('mesin_id').value;
+            var tgl_mulai = document.getElementById('tgl_mulai').value;
+            var tgl_selesai = document.getElementById('tgl_selesai').value;
+
+            // Ubah URL dengan filter baru
+            var newUrl = '{{ route('jadwal.index') }}' + '?mesin_id=' + mesin_id +
+                '&tgl_mulai=' + tgl_mulai +
+                '&tgl_selesai=' + tgl_selesai;
+
+            // Panggil fungsi untuk memperbarui kalender
+            window.history.pushState({
+                path: newUrl
+            }, '', newUrl);
+            calendar.refetchEvents(); // Memperbarui kalender dengan filter baru
+
+            // Tutup modal setelah filter diterapkan
+            $('#filterModal').modal('hide');
+        });
     </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-                left: '', // No buttons on the left
-                center: 'title', // Title in the center
-                right: 'dayGridMonth,timeGridWeek,timeGridDay' // View buttons on the right
-            },
-            navLinks: true,
-            editable: true,
-            eventClick: function(info) {
-                alert('Event: ' + info.event.title + '\nDescription: ' + info.event.extendedProps.description);
-            }
-        });
-
-        // Render the calendar
-        calendar.render();
-
-        // Event listener for the "Tampilkan" button
-        document.getElementById('tampilkanBtn').addEventListener('click', function() {
-            var mesinSelect = document.getElementById('mesin_id');
-            var mesinId = mesinSelect.value; // Get the selected machine ID
-            var eventDate = document.getElementById('event_date').value; // Get the selected date
-            var serviceType = document.getElementById('service_type').value; // Get the selected service type
-
-            // Check if a machine, date, and service type are selected
-            if (mesinId && eventDate && serviceType) {
-                // Get the machine name
-                var mesinName = mesinSelect.options[mesinSelect.selectedIndex].text; // Get the machine name
-
-                // Create the event title based on the service type
-                var eventTitle = (serviceType === 'maintenance') ? 'Perawatan Mesin: ' + mesinName : 'Perbaikan Mesin: ' + mesinName;
-
-                // Add an event to the calendar
-                calendar.addEvent({
-                    title: eventTitle, // Event title
-                    start: eventDate, // Use the selected date
-                    allDay: true, // Set to true for all-day events
-                    extendedProps: {
-                        description: 'Jasa: ' + (serviceType === 'maintenance' ? 'Perawatan' : 'Perbaikan') + ' untuk ' + mesinName // Optional description
-                    }
-                });
-
-                // Optionally, you can send an AJAX request to store the event in the database
-                /*
-                $.ajax({
-                    url: '/events', // Your endpoint to store events
-                    method: 'POST',
-                    data: {
-                        title: eventTitle,
-                        start: eventDate,
-                        _token: '{{ csrf_token() }}' // Include CSRF token
-                    },
-                    success: function(response) {
-                        console.log('Event saved:', response);
-                    }
-                });
-                */
-
-                alert('Event untuk ' + mesinName + ' pada tanggal ' + eventDate + ' dengan jenis jasa ' + (serviceType === 'maintenance' ? 'Perawatan' : 'Perbaikan') + ' telah ditambahkan ke kalender.');
-            } else {
-                alert('Silahkan pilih mesin, tanggal, dan jenis jasa terlebih dahulu.');
-            }
-        });
-    });
-</script>
-
-<script>
-    document.getElementById('tampilkanBtn').addEventListener('click', function() {
-        var mesinSelect = document.getElementById('mesin_id');
-        var mesinId = mesinSelect.value; // Ambil ID mesin yang dipilih
-
-        // Cari nama mesin berdasarkan ID
-        var mesinName = '';
-        @foreach ($data_mesins as $item)
-            if (mesinId == '{{ $item->id }}') {
-                mesinName = '{{ $item->nama_mesin }}';
-            }
-        @endforeach
-    });
-</script>
 </body>
 
 </html>

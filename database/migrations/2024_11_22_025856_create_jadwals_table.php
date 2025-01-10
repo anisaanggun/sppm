@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_pemilik');
             $table->integer('mesin_id');
+            $table->integer('user_id');
             $table->string('no_hp');
             $table->date('tanggal');
             $table->string('tempat');

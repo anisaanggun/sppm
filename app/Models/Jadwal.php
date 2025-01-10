@@ -22,5 +22,6 @@ class Jadwal extends Model
         'tanggal',
         'tempat',
         'jenis_jasa',
+        'user_id',
      ];
 }
