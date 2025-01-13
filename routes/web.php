@@ -17,6 +17,7 @@ use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
 use App\Http\Controllers\SendEmailController;
+use App\Http\Controllers\DataPelangganController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/dologin', [AuthController::class, 'dologin'])->name('dologin');
@@ -58,6 +59,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/brand', BrandController::class);
     Route::resource('/profil', ProfilController::class);
+
+    Route::resource('/pelanggan', DataPelangganController::class);
+
 
     Route::get('/send-email',function(){
         $data = [

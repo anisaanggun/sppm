@@ -5,7 +5,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar" id="sidebar">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link mb-2 mt-3" >
+        <a href="#" class="brand-link mb-2 mt-3">
             <div class="row">
                 <div class="col-md-3">
                     <img src="{{ asset('/img/logo4.png') }}" alt="">
@@ -56,13 +56,23 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a href="{{ url('/brand') }}"
                                     class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Brand
+                                    </p>
+                                </a>
+                            </li> --}}
+                            <li class="nav-item">
+                                <a href="{{ url('/pelanggan') }}"
+                                    class="nav-link {{ Request::segment(1) == 'pelanggan' ? 'active-link' : 'nonactive-link' }}">
+                                    <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
+                                        style="font-size: 20px;"></span>
+                                    <p>
+                                        Pelanggan
                                     </p>
                                 </a>
                             </li>
@@ -149,14 +159,10 @@
 
     <script>
         $(document).ready(function() {
-    // Event untuk toggle sidebar
+            // Event untuk toggle sidebar
             $('#sidebar-text').on('click', function() {
                 // Menambah/menghapus kelas 'closed' pada sidebar
                 $('#sidebar').toggleClass('closed');
             });
         });
     </script>
-
-
-
-

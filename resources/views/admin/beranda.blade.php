@@ -73,7 +73,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row ml-4 mr-4">
-                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
@@ -89,7 +89,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                         </div>
                         <!-- ./col -->
-                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </div>
                         </div>
                         <!-- ./col -->
-                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
@@ -114,20 +114,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <p>Catat perbaikan mesin Anda disini</p>
                                 </div>
                                 <a href="{{ route('data-perbaikan.index') }}" class="small-box-footer">Catat</a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
-                            <!-- small box -->
-                            <div class="small-box">
-                                <div class="inner">
-                                    <div class="lingkaran">
-                                        <span class="iconify" data-icon="gravity-ui:qr-code"></span>
-                                    </div>
-                                    <h5><b>Pindai QR-Code</b></h5>
-                                    <p>Pindai QR Code mesin Anda disini</p>
-                                </div>
-                                <a href="#" class="small-box-footer">Pindai</a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -180,8 +166,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="container">
                                         <h5 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Per
                                             Bulan</h5>
-                                        <form method="GET" action="{{ route('beranda.index') }}"
-                                            class="form-inline" style="margin-bottom:2%">
+                                        <form method="GET" action="{{ route('beranda.index') }}" class="form-inline"
+                                            style="margin-bottom:2%">
                                             <div class="form-group mb-2 mr-3">
                                                 <label for="bulan_perbaikan" class="mr-2">Bulan:</label>
                                                 <select name="bulan_perbaikan" id="bulan_perbaikan"

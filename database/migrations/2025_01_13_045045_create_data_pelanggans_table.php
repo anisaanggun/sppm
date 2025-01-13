@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('data_mesins', function (Blueprint $table) {
-            $table->string('image')->nullable(); // Menambahkan kolom image
+        Schema::create('data_pelanggans', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('no_hp');
+            $table->string('alamat');
+            $table->string('email')->unique();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('data_mesins', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('data_pelanggans');
     }
 };

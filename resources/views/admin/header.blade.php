@@ -19,7 +19,7 @@
                 <span class="d-lg-none">
                     <span class="badge badge-pill badge-warning"></span>
                 </span>
-                {{ auth()->user()->name }}
+                Teknisi {{ auth()->user()->name }}
             </a>
             <!-- start dropdown -->
             <div class="dropdown-menu mr-5 mt-3" aria-labelledby="alertsDropdown"

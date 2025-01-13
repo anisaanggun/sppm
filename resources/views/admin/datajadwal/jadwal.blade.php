@@ -25,14 +25,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-    <style>
+    {{-- <style>
         .fc-dot {
             background-color: blue !important;
             border-radius: 50% !important;
             width: 10px !important;
             height: 10px !important;
         }
-    </style>
+    </style> --}}
 </head>
 
 <body class="hold-transition sidebar-mini">
