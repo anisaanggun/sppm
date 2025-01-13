@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Detail Mesin</h4>
+                        <h4>Informasi Mesin</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -57,54 +57,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="container mt-3 mb-3">
-                        <div class="row ml-3 mr-3">
-                            <div class="col-md-12">
-                                @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-                                <div class="card border-0"
-                                    style="border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-                                    <div class="card-header text-center"
-                                        style="background-color: #FF9B50; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                                        <h5 class="card-title"><strong>Informasi Mesin</strong></h5>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <p class="card-text">
-                                                <strong>Nama Mesin:</strong>
-                                                <span class="badge badge-info">{{ $data_mesin->nama_mesin }}</span>
-                                            </p>
+                    <div class="row mt-3" style="margin-left: 26px; min-height: 60vh;">
+                        <div class="col-md-12">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                            <div class="card border-0" style="border-radius: 15px; box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); background-color: #f8f9fa;">
+                                <div class="card-header text-center" style="background-color: #297AE6; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                    <h5 class="card-title mb-1"><strong>Detail Mesin</strong></h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mb-1">
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-4"><strong>Nama Mesin:</strong>  {{ $data_mesin->nama_mesin }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"><strong>Nama Brand:</strong>  {{ $data_mesin->brand->brand_name }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"><strong>Nama Model:</strong>  {{ $data_mesin->model }}</div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4"><strong>Deskripsi:</strong>  {{ $data_mesin->deskripsi }}</div>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <p class="card-text">
-                                                <strong>Nama Brand:</strong>
-                                                <span
-                                                    class="badge badge-info">{{ $data_mesin->brand->brand_name }}</span>
-                                            </p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <p class="card-text">
-                                                <strong>Nama Model:</strong>
-                                                <span class="badge badge-info">{{ $data_mesin->model }}</span>
-                                            </p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <p class="card-text">
-                                                <strong>ID Mesin:</strong>
-                                                <span class="badge badge-info">{{ $data_mesin->id }}</span>
-                                            </p>
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('storage/images/' . $data_mesin->image) }}" alt="Gambar Mesin" style="max-width: 70%; height: auto;">
                                         </div>
                                     </div>
-                                    <div class="card-footer text-center">
-                                        <a href="{{ route('data-mesin.index') }}" class="btn btn-primary">Kembali</a>
-                                    </div>
+                                </div>
+                                <div class="text-right p-1">
+                                    <a href="{{ route('data-mesin.index') }}" class="btn btn-sm btn-primary mr-2">Kembali</a>
                                 </div>
                             </div>
                         </div>

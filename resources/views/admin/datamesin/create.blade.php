@@ -103,6 +103,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             value="{{ old('nama_mesin') }}"
                                                             placeholder="Masukan nama mesin">
                                                     </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Deskripsi</label>
+                                                        <input type="text" class="form-control" name="deskripsi"
+                                                            value="{{ old('deskripsi') }}"
+                                                            placeholder="Masukan deskripsi">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Upload Gambar Mesin</label>
+                                                        <input type="file" class="form-control" name="image"
+                                                            placeholder="Masukan gambar mesin">
+                                                    </div>
                                                     {{-- <div class="col-md-6 form-group mt-3">
                                                         <label for="brand">Brand</label>
                                                         <select class="form-control" id="brand" name="brand"

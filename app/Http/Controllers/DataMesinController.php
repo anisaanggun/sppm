@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use App\Models\DataMesin;
 use App\Models\Brand;
 use Illuminate\Http\RedirectResponse;
@@ -18,7 +19,7 @@ class DataMesinController extends Controller
         $query = DataMesin::select('data_mesins.*', 'brands.brand_name')
             ->leftJoin('brands', 'brand_id', '=', 'brands.id')
             ->where('user_id', Auth::user()->id);
-        
+
         $data_mesins = $query->get();
 
         // Array untuk menyimpan QR Code
@@ -27,7 +28,7 @@ class DataMesinController extends Controller
         // Generate QR Code untuk setiap mesin
         foreach ($data_mesins as $data_mesin) {
             $url = route('data-mesin.show', $data_mesin->id); // Pastikan route ini ada
-            $dataToEncode = $url; 
+            $dataToEncode = $url;
 
             // Generate QR Code
             $qrCode[$data_mesin->id] = QrCode::size(300)->generate($dataToEncode);
@@ -50,11 +51,19 @@ class DataMesinController extends Controller
             'nama_mesin' => 'required|string',
             'brand_id' => 'required',
             'model' => 'required|string',
+            'deskripsi' => 'nullable|string',
+            'image' => 'image|mimes:jpeg,jpg,png|max:1999',
         ], [
             'brand_id.required' => 'Silahkan pilih nama brand mesin.',
             'nama_mesin.required' => 'Silahkan masukan nama mesin.',
             'model.required' => 'Silahkan pilih nama model mesin.',
+            'deskripsi.nullable' => 'Silahkan masukan deskripsi',
         ]);
+
+        //upload image
+        $image = $request->file('image');
+        $image->storeAs('public/images', $image->hashName());
+
 
         //create data mesin
         DataMesin::create([
@@ -62,6 +71,9 @@ class DataMesinController extends Controller
             'nama_mesin' => $request->nama_mesin,
             'brand_id' => $request->brand_id,
             'model' => $request->model,
+            'deskripsi' => $request->deskripsi,
+            'image' => $image->hashName(),
+
         ]);
 
         $selectednama_mesin = $request->input('nama_mesin');
@@ -84,29 +96,57 @@ class DataMesinController extends Controller
             'nama_mesin' => 'required|string',
             'brand_id' => 'required',
             'model' => 'required|string',
+            'deskripsi' => 'nullable|string',
+            'image' => 'image|mimes:jpeg,jpg,png|max:1999',
         ], [
             'nama_mesin.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'brand_id.required' => 'Silahkan pilih nama brand mesin.',
             'model.required' => 'Silahkan pilih nama model mesin.',
+            'deskripsi.nullable' => 'Silahkan masukan deskripsi',
         ]);
 
         $data_mesins = DataMesin::findOrFail($id);
 
-        $data_mesins->update([
-            'nama_mesin' => $request->nama_mesin,
-            'brand_id' => $request->brand_id,
-            'model' => $request->model,
-        ]);
+        //check if image is uploaded
+        if ($request->hasFile('image')) {
 
-        $selectednama_mesin = $request->input('nama_mesin');
-        session()->flash('selectednama_mesin', $request->nama_mesin);
+            //upload new image
+            $image = $request->file('image');
+            $image->storeAs('public/images', $image->hashName());
 
-        return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' berhasil diubah!');
+            //delete old image
+            Storage::delete('public/images/'.$data_mesins->image);
+
+
+            $data_mesins->update([
+                'nama_mesin' => $request->nama_mesin,
+                'brand_id' => $request->brand_id,
+                'model' => $request->model,
+                'deskripsi' => $request->deskripsi,
+                'image'     => $image->hashName(),
+            ]);
+
+        } else {
+
+            $data_mesins->update([
+                'nama_mesin' => $request->nama_mesin,
+                'brand_id' => $request->brand_id,
+                'model' => $request->model,
+                'deskripsi' => $request->deskripsi,
+            ]);
+        }
+
+    $selectednama_mesin = $request->input('nama_mesin');
+    session()->flash('selectednama_mesin', $request->nama_mesin);
+
+    return redirect()->route('data-mesin.index')->with('success', 'Data mesin  ' . $selectednama_mesin . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
     {
         $data_mesins = DataMesin::findOrFail($id);
+
+        Storage::delete('public/images/' . $data_mesins->image);
 
         $data_mesins->delete();
 

@@ -70,6 +70,8 @@
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Model</th>
+                                                    <th scope="col">Deskripsi</th>
+                                                    <th scope="col">Gambar Mesin</th>
                                                     <th scope="col">QR Code</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
@@ -80,6 +82,14 @@
                                                         <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
+                                                        <td>{{ $data_mesin->deskripsi }}</td>
+                                                        <td>
+                                                            @if($data_mesin->image)
+                                                                <img src="{{ asset('storage/images/' . $data_mesin->image) }}" alt="Gambar Mesin" style="width: 100px; height: auto;">
+                                                            @else
+                                                                Tidak ada gambar
+                                                            @endif
+                                                        </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
                                                             <button type="button" class="btn btn-primary"
@@ -111,7 +121,6 @@
                                                                             <button type="button"
                                                                                 class="btn btn-secondary"
                                                                                 data-dismiss="modal">Close</button>
-
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -137,7 +146,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="5" class="text-center">Data Mesin belum
+                                                        <td colspan="6" class="text-center">Data Mesin belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse

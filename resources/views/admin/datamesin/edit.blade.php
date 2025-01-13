@@ -103,6 +103,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             value="{{ old('nama_mesin', $data_mesins->nama_mesin) }}"
                                                             placeholder="Masukan nama mesin" required>
                                                     </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Deskripsi</label>
+                                                        <input type="text" class="form-control" name="deskripsi"
+                                                            value="{{ old('deskripsi', $data_mesins->deskripsi) }}"
+                                                            placeholder="Masukan deskripsi" required>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Upload Gambar Mesin</label>
+                                                        @if($data_mesins->image)
+                                                            <img src="{{ asset('storage/images/' . $data_mesins->image) }}" alt="Gambar Mesin" style="width: 100px; height: auto;">
+                                                        @else
+                                                            <p>Tidak ada gambar</p>
+                                                        @endif
+                                                        <input type="file" class="form-control mt-2" name="image" id="imageInput" accept="image/*">
+                                                    </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Edit</button>
