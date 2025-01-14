@@ -56,7 +56,7 @@
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a href="{{ url('/brand') }}"
                                     class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
@@ -65,7 +65,7 @@
                                         Brand
                                     </p>
                                 </a>
-                            </li> --}}
+                            </li>
                             <li class="nav-item">
                                 <a href="{{ url('/pelanggan') }}"
                                     class="nav-link {{ Request::segment(1) == 'pelanggan' ? 'active-link' : 'nonactive-link' }}">

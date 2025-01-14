@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/data-mesin', DataMesinController::class);
     Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
     Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
+    Route::get('data-mesin/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('data-mesin.downloadQr');
 
     Route::resource('/data-perawatan', DataPerawatanController::class);
     Route::resource('/data-perbaikan', DataPerbaikanController::class);

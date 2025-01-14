@@ -14,6 +14,7 @@ class DataMesin extends Model
         'nama_mesin',
         'brand_id',
         'model',
+        'pemilik_id',
         'deskripsi',
         'image',
     ];

@@ -79,10 +79,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik', $data_perbaikans->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik" required>
+                                                        <label class="font-weight-bold">Pelanggan</label>
+                                                        <select class="form-control" id="pemilik_id" name="pemilik_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Pelanggan
+                                                            </option>
+                                                            @foreach ($data_pelanggans as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
@@ -91,12 +98,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 value="{{ old('tanggal', $data_perbaikans->tanggal) }}"
                                                                 required>
                                                         </form>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Teknisi</label>
-                                                        <input type="text" class="form-control" name="teknisi"
-                                                            value="{{ old('teknisi', $data_perbaikans->teknisi) }}"
-                                                            placeholder="Masukan nama teknisi" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Kerusakan</label>

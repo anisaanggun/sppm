@@ -67,10 +67,9 @@
                                         <table class="table table-striped table-hover" id="dataPerawatanTable">
                                             <thead>
                                                 <tr class="text">
-                                                    <th scope="col">Pemilik</th>
+                                                    <th scope="col">Pelanggan</th>
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Tanggal</th>
-                                                    <th scope="col">Teknisi</th>
                                                     <th scope="col">Aktivitas</th>
                                                     <th scope="col">Catatan</th>
                                                     <th scope="col">Status Perawatan</th>
@@ -80,10 +79,9 @@
                                             <tbody class="text">
                                                 @forelse ($data_perawatans as $data_perawatan)
                                                     <tr>
-                                                        <td>{{ $data_perawatan->pemilik }}</td>
+                                                        <td>{{ $data_perawatan->nama }}</td>
                                                         <td>{{ $data_perawatan->nama_mesin }}</td>
                                                         <td>{{ $data_perawatan->tanggal_perawatan }}</td>
-                                                        <td>{{ $data_perawatan->teknisi }}</td>
                                                         <td>{{ $data_perawatan->aktivitas }}</td>
                                                         <td>{{ $data_perawatan->catatan }}</td>
                                                         <td>
@@ -133,7 +131,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="8" class="text-center">Data Perawatan belum
+                                                        <td colspan="7" class="text-center">Data Perawatan belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse

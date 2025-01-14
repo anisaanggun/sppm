@@ -67,10 +67,9 @@
                                         <table class="table table-striped table-hover" id="dataPerbaikanTable">
                                             <thead>
                                                 <tr class="text">
-                                                    <th scope="col">Pemilik</th>
+                                                    <th scope="col">Pelanggan</th>
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Tanggal</th>
-                                                    <th scope="col">Teknisi</th>
                                                     <th scope="col">Kerusakan</th>
                                                     <th scope="col">Catatan</th>
                                                     <th scope="col">Status Perbaikan</th>
@@ -80,10 +79,9 @@
                                             <tbody class="text">
                                                 @forelse ($data_perbaikans as $data_perbaikan)
                                                     <tr>
-                                                        <td>{{ $data_perbaikan->pemilik }}</td>
+                                                        <td>{{ $data_perbaikan->nama }}</td>
                                                         <td>{{ $data_perbaikan->nama_mesin }}</td>
                                                         <td>{{ $data_perbaikan->tanggal }}</td>
-                                                        <td>{{ $data_perbaikan->teknisi }}</td>
                                                         <td>{{ $data_perbaikan->kerusakan }}</td>
                                                         <td>{{ $data_perbaikan->catatan }}</td>
                                                         <td>

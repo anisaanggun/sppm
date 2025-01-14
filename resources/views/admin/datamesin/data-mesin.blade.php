@@ -70,6 +70,7 @@
                                                     <th scope="col">Nama Mesin</th>
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Model</th>
+                                                    <th scope="col">Pelanggan</th>
                                                     <th scope="col">Deskripsi</th>
                                                     <th scope="col">Gambar Mesin</th>
                                                     <th scope="col">QR Code</th>
@@ -82,6 +83,7 @@
                                                         <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
+                                                        <td>{{ $data_mesin->nama}}</td>
                                                         <td>{{ $data_mesin->deskripsi }}</td>
                                                         <td>
                                                             @if($data_mesin->image)
@@ -116,6 +118,10 @@
                                                                         </div>
                                                                         <div class="modal-body text-center">
                                                                             {!! $qrCode[$data_mesin->id] !!}
+                                                                            <div class="mt-2">
+                                                                                <a href="{{ route('data-mesin.downloadQr', $data_mesin->id) }}" class="btn btn-success">Download QR Code as PDF</a>
+                                                                                <button onclick="printQrCode('{{ asset('qr_codes/' . $data_mesin->id . '.png') }}')" class="btn btn-secondary">Print QR Code</button>
+                                                                            </div>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button"
@@ -146,7 +152,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="6" class="text-center">Data Mesin belum
+                                                        <td colspan="8" class="text-center">Data Mesin belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse
@@ -214,6 +220,19 @@
             // }).remove();
         });
     </script>
+
+<script>
+    function printQrCode(qrCodeUrl) {
+        var printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Print QR Code</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<h1>QR Code</h1>');
+        printWindow.document.write('<img src="' + qrCodeUrl + '" alt="QR Code" />');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
 
 </body>
 

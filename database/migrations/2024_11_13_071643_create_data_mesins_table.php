@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_mesin');
             $table->integer('brand_id');
             $table->string('model');
+            $table->integer('pemilik_id');
             $table->string('deskripsi')->nullable(); // Menambahkan deskripsi
             $table->string('image')->nullable(); // Menambahkan kolom untuk menyimpan nama file gambar
             $table->timestamps();

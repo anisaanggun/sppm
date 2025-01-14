@@ -80,24 +80,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik', $data_perawatans->pemilik) }}"
-                                                            placeholder="Masukan nama pemilik" required>
-                                                    </div>
+                                                    <label class="font-weight-bold">Pelanggan</label>
+                                                        <select class="form-control" id="pemilik_id" name="pemilik_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Pelanggan
+                                                            </option>
+                                                            @foreach ($data_pelanggans as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <input type="date" class="form-control"
                                                             name="tanggal_perawatan"
                                                             value="{{ old('tanggal_perawatan', $data_perawatans->tanggal_perawatan) }}"
                                                             placeholder="Masukan tanggal perawatan" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Teknisi</label>
-                                                        <input type="text" class="form-control" name="teknisi"
-                                                            value="{{ old('teknisi', $data_perawatans->teknisi) }}"
-                                                            placeholder="Masukan nama teknisi" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Aktivitas</label>

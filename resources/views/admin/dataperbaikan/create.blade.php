@@ -77,10 +77,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Pemilik</label>
-                                                        <input type="text" class="form-control" name="pemilik"
-                                                            value="{{ old('pemilik') }}"
-                                                            placeholder="Masukan nama pemilik">
+                                                        <label class="font-weight-bold">Pelanggan</label>
+                                                        <select class="form-control" id="pemilik_id" name="pemilik_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Pelanggan
+                                                            </option>
+                                                            @foreach ($data_pelanggans as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
@@ -88,12 +95,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <input type="date" class="form-control" name="tanggal"
                                                                 value="{{ old('tanggal') }}">
                                                         </form>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label for="teknisi">Teknisi</label>
-                                                        <input type="text" class="form-control" name="teknisi"
-                                                            value="{{ old('teknisi') }}"
-                                                            placeholder="Masukan nama teknisi">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Kerusakan</label>

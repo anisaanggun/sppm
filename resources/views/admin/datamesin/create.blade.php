@@ -95,19 +95,32 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <label class="font-weight-bold">Model</label>
                                                         <input type="text" class="form-control" name="model"
                                                             value="{{ old('model') }}"
-                                                            placeholder="Masukan nama model">
+                                                            placeholder="Masukkan nama model">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Pelanggan</label>
+                                                        <select class="form-control" id="pemilik_id" name="pemilik_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Pelanggan
+                                                            </option>
+                                                            @foreach ($data_pelanggans as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         <input type="text" class="form-control" name="nama_mesin"
                                                             value="{{ old('nama_mesin') }}"
-                                                            placeholder="Masukan nama mesin">
+                                                            placeholder="Masukkan nama mesin">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Deskripsi</label>
                                                         <input type="text" class="form-control" name="deskripsi"
                                                             value="{{ old('deskripsi') }}"
-                                                            placeholder="Masukan deskripsi">
+                                                            placeholder="Masukkan deskripsi">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Upload Gambar Mesin</label>

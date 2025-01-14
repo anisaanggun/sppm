@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\DataPerbaikan;
 use App\Models\DataMesin;
+use App\Models\DataPelanggan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -14,8 +15,9 @@ class DataPerbaikanController extends Controller
 {
     public function index(Request $request): View
     {
-        $query = DataPerbaikan::select('data_perbaikans.*', 'data_mesins.nama_mesin')
+        $query = DataPerbaikan::select('data_perbaikans.*', 'data_mesins.nama_mesin', 'data_pelanggans.nama')
         ->leftJoin('data_mesins', 'mesin_id', '=', 'data_mesins.id')
+        ->leftJoin('data_pelanggans', 'data_perbaikans.pemilik_id', '=', 'data_pelanggans.id')
         ->where('data_perbaikans.user_id', Auth::user()->id);
 
         $data_perbaikans = $query->get();
@@ -28,26 +30,25 @@ class DataPerbaikanController extends Controller
     {
         //Daftar nama_mesin untuk select
         $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+        $data_pelanggans = DataPelanggan::get();
         // dd($data_mesins);
-        return view('admin.dataperbaikan.create', compact('data_mesins'));
+        return view('admin.dataperbaikan.create', compact('data_mesins', 'data_pelanggans'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         // validasi form
         $request->validate([
-            'pemilik' => 'required|string|max:255',
+            'pemilik_id' => 'required',
             'mesin_id' => 'required',
             'tanggal' => 'required|date',
-            'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
             'catatan' => 'required|string',
             'status_perbaikan' => 'required',
         ], [
-            'pemilik.required' => 'Silahkan masukkan nama anda.',
+            'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
-            'teknisi.required' => 'Silahkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
@@ -56,43 +57,41 @@ class DataPerbaikanController extends Controller
         //create data perbaikan
         DataPerbaikan::create([
             'user_id' => Auth::user()->id,
-            'pemilik' => $request->pemilik,
+            'pemilik_id' => $request->pemilik_id,
             'mesin_id' => $request->mesin_id,
             'tanggal' => $request->tanggal,
-            'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
             'status_perbaikan' => $request->status_perbaikan,
         ]);
 
-        $pemilik = $request->input('pemilik');
+        $pemilik_id = $request->input('pemilik_id');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik . ' berhasil ditambahkan!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik_id . ' berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
     {
         $data_perbaikans = DataPerbaikan::findOrFail($id);
         $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+        $data_pelanggans = DataPelanggan::get();
 
-        return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_mesins'));
+        return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_mesins', 'data_pelanggans'));
     }
 
     public function update(Request $request, $id): RedirectResponse
     {
         $this->validate($request, [
-            'pemilik' => 'required|string|max:255',
+            'pemilik_id' => 'required',
             'mesin_id' => 'required',
             'tanggal' => 'required|date',
-            'teknisi' => 'required|string',
             'kerusakan' => 'required|string',
             'catatan' => 'required|string',
             'status_perbaikan' => 'required',
         ], [
-            'pemilik.required' => 'Silahkan masukkan nama anda.',
+            'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
-            'teknisi.required' => 'Silahkan masukkan nama teknisi.',
             'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
             'catatan.required' => 'Masukkan catatan mesin anda.',
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
@@ -101,18 +100,17 @@ class DataPerbaikanController extends Controller
         $data_perbaikans = DataPerbaikan::findOrFail($id);
 
         $data_perbaikans->update([
-            'pemilik' => $request->pemilik,
+            'pemilik_id' => $request->pemilik_id,
             'mesin_id' => $request->mesin_id,
             'tanggal' => $request->tanggal,
-            'teknisi' => $request->teknisi,
             'kerusakan' => $request->kerusakan,
             'catatan' => $request->catatan,
             'status_perbaikan' => $request->status_perbaikan,
         ]);
 
-        $pemilik = $request->input('pemilik');
+        $pemilik_id = $request->input('pemilik_id');
 
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik . ' berhasil diubah!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik_id . ' berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse

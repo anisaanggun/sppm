@@ -9,7 +9,7 @@ class DataPerawatan extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'pemilik',
+        'pemilik_id',
         'teknisi',
         'mesin_id',
         'user_id',

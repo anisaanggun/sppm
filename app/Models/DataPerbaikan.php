@@ -10,7 +10,7 @@ class DataPerbaikan extends Model
     use HasFactory;
 
     protected $fillable = [
-        'pemilik',
+        'pemilik_id',
         'mesin_id',
         'user_id',
         'tanggal',

@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('data_perbaikans', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('pemilik');
+            $table->integer('pemilik_id');
             $table->integer('mesin_id');
             $table->date('tanggal');
-            $table->string('teknisi');
             $table->string('kerusakan');
             $table->string('catatan');
             $table->integer('status_perbaikan');
