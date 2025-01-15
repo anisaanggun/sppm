@@ -244,8 +244,6 @@
 
 
 .lingkaran {
-
-
     width: 40px;
     height: 40px;
     /* float: right; */
@@ -379,19 +377,3 @@ li::marker {
     max-width: 100px;
 
 }
-
-.status-menunggu {
-    background-color: #FFDDC1;
-    /* Warna untuk Menunggu Konfirmasi */
-}
-
-.status-diproses {
-    background-color: #FFABAB;
-    /* Warna untuk Sedang Diproses */
-}
-
-.status-selesai {
-    background-color: #C1FFC1;
-    /* Warna untuk Selesai */
-}
-
