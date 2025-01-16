@@ -10,6 +10,8 @@ use App\Models\DataPelanggan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Exports\DataPerawatanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataPerawatanController extends Controller
 {
@@ -67,9 +69,7 @@ class DataPerawatanController extends Controller
             'status_perawatan' => $request->status_perawatan,
         ]);
 
-        $pemilik_id = $request->input('pemilik_id');
-
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan milik ' . $pemilik_id . ' berhasil ditambahkan!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
@@ -112,9 +112,7 @@ class DataPerawatanController extends Controller
             'status_perawatan' => $request->status_perawatan,
         ]);
 
-        $pemilik_id = $request->input('pemilik_id');
-
-        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan milik ' . $pemilik_id . ' berhasil diubah!');
+        return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
@@ -124,5 +122,10 @@ class DataPerawatanController extends Controller
         $data_perawatans->delete();
 
         return redirect()->route('data-perawatan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
+    public function export_excel()
+    {
+        return Excel::download(new DataPerawatanExport, 'data_perawatans.xlsx');
     }
 }

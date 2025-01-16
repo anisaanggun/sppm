@@ -77,15 +77,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
-                                    <div class="lingkaran">
-                                        <span class="iconify" data-icon="gravity-ui:gear-branches"></span>
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
+                                                style="width: 50px; height: 50px;">
+                                                <span class="iconify" data-icon="gravity-ui:gear-branches"
+                                                    style="font-size: 2.5rem;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('data-mesin.index') }}"
+                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
+                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
+                                                    Mesin Baru</span>
+                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <h5><b>Tambah Mesin</b></h5>
-                                    <p>Tambahkan mesin baru Anda disini</p>
                                 </div>
-                                <a href="{{ route('data-mesin.index') }}" class="small-box-footer text-center">
+                                {{-- <a href="{{ route('data-mesin.index') }}" class="small-box-footer text-center">
                                     <span>Tambah</span>
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                         <!-- ./col -->
@@ -93,13 +105,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
-                                    <div class="lingkaran">
-                                        <span class="iconify" data-icon="fa6-solid:gears"></span>
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
+                                                style="width: 50px; height: 50px;">
+                                                <span class="iconify" data-icon="fa6-solid:gears"
+                                                    style="font-size: 2.5rem;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('data-perawatan.index') }}"
+                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
+                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
+                                                    Perawatan</span>
+                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <h5><b>Catatan Perawatan</b></h5>
-                                    <p>Catat perawatan mesin Anda disini</p>
                                 </div>
-                                <a href="{{ route('data-perawatan.index') }}" class="small-box-footer">Catat</a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -107,13 +130,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <!-- small box -->
                             <div class="small-box">
                                 <div class="inner">
-                                    <div class="lingkaran">
-                                        <span class="iconify" data-icon="tabler:manual-gearbox-filled"></span>
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
+                                                style="width: 50px; height: 50px;">
+                                                <span class="iconify" data-icon="tabler:manual-gearbox-filled"
+                                                    style="font-size: 2.5rem;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <a href="{{ route('data-perbaikan.index') }}"
+                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
+                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
+                                                    Perbaikan</span>
+                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
+                                            </a>
+                                        </div>
                                     </div>
-                                    <h5><b>Catatan Perbaikan</b></h5>
-                                    <p>Catat perbaikan mesin Anda disini</p>
                                 </div>
-                                <a href="{{ route('data-perbaikan.index') }}" class="small-box-footer">Catat</a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -166,8 +200,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="container">
                                         <h5 style="text-align: center; margin-bottom:4%">Jumlah Perbaikan Per
                                             Bulan</h5>
-                                        <form method="GET" action="{{ route('beranda.index') }}" class="form-inline"
-                                            style="margin-bottom:2%">
+                                        <form method="GET" action="{{ route('beranda.index') }}"
+                                            class="form-inline" style="margin-bottom:2%">
                                             <div class="form-group mb-2 mr-3">
                                                 <label for="bulan_perbaikan" class="mr-2">Bulan:</label>
                                                 <select name="bulan_perbaikan" id="bulan_perbaikan"

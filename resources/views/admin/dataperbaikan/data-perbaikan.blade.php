@@ -52,11 +52,16 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-6">
+                            <div class="row g-1">
+                                <div class="col-auto mb-3">
                                     <a href="{{ route('data-perbaikan.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
+                                </div>
+                                <div class="col-auto mb-3">
+                                    <a href="{{ route('data-perbaikan.export_excel') }}"
+                                        class="btn btn-success btn-md mb-0 mt-1" style="border-radius: 10px;"
+                                        target="_blank">Export Excel</a>
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
@@ -181,6 +186,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#dataPerbaikanTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,

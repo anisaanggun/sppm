@@ -80,17 +80,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
-                                                    <label class="font-weight-bold">Pelanggan</label>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Pelanggan</label>
                                                         <select class="form-control" id="pemilik_id" name="pemilik_id"
                                                             required>
                                                             <option value="" disabled selected>Pilih Pelanggan
                                                             </option>
                                                             @foreach ($data_pelanggans as $item)
-                                                                <option value="{{ $item->id }}">
+                                                                <option value="{{ $item->id }}"
+                                                                    {{ old('pemilik_id', $data_perawatans->pemilik_id) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->nama }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
+                                                    </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Tanggal</label>
                                                         <input type="date" class="form-control"

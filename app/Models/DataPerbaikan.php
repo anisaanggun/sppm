@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DataPelanggan;
+use App\Models\DataMesin;
 
 class DataPerbaikan extends Model
 {
@@ -11,6 +13,8 @@ class DataPerbaikan extends Model
 
     protected $fillable = [
         'pemilik_id',
+        'no_hp',
+        'alamat',
         'mesin_id',
         'user_id',
         'tanggal',
@@ -19,4 +23,16 @@ class DataPerbaikan extends Model
         'catatan',
         'status_perbaikan',
     ];
+
+    // Relasi ke model Pemilik
+    public function pemilik()
+    {
+        return $this->belongsTo(DataPelanggan::class, 'pemilik_id');
+    }
+
+    // Relasi ke model Mesin
+    public function mesin()
+    {
+        return $this->belongsTo(DataMesin::class, 'mesin_id');
+    }
 }

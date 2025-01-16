@@ -24,6 +24,7 @@ class User extends Authenticatable
         'no_hp',
         'alamat',
         'ulangi_password',
+        'role_id',
     ];
 
 
@@ -48,8 +49,8 @@ class User extends Authenticatable
 
 
     // inverse one to Many ke tabel role
-    // public function role() {
-    //     return $this->belongsTo(Role::class, 'role_id');
-    // }
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 
 }

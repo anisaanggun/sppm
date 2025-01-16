@@ -22,14 +22,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Role::create([
-            'role_name' => 'teknisi',
+            'role_name' => 'super_admin',
         ]);
-
-        Role::create([
-            'role_name' => 'customer',
-        ]);
-
-
 
     }
 }

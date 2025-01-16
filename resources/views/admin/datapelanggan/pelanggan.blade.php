@@ -52,11 +52,17 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="row">
-                                <div class="col-6 mb-3">
+                            <div class="row g-1">
+                                <div class="col-auto mb-3">
                                     <a href="{{ route('pelanggan.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
+                                </div>
+                                <div class="col-auto mb-3">
+                                    <a href="{{ route('pelanggan.export_excel') }}"
+                                        class="btn btn-success btn-md mb-0 mt-1" style="border-radius: 10px;"
+                                        target="_blank">Export Excel</a>
+
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
@@ -67,6 +73,7 @@
                                         <table id="brandTable" class="table table-striped table-hover">
                                             <thead>
                                                 <tr class="text">
+                                                    <th scope="col">Id</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">No Hp</th>
                                                     <th scope="col">Alamat</th>
@@ -77,6 +84,7 @@
                                             <tbody class="text">
                                                 @forelse ($data_pelanggans as $item)
                                                     <tr>
+                                                        <td>{{ $item->id }}</td>
                                                         <td>{{ $item->nama }}</td>
                                                         <td>{{ $item->no_hp }}</td>
                                                         <td>{{ $item->alamat }}</td>
@@ -101,7 +109,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="5" class="text-center">Data Pelanggan belum
+                                                        <td colspan="6" class="text-center">Data Pelanggan belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse
@@ -150,6 +158,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#brandTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,

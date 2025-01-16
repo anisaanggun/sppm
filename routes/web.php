@@ -45,8 +45,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
     Route::get('data-mesin/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('data-mesin.downloadQr');
 
-    Route::resource('/data-perawatan', DataPerawatanController::class);
-    Route::resource('/data-perbaikan', DataPerbaikanController::class);
+    Route::resource('/data-perawatan', DataPerawatanController::class)->except(['show']);
+    Route::get('/data-perawatan/export_excel', [DataPerawatanController::class, 'export_excel'])->name('data-perawatan.export_excel');
+
+    Route::resource('/data-perbaikan', DataPerbaikanController::class)->except(['show']);
+    Route::get('/data-perbaikan/export_excel', [DataPerbaikanController::class, 'export_excel'])->name('data-perbaikan.export_excel');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
     Route::get('/laporan-mesin', [LaporanMesinController::class, 'index'])->name('laporan-mesin.index');
@@ -61,7 +64,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/brand', BrandController::class);
     Route::resource('/profil', ProfilController::class);
 
-    Route::resource('/pelanggan', DataPelangganController::class);
+    Route::resource('/pelanggan', DataPelangganController::class)->except(['show']);
+    Route::get('/pelanggan/export_excel', [DataPelangganController::class, 'export_excel'])->name('pelanggan.export_excel');
+
 
 
     Route::get('/send-email',function(){

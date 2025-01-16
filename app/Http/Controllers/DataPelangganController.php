@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\DataPelanggan;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use App\Exports\DataPelangganExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataPelangganController extends Controller
 {
     public function index(): View
     {
-        $data_pelanggans = DataPelanggan::latest()->get();
+        $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
 
         return view('admin.datapelanggan.pelanggan', compact('data_pelanggans'));
     }
@@ -37,6 +41,7 @@ class DataPelangganController extends Controller
         ]);
 
         DataPelanggan::create([
+            'user_id' => Auth::user()->id,
             'nama' => $request->nama,
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
@@ -86,5 +91,10 @@ class DataPelangganController extends Controller
         $data_pelanggans->delete();
 
         return redirect()->route('pelanggan.store')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
+    public function export_excel()
+    {
+        return Excel::download(new DataPelangganExport, 'data_pelanggans.xlsx');
     }
 }

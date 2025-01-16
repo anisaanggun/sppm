@@ -48,24 +48,32 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'pelanggan' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
+
+                                {{-- {{ dd(\Illuminate\Support\Facades\Auth::user()->role_id) }} --}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+
                         <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="{{ url('/brand') }}"
-                                    class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
-                                        style="font-size: 20px;"></span>
-                                    <p>
-                                        Brand
-                                    </p>
-                                </a>
-                            </li>
+                            @if (Auth::check() && Auth::user()->role_id == 2)
+                                <li class="nav-item">
+                                    <a href="{{ url('/brand') }}"
+                                        class="nav-link {{ Request::segment(1) == 'brand' ? 'active-link' : 'nonactive-link' }}">
+                                        <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
+                                            style="font-size: 20px;"></span>
+                                        <p>
+                                            Brand
+                                        </p>
+                                    </a>
+                                </li>
+                            @elseif(Auth::check() && Auth::user()->role_id == 1)
+                                {{-- Admin --}}
+                                {{-- Tidak menampilkan item brand untuk Admin --}}
+                            @endif
                             <li class="nav-item">
                                 <a href="{{ url('/pelanggan') }}"
                                     class="nav-link {{ Request::segment(1) == 'pelanggan' ? 'active-link' : 'nonactive-link' }}">
