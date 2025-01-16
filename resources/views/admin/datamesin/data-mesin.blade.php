@@ -107,25 +107,27 @@
                                                                 aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="ModalLabel{{ $data_mesin->id }}">QR
-                                                                                Code {{ $data_mesin->nama_mesin }}</h5>
-                                                                            <button type="button" class="close"
-                                                                                data-dismiss="modal" aria-label="Close">
+                                                                        <div class="modal-header text-center">
+                                                                            <h5 class="modal-title" id="ModalLabel{{ $data_mesin->id }}">
+                                                                                QR Code {{ $data_mesin->nama_mesin }}
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
-                                                                        <div class="modal-body text-center">
-                                                                            {!! $qrCode[$data_mesin->id] !!}
+                                                                        <div class="modal-body">
+                                                                            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                                                                            <!-- QR Code SVG atau gambar QR -->
+                                                                            {!! $data_mesin->qr_code !!}
+                                                                        </div>
                                                                             <div class="mt-2">
                                                                                 <a href="{{ route('data-mesin.downloadQr', $data_mesin->id) }}" class="btn btn-success">Download QR Code as PDF</a>
-                                                                                <button onclick="printQrCode('{{ asset('qr_codes/' . $data_mesin->id . '.png') }}')" class="btn btn-secondary">Print QR Code</button>
+                                                                                <button onclick="printQrCode('{!! $data_mesin->svg !!}')" class="btn btn-secondary">Print QR Code</button>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
                                                                             <button type="button"
-                                                                                class="btn btn-secondary"
+                                                                                class="btn btn-danger"
                                                                                 data-dismiss="modal">Close</button>
                                                                         </div>
                                                                     </div>
@@ -221,18 +223,39 @@
         });
     </script>
 
-<script>
-    function printQrCode(qrCodeUrl) {
-        var printWindow = window.open('', '_blank');
-        printWindow.document.write('<html><head><title>Print QR Code</title>');
-        printWindow.document.write('</head><body>');
-        printWindow.document.write('<h1>QR Code</h1>');
-        printWindow.document.write('<img src="' + qrCodeUrl + '" alt="QR Code" />');
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
-</script>
+    <script>
+        function printQrCode(qrCodeUrl) {
+                // var url = "{{ url('/posts') }}" + '/' + qrCodeUrl;
+                // var svg = "QrCode::size(300)->generate(" + url + ")";
+
+                var printWindow = window.open('', '_blank');
+                printWindow.document.write('<html><head><title>Print QR Code</title>');
+                printWindow.document.write('<style>');
+                printWindow.document.write('body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; font-family: Arial, sans-serif; }');
+                printWindow.document.write('h1 { margin: 0; text-align: center; }');
+                printWindow.document.write('div { text-align: center; width: 100%;}');
+                printWindow.document.write('img { width: 300px; height: 300px; margin-top: 20px; }'); // Atur ukuran sesuai dengan QR Code
+                printWindow.document.write('@media print {');
+                printWindow.document.write('body { margin: 0; padding: 0; }'); // Menghilangkan margin dan padding
+                printWindow.document.write('@page { size: auto; margin: 0; }'); // Mengatur ukuran halaman cetak
+                printWindow.document.write('img { width: 300px; height: 300px; }'); // Pastikan ukuran saat print
+                printWindow.document.write('}');
+                printWindow.document.write('</style>');
+                printWindow.document.write('</head><body>');
+                printWindow.document.write('<div>');
+                printWindow.document.write('<h1 style="text-align: center !important;">QR Code untuk Data Mesin</h1>'); // Label di tengah
+                printWindow.document.write('<img src="data:image/svg+xml;base64,' + qrCodeUrl + '" alt="QR Code" />');
+                printWindow.document.write('</div>');
+                printWindow.document.write('</body></html>');
+                printWindow.document.close();  // close the document to finish writing
+
+                setTimeout(function() {
+                printWindow.print();  // Melakukan print setelah 500ms
+                }, 500);  // 500ms delay, Anda bisa menyesuaikan waktu sesuai kebutuhan
+            };
+    </script>
+
+
 
 </body>
 

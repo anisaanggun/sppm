@@ -30,14 +30,16 @@ class DataMesinController extends Controller
         $qrCode = [];
 
         // Generate QR Code untuk setiap mesin
-        foreach ($data_mesins as $data_mesin) {
-            $url = route('data-mesin.show', $data_mesin->id); // Pastikan route ini ada
-            $dataToEncode = $url;
+        foreach ($data_mesins as &$data_mesin) {
+            $data_mesin->url = route('data-mesin.show', $data_mesin->id); // Pastikan route ini ada
+            $dataToEncode = $data_mesin->url;
 
-            // Generate QR Code
-            $qrCode[$data_mesin->id] = QrCode::size(300)->generate($dataToEncode);
+            $data_mesin->qr_code = QrCode::size(300)->generate($dataToEncode);
+            $data_mesin->svg = base64_encode($data_mesin->qr_code);
         }
-        return view('admin.datamesin.data-mesin', compact('data_mesins', 'qrCode'));
+
+        // dd($data_mesins);
+        return view('admin.datamesin.data-mesin', compact('data_mesins'));
     }
 
         public function downloadQr($id)
@@ -45,13 +47,26 @@ class DataMesinController extends Controller
         // Ambil data mesin berdasarkan ID
         $data_mesin = DataMesin::findOrFail($id);
 
-         // Buat URL untuk QR Code
+        // Buat URL untuk QR Code
         $url = route('data-mesin.show', $data_mesin->id);
+        $dataToEncode = $url;
 
-        // Generate QR Code dan simpan sebagai gambar
-        $qrCodeImage = QrCode::format('png')->size(300)->generate($url);
-        $qrCodeImagePath = public_path('qr_codes/' . $data_mesin->id . '.png');
-        file_put_contents($qrCodeImagePath, $qrCodeImage);
+        // Generate QR Code dalam format SVG
+        $qrCodeSvg = QrCode::size(300)->generate($dataToEncode);
+
+        // Simpan QR Code sebagai file SVG
+        $fileName = 'qr_code_' . $data_mesin->id . '.svg';
+        // $path = public_path('storage/qr_codes/' . $fileName);
+
+        //  // Simpan SVG ke file
+        // if (file_put_contents($path, $qrCodeSvg) === false) {
+        //     return response()->json(['error' => 'Gagal menyimpan QR Code.'], 500);
+        // }
+
+        // // Cek apakah file berhasil disimpan
+        // if (!file_exists($path)) {
+        //     return response()->json(['error' => 'QR Code tidak ditemukan di path: ' . $path], 404);
+        // }
 
         // Buat instance Dompdf
         $options = new Options();
@@ -59,16 +74,22 @@ class DataMesinController extends Controller
         $dompdf = new Dompdf($options);
 
         // Buat HTML untuk PDF
-        $html = '<h1>QR Code untuk ' . $data_mesin->nama_mesin . '</h1>';
-        $html .= '<div style="text-align: center;">';
-        $html .= '<img src="' . asset('qr_codes/' . $data_mesin->id . '.png') . '" alt="QR Code" style="width: 15cm; height: 15cm;"/>';
+        $html = '<html><head><style>';
+        $html .= 'body { font-family: Arial, sans-serif; text-align: center; }';
+        $html .= 'h1 { text-align: center; margin: 0; font-size: 25px; color: #333; }'; // Penataan h1
+        $html .= 'div.qr-code-container { margin-top: 20px; }'; // Memberikan jarak antara teks dan QR Code
+        $html .= '</style></head><body>';
+        $html .= '<h1>QR Code ' . $data_mesin->nama_mesin . '</h1>';
+        $html .= '<div class="qr-code-container">';
+        $html .= '<img src="data:image/svg+xml;base64,' . base64_encode($qrCodeSvg) . '" style="width: 300px; height: 300px;" />';
         $html .= '</div>';
+        $html .= '</body></html>';
 
         // Load HTML ke Dompdf
         $dompdf->loadHtml($html);
 
-        // (Optional) Set ukuran dan orientasi kertas
-        $dompdf->setPaper([0, 0, 425, 425], 'portrait');
+        // Set ukuran kertas menjadi ukuran kustom (misalnya 5x5 cm)
+        $dompdf->setPaper([0, 40, 500, 500], 'portrait'); // [x0, y0, x1, y1] dalam satuan poin
 
         // Render PDF
         $dompdf->render();

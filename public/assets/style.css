@@ -377,3 +377,37 @@ li::marker {
     max-width: 100px;
 
 }
+
+@media print {
+    .qr-code-container {
+        display: block; /* Pastikan QR Code ditampilkan saat mencetak */
+        margin: 0 auto; /* Pusatkan QR Code */
+        width: 300px; /* Atur lebar QR Code */
+        height: auto; /* Atur tinggi otomatis */
+    }
+}
+
+.modal-header .modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.modal-body {
+    text-align: center; /* Memastikan QR code di modal tetap terpusat */
+}
+
+@media print {
+    .modal-header .modal-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
+    .modal-body {
+        text-align: center;
+    }
+}
