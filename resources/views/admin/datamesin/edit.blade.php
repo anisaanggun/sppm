@@ -99,9 +99,17 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Pelanggan</label>
-                                                        <input type="text" class="form-control" name="pemilik_id"
-                                                            value="{{ old('pemilik_id', $data_mesins->pemilik_id) }}"
-                                                            placeholder="Masukkan nama pemilik" required>
+                                                        <select class="form-control" id="pemilik_id" name="pemilik_id"
+                                                            required>
+                                                            <option value="" disabled>Pilih Pelanggan
+                                                            </option>
+                                                            @foreach ($data_pelanggans as $item)
+                                                                <option value="{{ $item->id }}"
+                                                                    {{ old('pemilik_id', $data_mesins->pemilik_id) == $item->id ? 'selected' : '' }}>
+                                                                    {{ $item->nama }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
