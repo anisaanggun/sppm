@@ -51,7 +51,6 @@ class ProfilController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password_baru),
-            'ulangi_password' => $request->password_baru,
             'no_hp' => $request->no_hp,
             'alamat' => $request->alamat,
         ]);
@@ -62,6 +61,9 @@ class ProfilController extends Controller
 
     public function destroy($id): RedirectResponse
     {
-        //
+        $users = User::find($id);
+    	$users->delete();
+ 
+    	return redirect('/users');
     }
 }

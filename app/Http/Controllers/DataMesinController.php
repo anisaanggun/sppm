@@ -14,6 +14,8 @@ use App\Models\DataPelanggan;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Exports\DataMesinExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataMesinController extends Controller
 {
@@ -22,7 +24,7 @@ class DataMesinController extends Controller
         $query = DataMesin::select('data_mesins.*', 'brands.brand_name', 'data_pelanggans.nama')
             ->leftJoin('brands', 'brand_id', '=', 'brands.id')
             ->leftJoin('data_pelanggans', 'pemilik_id', '=', 'data_pelanggans.id')
-            ->where('user_id', Auth::user()->id);
+            ->where('data_mesins.user_id', Auth::user()->id);
 
         $data_mesins = $query->get();
 
@@ -31,7 +33,7 @@ class DataMesinController extends Controller
 
         // Generate QR Code untuk setiap mesin
         foreach ($data_mesins as &$data_mesin) {
-            $data_mesin->url = route('data-mesin.show', $data_mesin->id); // Pastikan route ini ada
+            $data_mesin->url = route('data-mesin.detail', $data_mesin->id); // Pastikan route ini ada
             $dataToEncode = $data_mesin->url;
 
             $data_mesin->qr_code = QrCode::size(300)->generate($dataToEncode);
@@ -48,7 +50,7 @@ class DataMesinController extends Controller
         $data_mesin = DataMesin::findOrFail($id);
 
         // Buat URL untuk QR Code
-        $url = route('data-mesin.show', $data_mesin->id);
+        $url = route('data-mesin.detail', $data_mesin->id);
         $dataToEncode = $url;
 
         // Generate QR Code dalam format SVG
@@ -103,7 +105,7 @@ class DataMesinController extends Controller
     {
         //Daftar brand_name untuk select
         $brands = Brand::get();
-        $data_pelanggans = DataPelanggan::get();
+        $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
 
         return view('admin.datamesin.create', compact('brands', 'data_pelanggans'));
     }
@@ -153,7 +155,7 @@ class DataMesinController extends Controller
     {
         $data_mesins = DataMesin::findOrFail($id);
         $brands = Brand::get();
-        $data_pelanggans = DataPelanggan::get();
+        $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
 
 
         return view('admin.datamesin.edit', compact('data_mesins', 'brands', 'data_pelanggans'));
@@ -234,9 +236,19 @@ class DataMesinController extends Controller
     //     return view('admin.datamesin.data-mesin', compact('data_mesins'));
     // }
 
-    public function show($id)
+    public function detail($id)
     {
         $data_mesin = DataMesin::with('brand')->findOrFail($id);
-        return view('admin.datamesin.show', compact('data_mesin'));
+        return view('admin.data-mesin.detail', compact('data_mesin'));
+    }
+
+    public function export_excel()
+    {
+        // $data_mesins = DataMesin::where('user_id', Auth::user()->id)->get();
+        $data_mesins = DataMesin::with(['pemilik', 'brand'])
+        ->where('user_id', Auth::user()->id)
+        ->get();
+
+        return Excel::download(new DataMesinExport($data_mesins), 'data_mesins.xlsx');
     }
 }

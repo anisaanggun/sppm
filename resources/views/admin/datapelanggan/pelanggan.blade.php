@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Data Brand | Mesinify</title>
+    <title>Data Pelanggan | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -52,11 +52,17 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="row">
-                                <div class="col-6 mb-3">
+                            <div class="row g-1">
+                                <div class="col-auto mb-3">
                                     <a href="{{ route('pelanggan.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
+                                </div>
+                                <div class="col-auto mb-3">
+                                    <a href="{{ route('pelanggan.export_excel') }}"
+                                        class="btn btn-success btn-md mb-0 mt-1" style="border-radius: 10px;"
+                                        target="_blank">Export Excel</a>
+
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
@@ -150,6 +156,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#brandTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,

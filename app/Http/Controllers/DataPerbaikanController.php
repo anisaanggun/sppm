@@ -12,6 +12,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Mail;
+use App\Exports\DataPerbaikanExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DataPerbaikanController extends Controller
 {
@@ -67,9 +69,7 @@ class DataPerbaikanController extends Controller
             'status_perbaikan' => $request->status_perbaikan,
         ]);
 
-        $pemilik_id = $request->input('pemilik_id');
-
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik_id . ' berhasil ditambahkan!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan!');
     }
 
     public function edit(string $id): View
@@ -110,9 +110,7 @@ class DataPerbaikanController extends Controller
             'status_perbaikan' => $request->status_perbaikan,
         ]);
 
-        $pemilik_id = $request->input('pemilik_id');
-
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan milik ' . $pemilik_id . ' berhasil diubah!');
+        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan berhasil diubah!');
     }
 
     public function destroy($id): RedirectResponse
@@ -122,5 +120,10 @@ class DataPerbaikanController extends Controller
         $data_perbaikans->delete();
 
         return redirect()->route('data-perbaikan.index')->with(['success' => 'Data Berhasil Dihapus!']);
+    }
+
+    public function export_excel()
+    {
+        return Excel::download(new DataPerbaikanExport, 'data_perbaikans.xlsx');
     }
 }

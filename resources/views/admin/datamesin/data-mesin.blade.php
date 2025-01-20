@@ -52,11 +52,16 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="row mb-3">
-                                <div class="col-12 col-md-6">
+                            <div class="row g-1">
+                                <div class="col-auto mb-3">
                                     <a href="{{ route('data-mesin.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
+                                </div>
+                                <div class="col-auto mb-3">
+                                    <a href="{{ route('data-mesin.export_excel') }}"
+                                        class="btn btn-success btn-md mb-0 mt-1" style="border-radius: 10px;"
+                                        target="_blank">Export Excel</a>
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
@@ -83,11 +88,13 @@
                                                         <td>{{ $data_mesin->nama_mesin }}</td>
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
-                                                        <td>{{ $data_mesin->nama}}</td>
+                                                        <td>{{ $data_mesin->nama }}</td>
                                                         <td>{{ $data_mesin->deskripsi }}</td>
                                                         <td>
-                                                            @if($data_mesin->image)
-                                                                <img src="{{ asset('storage/images/' . $data_mesin->image) }}" alt="Gambar Mesin" style="width: 100px; height: auto;">
+                                                            @if ($data_mesin->image)
+                                                                <img src="{{ asset('storage/images/' . $data_mesin->image) }}"
+                                                                    alt="Gambar Mesin"
+                                                                    style="width: 100px; height: auto;">
                                                             @else
                                                                 Tidak ada gambar
                                                             @endif
@@ -108,21 +115,29 @@
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header text-center">
-                                                                            <h5 class="modal-title" id="ModalLabel{{ $data_mesin->id }}">
+                                                                            <h5 class="modal-title"
+                                                                                id="ModalLabel{{ $data_mesin->id }}">
                                                                                 QR Code {{ $data_mesin->nama_mesin }}
                                                                             </h5>
-                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
                                                                                 <span aria-hidden="true">&times;</span>
                                                                             </button>
                                                                         </div>
                                                                         <div class="modal-body">
-                                                                            <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
-                                                                            <!-- QR Code SVG atau gambar QR -->
-                                                                            {!! $data_mesin->qr_code !!}
-                                                                        </div>
+                                                                            <div
+                                                                                style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                                                                                <!-- QR Code SVG atau gambar QR -->
+                                                                                {!! $data_mesin->qr_code !!}
+                                                                            </div>
                                                                             <div class="mt-2">
-                                                                                <a href="{{ route('data-mesin.downloadQr', $data_mesin->id) }}" class="btn btn-success">Download QR Code as PDF</a>
-                                                                                <button onclick="printQrCode('{!! $data_mesin->svg !!}')" class="btn btn-secondary">Print QR Code</button>
+                                                                                <a href="{{ route('data-mesin.downloadQr', $data_mesin->id) }}"
+                                                                                    class="btn btn-success">Download QR
+                                                                                    Code as PDF</a>
+                                                                                <button
+                                                                                    onclick="printQrCode('{!! $data_mesin->svg !!}')"
+                                                                                    class="btn btn-secondary">Print QR
+                                                                                    Code</button>
                                                                             </div>
                                                                         </div>
                                                                         <div class="modal-footer">
@@ -205,6 +220,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#myTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,
@@ -225,34 +241,38 @@
 
     <script>
         function printQrCode(qrCodeUrl) {
-                // var url = "{{ url('/posts') }}" + '/' + qrCodeUrl;
-                // var svg = "QrCode::size(300)->generate(" + url + ")";
+            // var url = "{{ url('/posts') }}" + '/' + qrCodeUrl;
+            // var svg = "QrCode::size(300)->generate(" + url + ")";
 
-                var printWindow = window.open('', '_blank');
-                printWindow.document.write('<html><head><title>Print QR Code</title>');
-                printWindow.document.write('<style>');
-                printWindow.document.write('body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; font-family: Arial, sans-serif; }');
-                printWindow.document.write('h1 { margin: 0; text-align: center; }');
-                printWindow.document.write('div { text-align: center; width: 100%;}');
-                printWindow.document.write('img { width: 300px; height: 300px; margin-top: 20px; }'); // Atur ukuran sesuai dengan QR Code
-                printWindow.document.write('@media print {');
-                printWindow.document.write('body { margin: 0; padding: 0; }'); // Menghilangkan margin dan padding
-                printWindow.document.write('@page { size: auto; margin: 0; }'); // Mengatur ukuran halaman cetak
-                printWindow.document.write('img { width: 300px; height: 300px; }'); // Pastikan ukuran saat print
-                printWindow.document.write('}');
-                printWindow.document.write('</style>');
-                printWindow.document.write('</head><body>');
-                printWindow.document.write('<div>');
-                printWindow.document.write('<h1 style="text-align: center !important;">QR Code untuk Data Mesin</h1>'); // Label di tengah
-                printWindow.document.write('<img src="data:image/svg+xml;base64,' + qrCodeUrl + '" alt="QR Code" />');
-                printWindow.document.write('</div>');
-                printWindow.document.write('</body></html>');
-                printWindow.document.close();  // close the document to finish writing
+            var printWindow = window.open('', '_blank');
+            printWindow.document.write('<html><head><title>Print QR Code</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write(
+                'body { display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; padding: 0; font-family: Arial, sans-serif; }'
+            );
+            printWindow.document.write('h1 { margin: 0; text-align: center; }');
+            printWindow.document.write('div { text-align: center; width: 100%;}');
+            printWindow.document.write(
+                'img { width: 300px; height: 300px; margin-top: 20px; }'); // Atur ukuran sesuai dengan QR Code
+            printWindow.document.write('@media print {');
+            printWindow.document.write('body { margin: 0; padding: 0; }'); // Menghilangkan margin dan padding
+            printWindow.document.write('@page { size: auto; margin: 0; }'); // Mengatur ukuran halaman cetak
+            printWindow.document.write('img { width: 300px; height: 300px; }'); // Pastikan ukuran saat print
+            printWindow.document.write('}');
+            printWindow.document.write('</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write('<div>');
+            printWindow.document.write(
+                '<h1 style="text-align: center !important;">QR Code untuk Data Mesin</h1>'); // Label di tengah
+            printWindow.document.write('<img src="data:image/svg+xml;base64,' + qrCodeUrl + '" alt="QR Code" />');
+            printWindow.document.write('</div>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close(); // close the document to finish writing
 
-                setTimeout(function() {
-                printWindow.print();  // Melakukan print setelah 500ms
-                }, 500);  // 500ms delay, Anda bisa menyesuaikan waktu sesuai kebutuhan
-            };
+            setTimeout(function() {
+                printWindow.print(); // Melakukan print setelah 500ms
+            }, 500); // 500ms delay, Anda bisa menyesuaikan waktu sesuai kebutuhan
+        };
     </script>
 
 

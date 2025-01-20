@@ -85,7 +85,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             <option value="" disabled selected>Pilih Pelanggan
                                                             </option>
                                                             @foreach ($data_pelanggans as $item)
-                                                                <option value="{{ $item->id }}">
+                                                                <option value="{{ $item->id }}"
+                                                                    {{ old('pemilik_id', $data_perbaikans->pemilik_id) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->nama }}
                                                                 </option>
                                                             @endforeach

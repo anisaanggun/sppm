@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+ 
+    protected $table = "users";
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +26,8 @@ class User extends Authenticatable
         'password',
         'no_hp',
         'alamat',
-        'ulangi_password',
+        'role_id',
+        'deleted_at',
     ];
 
 
@@ -48,8 +52,8 @@ class User extends Authenticatable
 
 
     // inverse one to Many ke tabel role
-    // public function role() {
-    //     return $this->belongsTo(Role::class, 'role_id');
-    // }
+    public function role() {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 
 }

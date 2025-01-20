@@ -10,6 +10,8 @@ class DataMesin extends Model
     use HasFactory;
 
     protected $fillable = [
+        'pemilik_id',
+        'no_hp',
         'user_id',
         'nama_mesin',
         'brand_id',
@@ -23,5 +25,11 @@ class DataMesin extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id');
+    }
+
+    // Relasi ke model Pemilik
+    public function pemilik()
+    {
+        return $this->belongsTo(DataPelanggan::class, 'pemilik_id');
     }
 }

@@ -20,6 +20,7 @@ use App\Mail\PerawatanSelesaiMail;
 use App\Mail\perawatandoneEmail;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\DataPelangganController;
+use App\Http\Controllers\DataTeknisiController;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
 Route::post('/dologin', [AuthController::class, 'dologin'])->name('dologin');
@@ -42,13 +43,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/jadwal/events', [JadwalController::class, 'getEvents'])->name('jadwal.events');
 
 
-    Route::resource('/data-mesin', DataMesinController::class);
+    Route::resource('/data-mesin', DataMesinController::class)->except(['show']);
+    Route::get('datamesin/{id}/detail', [DataMesinController::class, 'detail'])->name('data-mesin.detail');
     // Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
-    Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
+    // Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
     Route::get('data-mesin/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('data-mesin.downloadQr');
+    Route::get('/data-mesin/export_excel', [DataMesinController::class, 'export_excel'])->name('data-mesin.export_excel');
 
-    Route::resource('/data-perawatan', DataPerawatanController::class);
-    Route::resource('/data-perbaikan', DataPerbaikanController::class);
+    Route::resource('/data-perawatan', DataPerawatanController::class)->except(['show']);
+    Route::get('/data-perawatan/export_excel', [DataPerawatanController::class, 'export_excel'])->name('data-perawatan.export_excel');
+
+    Route::resource('/data-perbaikan', DataPerbaikanController::class)->except(['show']);
+    Route::get('/data-perbaikan/export_excel', [DataPerbaikanController::class, 'export_excel'])->name('data-perbaikan.export_excel');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
     Route::get('/laporan-mesin', [LaporanMesinController::class, 'index'])->name('laporan-mesin.index');
@@ -63,10 +69,27 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/brand', BrandController::class);
     Route::resource('/profil', ProfilController::class);
 
-    Route::resource('/pelanggan', DataPelangganController::class);
+    Route::resource('/pelanggan', DataPelangganController::class)->except(['show']);
+    Route::get('/pelanggan/export_excel', [DataPelangganController::class, 'export_excel'])->name('pelanggan.export_excel');
+
+    Route::resource('/teknisi', DataTeknisiController::class)->except(['show']);
+    Route::get('/teknisi/export_excel', [DataTeknisiController::class, 'export_excel'])->name('teknisi.export_excel');
 
 
+    Route::get('/send-email',function(){
+        $data = [
+            'name' => 'Anisa Anggun',
+            'body' => 'Testing Kirim Email'
+        ];
 
+        Mail::to('anisaanggun81471@gmail.com')->send(new SendEmail($data));
+
+        dd("Email Berhasil dikirim.");
+    });
+
+    Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+
+    Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 
 });

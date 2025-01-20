@@ -146,6 +146,7 @@
         }
 
         $(document).ready(function() {
+            DataTable.ext.errMode = 'none';
             $('#brandTable').DataTable({
                 "paging": true, // Untuk tampilan Previous, angka, dan Next
                 "ordering": true,
