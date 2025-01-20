@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendEmail;
+use App\Mail\PerawatanSelesaiMail;
+use App\Mail\perawatandoneEmail;
 use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\DataPelangganController;
 
@@ -41,7 +43,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::resource('/data-mesin', DataMesinController::class);
-    Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
+    // Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
     Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
     Route::get('data-mesin/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('data-mesin.downloadQr');
 
@@ -64,20 +66,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/pelanggan', DataPelangganController::class);
 
 
-    Route::get('/send-email',function(){
-        $data = [
-            'name' => 'Anisa Anggun',
-            'body' => 'Testing Kirim Email'
-        ];
 
-        Mail::to('anisaanggun81471@gmail.com')->send(new SendEmail($data));
-
-        dd("Email Berhasil dikirim.");
-    });
-
-    Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
-
-    Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
 
 
 });

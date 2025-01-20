@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\DataPerawatan;
 use App\Models\DataMesin;
 use App\Models\DataPelanggan;
+use App\Mail\PerawatanSelesaiMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+
 
 class DataPerawatanController extends Controller
 {
@@ -103,6 +106,7 @@ class DataPerawatanController extends Controller
 
         $data_perawatans = DataPerawatan::findOrFail($id);
 
+        $status_before = $data_perawatans->status_perawatan;
         $data_perawatans->update([
             'pemilik_id' => $request->pemilik_id,
             'mesin_id' => $request->mesin_id,
@@ -112,8 +116,20 @@ class DataPerawatanController extends Controller
             'status_perawatan' => $request->status_perawatan,
         ]);
 
-        $pemilik_id = $request->input('pemilik_id');
+        // Kirim email jika status perawatan diubah menjadi selesai
+        if ($request->status_perawatan == 'selesai' && $status_before != 'selesai') {
+            $pemilik = DataPelanggan::find($request->pemilik_id);
+            $data = [
+                'subject' => 'Perawatan Mesin Selesai',
+                'title' => 'Perawatan Mesin Anda Selesai',
+                'body' => 'Perawatan mesin dengan nama ' . $data_perawatans->mesin->nama_mesin . ' telah selesai. Silakan cek kembali untuk informasi lebih lanjut.',
+            ];
 
+            // Kirim email ke pelanggan
+        Mail::to($pemilik->email)->send(new PerawatanSelesaiMail($data));
+        }
+
+        $pemilik_id = $request->input('pemilik_id');
         return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan milik ' . $pemilik_id . ' berhasil diubah!');
     }
 

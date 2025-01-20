@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\DataPerbaikan;
 use App\Models\DataMesin;
 use App\Models\DataPelanggan;
+use App\Mail\PerbaikanSelesaiMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
 
 class DataPerbaikanController extends Controller
 {
