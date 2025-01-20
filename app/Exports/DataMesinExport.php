@@ -2,19 +2,19 @@
 
 namespace App\Exports;
 
-use App\Models\DataPelanggan;
+use App\Models\DataMesin;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class DataPelangganExport implements FromCollection, WithHeadings, WithEvents 
+class DataMesinExport implements FromCollection, WithHeadings, WithEvents 
 {
-    protected $data_pelanggans;
+    protected $data_mesins;
 
-    public function __construct($data_pelanggans)
+    public function __construct($data_mesins)
     {
-        $this->data_pelanggans = $data_pelanggans;
+        $this->data_mesins = $data_mesins;
     }
 
     /**
@@ -22,30 +22,27 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
     */
     public function collection()
     {
-        // Ambil hanya kolom yang diinginkan
-        // return DataPelanggan::select('nama', 'no_hp', 'alamat', 'email')->get();
-        return $this->data_pelanggans->map(function ($item) {
+        return $this->data_mesins->map(function ($item) {
             return [
-                'nama' => $item->nama,
-                'no_hp' => $item->no_hp,
-                'alamat' => $item->alamat,
-                'email' => $item->email,
+                'nama_mesin' => $item->nama_mesin,
+                'brand_name' => $item->brand ? $item->brand->brand_name : 'Tidak Ditemukan',
+                'model' => $item->model,
+                'pemilik' => $item->pemilik ? $item->pemilik->nama : 'Tidak Ditemukan',
+                'no_hp' => $item->pemilik ? $item->pemilik->no_hp : 'Tidak Ditemukan',
+                'deskripsi' => $item->deskripsi,
             ];
         });
     }
 
-    /**
-    * Menambahkan nama kolom di file Excel
-    *
-    * @return array
-    */
     public function headings(): array
     {
         return [
-            'Nama',
-            'No HP',
-            'Alamat',
-            'Email',
+            'Nama Mesin',
+            'Brand',
+            'Model',
+            'Pelanggan',
+            'No Hp',
+            'Deskripsi',
         ];
     }
 
@@ -53,7 +50,7 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $cellRange = 'A1:D1'; // Rentang header
+                $cellRange = 'A1:F1'; // Rentang header
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -67,13 +64,15 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
                 ]);
 
                 // Mengatur lebar kolom
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(15);
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(25);
                 $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(30);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(30);
                 
                 // Menambahkan border ke seluruh tabel
-                $event->sheet->getDelegate()->getStyle('A1:D' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getDelegate()->getStyle('A1:F' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

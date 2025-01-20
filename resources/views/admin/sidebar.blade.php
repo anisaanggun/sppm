@@ -48,7 +48,7 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'pelanggan' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'teknisi' || Request::segment(1) == 'pelanggan' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
@@ -74,10 +74,25 @@
                                 {{-- Admin --}}
                                 {{-- Tidak menampilkan item brand untuk Admin --}}
                             @endif
+                            @if (Auth::check() && Auth::user()->role_id == 2)
+                                <li class="nav-item">
+                                    <a href="{{ url('/teknisi') }}"
+                                        class="nav-link {{ Request::segment(1) == 'teknisi' ? 'active-link' : 'nonactive-link' }}">
+                                        <span class="iconify mr-2 ml-1" data-icon="mdi:wrench"
+                                            style="font-size: 20px;"></span>
+                                        <p>
+                                            Teknisi
+                                        </p>
+                                    </a>
+                                </li>
+                            @elseif(Auth::check() && Auth::user()->role_id == 1)
+                                {{-- Admin --}}
+                                {{-- Tidak menampilkan item brand untuk Admin --}}
+                            @endif
                             <li class="nav-item">
                                 <a href="{{ url('/pelanggan') }}"
                                     class="nav-link {{ Request::segment(1) == 'pelanggan' ? 'active-link' : 'nonactive-link' }}">
-                                    <span class="iconify mr-2 ml-1" data-icon="mdi:flash"
+                                    <span class="iconify mr-2 ml-1" data-icon="flowbite:users-group-solid"
                                         style="font-size: 20px;"></span>
                                     <p>
                                         Pelanggan

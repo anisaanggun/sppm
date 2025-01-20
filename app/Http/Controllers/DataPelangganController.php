@@ -95,6 +95,8 @@ class DataPelangganController extends Controller
 
     public function export_excel()
     {
-        return Excel::download(new DataPelangganExport, 'data_pelanggans.xlsx');
+        $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
+
+        return Excel::download(new DataPelangganExport($data_pelanggans), 'data_pelanggans.xlsx');
     }
 }

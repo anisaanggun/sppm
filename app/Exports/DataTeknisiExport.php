@@ -2,19 +2,20 @@
 
 namespace App\Exports;
 
-use App\Models\DataPelanggan;
+use App\Models\User;
+use App\Models\DataTeknisi;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class DataPelangganExport implements FromCollection, WithHeadings, WithEvents 
+class DataTeknisiExport implements FromCollection, WithHeadings, WithEvents 
 {
-    protected $data_pelanggans;
+    protected $users;
 
-    public function __construct($data_pelanggans)
+    public function __construct($users)
     {
-        $this->data_pelanggans = $data_pelanggans;
+        $this->users = $users;
     }
 
     /**
@@ -22,11 +23,9 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
     */
     public function collection()
     {
-        // Ambil hanya kolom yang diinginkan
-        // return DataPelanggan::select('nama', 'no_hp', 'alamat', 'email')->get();
-        return $this->data_pelanggans->map(function ($item) {
+        return $this->users->map(function ($item) {
             return [
-                'nama' => $item->nama,
+                'name' => $item->name,
                 'no_hp' => $item->no_hp,
                 'alamat' => $item->alamat,
                 'email' => $item->email,
@@ -34,11 +33,6 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
         });
     }
 
-    /**
-    * Menambahkan nama kolom di file Excel
-    *
-    * @return array
-    */
     public function headings(): array
     {
         return [

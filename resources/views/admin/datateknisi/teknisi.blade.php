@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Data Pelanggan | Mesinify</title>
+    <title>Data Teknisi | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -37,7 +37,7 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3" style="margin-left: 26px">
-                        <h4>Data Pelanggan</h4>
+                        <h4>Data Teknisi</h4>
                     </div>
                 </div>
             </div>
@@ -54,12 +54,12 @@
                             @endif
                             <div class="row g-1">
                                 <div class="col-auto mb-3">
-                                    <a href="{{ route('pelanggan.create') }}" class="btn btn-md mb-0 mt-1"
+                                    <a href="{{ route('teknisi.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
                                 </div>
                                 <div class="col-auto mb-3">
-                                    <a href="{{ route('pelanggan.export_excel') }}"
+                                    <a href="{{ route('teknisi.export_excel') }}"
                                         class="btn btn-success btn-md mb-0 mt-1" style="border-radius: 10px;"
                                         target="_blank">Export Excel</a>
 
@@ -73,26 +73,28 @@
                                         <table id="brandTable" class="table table-striped table-hover">
                                             <thead>
                                                 <tr class="text">
+                                                    <th scope="col">Id</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">No Hp</th>
-                                                    <th scope="col">Alamat</th>
                                                     <th scope="col">Email</th>
+                                                    <th scope="col">Alamat</th>
                                                     <th scope="col">Aksi</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="text">
-                                                @forelse ($data_pelanggans as $item)
+                                                @forelse ($data_teknisis as $item)
                                                     <tr>
-                                                        <td>{{ $item->nama }}</td>
+                                                        <td>{{ $item->id }}</td>
+                                                        <td>{{ $item->name }}</td>
                                                         <td>{{ $item->no_hp }}</td>
-                                                        <td>{{ $item->alamat }}</td>
                                                         <td>{{ $item->email }}</td>
+                                                        <td>{{ $item->alamat }}</td>
                                                         <td>
                                                             <form
                                                                 onsubmit="event.preventDefault(); confirmDelete(this);"
-                                                                action="{{ route('pelanggan.destroy', $item->id) }}"
+                                                                action="{{ route('teknisi.destroy', $item->id) }}"
                                                                 method="POST">
-                                                                <a href="{{ route('pelanggan.edit', $item->id) }}"
+                                                                <a href="{{ route('teknisi.edit', $item->id) }}"
                                                                     class="btn btn-sm btn-primary mt-1">
                                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                                 </a>
@@ -107,7 +109,7 @@
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="5" class="text-center">Data Pelanggan belum
+                                                        <td colspan="6" class="text-center">Data Teknisi belum
                                                             Tersedia.</td>
                                                     </tr>
                                                 @endforelse
