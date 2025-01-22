@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Teknisi | Mesinify</title>
+    <title>Tambah Data Pelanggan | Mesinify</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/Logo.png') }}">
 
     <!-- Google Font: Source Sans Pro -->
@@ -28,8 +28,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -49,7 +47,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Edit Data Teknisi</h4>
+                        <h4>Tambah Data Pelanggan</h4>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -73,58 +71,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('teknisi.update', $data_teknisis->id) }}" method="POST"
+                                        <form action="{{ route('pelanggan_admin.store') }}" method="POST"
                                             enctype="multipart/form-data" class="needs-validation" novalidate>
-                                            @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Nama Teknisi</label>
-                                                        <input type="text" class="form-control" id="name"
-                                                            name="name"
-                                                            value="{{ old('name', $data_teknisis->name) }}"
-                                                            placeholder="Masukkan nama pelanggan" required>
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Email</label>
-                                                        <input type="text" class="form-control" id="email"
-                                                            name="email"
-                                                            value="{{ old('email', $data_teknisis->email) }}"
-                                                            placeholder="Masukkan email" required>
+                                                        <label class="font-weight-bold">Nama Pelanggan</label>
+                                                        <input type="text" class="form-control" name="nama"
+                                                            value="{{ old('nama') }}"
+                                                            placeholder="Masukkan nama pelanggan">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">No Hp</label>
-                                                        <input type="text" class="form-control" id="no_hp"
-                                                            name="no_hp"
-                                                            value="{{ old('no_hp', $data_teknisis->no_hp) }}"
-                                                            placeholder="Masukkan no hp" required>
+                                                        <input type="text" class="form-control" name="no_hp"
+                                                            value="{{ old('no_hp') }}" placeholder="Masukkan no hp">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Alamat</label>
-                                                        <input type="text" class="form-control" id="alamat"
-                                                            name="alamat"
-                                                            value="{{ old('alamat', $data_teknisis->alamat) }}"
-                                                            placeholder="Masukkan alamat" required>
+                                                        <input type="text" class="form-control" name="alamat"
+                                                            value="{{ old('alamat') }}" placeholder="Masukkan alamat">
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Password Baru</label>
-                                                        <div class="password-wrapper">
-                                                            <input type="password" class="form-control"
-                                                                id="password_baru" name="password_baru" value=""
-                                                                placeholder="Kosongkan jika tidak ingin mengganti password"
-                                                                required>
-                                                            <i id="eyeIconBaru" class="fa fa-eye password-icon"
-                                                                onclick="showPassBaru()"></i>
-                                                        </div>
-
+                                                        <label class="font-weight-bold">Email</label>
+                                                        <input type="text" class="form-control" name="email"
+                                                            value="{{ old('email') }}" placeholder="Masukkan email">
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Teknisi</label>
+                                                        <select class="form-control" id="user_id" name="user_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Teknisi
+                                                            </option>
+                                                            @foreach ($teknisis as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="text-right mt-3 mb-3">
-                                                <button type="submit" class="btn btn-md btn-success">Edit</button>
-                                                <a href="{{ route('teknisi.index') }}"
-                                                    class="btn btn-md btn-danger">Batal</a>
+                                                <div class="text-right mt-3 mb-3">
+                                                    <button type="submit" class="btn btn-md btn-success">Buat</button>
+                                                    <a href="{{ route('pelanggan_admin.index') }}"
+                                                        class="btn btn-md btn-danger">Batal</a>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -153,21 +144,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    <script>
-        function showPassBaru() {
-            const passwordInput = document.getElementById('password_baru');
-            const eyeIcon = document.getElementById('eyeIconBaru');
-
-            // Toggle the type attribute
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-
-            // Toggle the eye icon
-            eyeIcon.classList.toggle('fa-eye'); // Ganti ikon mata terbuka
-            eyeIcon.classList.toggle('fa-eye-slash'); // Ganti ikon mata tertutup
-        }
-    </script>
 </body>
 
 </html>

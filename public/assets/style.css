@@ -239,8 +239,12 @@
     display: block;
     position: relative;
     padding: 15px !important;
+    text-decoration: none;
 }
 
+.small-box a:hover {
+    text-decoration: none;
+}
 
 
 .lingkaran {
@@ -288,6 +292,22 @@
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
 }
+
+/* Efek hover untuk ikon */
+.icon-container:hover .iconify {
+    transform: scale(1.2);
+    /* Membesarkan ikon saat hover */
+    color: #1E56A0 !important;
+    /* Mengubah warna ikon menjadi biru saat hover */
+}
+
+/* Pastikan ada transisi yang halus untuk transformasi dan perubahan warna */
+.iconify {
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+
+
 
 .textarea {
     float: left !important;
@@ -380,10 +400,14 @@ li::marker {
 
 @media print {
     .qr-code-container {
-        display: block; /* Pastikan QR Code ditampilkan saat mencetak */
-        margin: 0 auto; /* Pusatkan QR Code */
-        width: 300px; /* Atur lebar QR Code */
-        height: auto; /* Atur tinggi otomatis */
+        display: block;
+        /* Pastikan QR Code ditampilkan saat mencetak */
+        margin: 0 auto;
+        /* Pusatkan QR Code */
+        width: 300px;
+        /* Atur lebar QR Code */
+        height: auto;
+        /* Atur tinggi otomatis */
     }
 }
 
@@ -396,7 +420,8 @@ li::marker {
 }
 
 .modal-body {
-    text-align: center; /* Memastikan QR code di modal tetap terpusat */
+    text-align: center;
+    /* Memastikan QR code di modal tetap terpusat */
 }
 
 @media print {
@@ -407,6 +432,7 @@ li::marker {
         text-align: center;
         width: 100%;
     }
+
     .modal-body {
         text-align: center;
     }

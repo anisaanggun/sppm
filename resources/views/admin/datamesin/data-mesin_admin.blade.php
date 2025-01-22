@@ -76,6 +76,7 @@
                                                     <th scope="col">Brand</th>
                                                     <th scope="col">Model</th>
                                                     <th scope="col">Pelanggan</th>
+                                                    <th scope="col">Teknisi</th>
                                                     <th scope="col">Deskripsi</th>
                                                     <th scope="col">Gambar Mesin</th>
                                                     <th scope="col">QR Code</th>
@@ -89,6 +90,7 @@
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
                                                         <td>{{ $data_mesin->nama }}</td>
+                                                        <td>{{ $item->user->name }}</td>
                                                         <td>{{ $data_mesin->deskripsi }}</td>
                                                         <td>
                                                             @if ($data_mesin->image)
