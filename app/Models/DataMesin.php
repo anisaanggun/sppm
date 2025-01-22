@@ -32,4 +32,9 @@ class DataMesin extends Model
     {
         return $this->belongsTo(DataPelanggan::class, 'pemilik_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

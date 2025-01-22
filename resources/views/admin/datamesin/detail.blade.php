@@ -48,7 +48,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mt-3 " style="margin-left: 28px">
-                        <h4>Informasi Mesin</h4>
+                        {{-- <h4>Informasi Mesin</h4> --}}
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -57,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row mt-3" style="margin-left: 26px; min-height: 60vh;">
+                    <div class="row mt-3 ml-4 mr-4">
                         <div class="col-md-12">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -68,35 +68,65 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </ul>
                                 </div>
                             @endif
-                            <div class="card border-0" style="border-radius: 15px; box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1); background-color: #f8f9fa;">
-                                <div class="card-header text-center" style="background-color: #297AE6; color: white; border-top-left-radius: 15px; border-top-right-radius: 15px;">
-                                    <h5 class="card-title mb-1"><strong>Detail Mesin</strong></h5>
+                            <div class="card border-0 shadow-lg rounded-4 overflow-hidden"
+                                style="background-color: #ffffff; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                                <div class="card-header text-center"
+                                    style="background-color: #297AE6; color: #ffffff; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                    <h5 class="card-title mb-0 font-weight-bold">Detail Mesin</h5>
                                 </div>
+
                                 <div class="card-body">
-                                    <div class="row mb-1">
-                                        <div class="col-md-8">
-                                            <div class="row">
-                                                <div class="col-md-4"><strong>Nama Mesin:</strong>  {{ $data_mesin->nama_mesin }}</div>
+                                    <div class="row justify-content-between ml-2">
+                                        <!-- Detail Mesin -->
+                                        <div class="col-md-7 mt-2">
+                                            {{-- <h3 class="text-primary font-weight-bold mb-4">Informasi Mesin</h3> --}}
+
+                                            <div class="row mb-4">
+                                                <div class="col-md-4"><strong>Nama Mesin</strong></div>
+                                                <div class="col-md-8"><span
+                                                        class="text-muted">{{ $data_mesin->nama_mesin }}</span></div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4"><strong>Nama Brand:</strong>  {{ $data_mesin->brand->brand_name }}</div>
+
+                                            <div class="row mb-4">
+                                                <div class="col-md-4"><strong>Nama Brand</strong></div>
+                                                <div class="col-md-8"><span
+                                                        class="text-muted">{{ $data_mesin->brand->brand_name }}</span>
+                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4"><strong>Nama Model:</strong>  {{ $data_mesin->model }}</div>
+
+                                            <div class="row mb-4">
+                                                <div class="col-md-4"><strong>Nama Model</strong></div>
+                                                <div class="col-md-8"><span
+                                                        class="text-muted">{{ $data_mesin->model }}</span></div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-4"><strong>Deskripsi:</strong>  {{ $data_mesin->deskripsi }}</div>
+
+                                            <div class="row mb-4">
+                                                <div class="col-md-4"><strong>Deskripsi</strong></div>
+                                                <div class="col-md-8"><span
+                                                        class="text-muted">{{ $data_mesin->deskripsi ?: 'Tidak ada deskripsi' }}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('storage/images/' . $data_mesin->image) }}" alt="Gambar Mesin" style="max-width: 70%; height: auto;">
+
+                                        <!-- Gambar Mesin -->
+                                        <div class="col-md-4 d-flex justify-content-center align-items-center">
+                                            <div class="image-container">
+                                                <img src="{{ asset('storage/images/' . $data_mesin->image) }}"
+                                                    alt="Gambar Mesin"
+                                                    class="img-fluid rounded-3 shadow-lg hover-effect"
+                                                    style="max-height: 300px; object-fit: cover;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-right p-1">
-                                    <a href="{{ route('data-mesin.index') }}" class="btn btn-sm btn-primary mr-2">Kembali</a>
+
+                                    <!-- Tombol Kembali -->
+                                    <div class="text-right mt-4">
+                                        <a href="{{ route('data-mesin.index') }}"
+                                            class="btn btn-primary btn-sm px-4 py-2 rounded-pill shadow-sm hover-shadow">Kembali</a>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>

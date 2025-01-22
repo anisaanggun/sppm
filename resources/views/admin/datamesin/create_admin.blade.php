@@ -111,6 +111,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Teknisi</label>
+                                                        <select class="form-control" id="user_id" name="user_id"
+                                                            required>
+                                                            <option value="" disabled selected>Pilih Teknisi
+                                                            </option>
+                                                            @foreach ($teknisis as $item)
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         <input type="text" class="form-control" name="nama_mesin"
                                                             value="{{ old('nama_mesin') }}"
@@ -127,42 +140,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <input type="file" class="form-control" name="image"
                                                             placeholder="Masukan gambar mesin">
                                                     </div>
-                                                    {{-- <div class="col-md-6 form-group mt-3">
-                                                        <label for="brand">Brand</label>
-                                                        <select class="form-control" id="brand" name="brand"
-                                                            required>
-                                                            <option value="">Pilih Brand Mesin</option>
-                                                            <option value="Mitsubishi">Mitsubishi</option>
-                                                            <option value="LG">LG</option>
-                                                            <option value="Honeywell">Honeywell</option>
-                                                            <option value="Lainnya">Lainnya</option>
-                                                        </select>
-                                                    </div> --}}
-                                                    {{-- <div class="col-md-6 form-group mt-3">
-                                                        <label for="model">Model</label>
-                                                        <select class="form-control" id="model" name="model"
-                                                            required>
-                                                            <option value="">Pilih Model Mesin</option>
-                                                            <option value="AC Split">AC Split</option>
-                                                            <option value="AC Floor Standing">AC Floor Standing</option>
-                                                            <option value="AC Window">AC Window</option>
-                                                            <option value="Lainnya">Lainnya</option>
-                                                        </select>
-                                                    </div> --}}
-                                                    {{-- <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Nama Mesin</label>
-                                                        @foreach ($nama_mesin as $value => $label)
-                                                            <div class="form-check">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="nama_mesin" value="{{ $value }}"
-                                                                    id="nama_mesin{{ $value }}">
-                                                                <label class="form-check-label"
-                                                                    for="nama_mesin{{ $value }}">
-                                                                    {{ $label }}
-                                                                </label>
-                                                            </div>
-                                                        @endforeach
-                                                    </div> --}}
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
                                                             class="btn btn-md btn-success">Buat</button>

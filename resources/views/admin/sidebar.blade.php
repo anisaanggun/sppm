@@ -48,7 +48,7 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ in_array(Request::segment(1), ['data', 'brand', 'teknisi', 'pelanggan', 'pelanggan_admin', 'data-mesin', 'data-perawatan', 'data-perbaikan']) ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ in_array(Request::segment(1), ['data', 'brand', 'teknisi', 'pelanggan', 'pelanggan_admin', 'data-mesin', 'data-mesin_admin', 'data-perawatan', 'data-perbaikan']) ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
@@ -100,7 +100,7 @@
 
                             <li class="nav-item">
                                 <a href="{{ url('/data-mesin') }}"
-                                    class="nav-link {{ Request::segment(1) == 'data-mesin' ? 'active-link' : 'nonactive-link' }}">
+                                    class="nav-link {{ (Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-mesin_admin') && (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="gravity-ui:gear-branches"
                                         style="font-size: 20px;"></span>
                                     <p>

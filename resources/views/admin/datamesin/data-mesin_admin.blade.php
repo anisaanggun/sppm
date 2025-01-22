@@ -90,7 +90,7 @@
                                                         <td>{{ $data_mesin->brand_name }}</td>
                                                         <td>{{ $data_mesin->model }}</td>
                                                         <td>{{ $data_mesin->nama }}</td>
-                                                        <td>{{ $item->user->name }}</td>
+                                                        <td>{{ $data_mesin->user->name }}</td>
                                                         <td>{{ $data_mesin->deskripsi }}</td>
                                                         <td>
                                                             @if ($data_mesin->image)

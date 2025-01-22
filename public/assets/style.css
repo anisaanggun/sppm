@@ -437,3 +437,33 @@ li::marker {
         text-align: center;
     }
 }
+
+.hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-effect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.image-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.btn-primary {
+    background-color: #297AE6;
+    border-radius: 30px;
+    padding: 10px 20px;
+    /* Mengurangi padding agar tombol lebih ramping */
+    font-size: 1rem;
+    /* Ukuran font sedikit lebih kecil */
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #1d66b1;
+}

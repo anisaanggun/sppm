@@ -112,6 +112,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
+                                                        <label class="font-weight-bold">Teknisi</label>
+                                                        <select class="form-control" id="user_id" name="user_id"
+                                                            required>
+                                                            <option value="" disabled>Pilih Teknisi
+                                                            </option>
+                                                            @foreach ($teknisis as $item)
+                                                                <option value="{{ $item->id }}"
+                                                                    {{ old('user_id', isset($data_mesins) ? $data_mesins->user_id : null) == $item->id ? 'selected' : '' }}>
+                                                                    {{ $item->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
                                                         <input type="text" class="form-control" name="nama_mesin"
                                                             value="{{ old('nama_mesin', $data_mesins->nama_mesin) }}"
@@ -124,7 +138,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             placeholder="Masukkan deskripsi" required>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Upload Gambar Mesin</label>
+                                                        <label class="font-weight-bold">Upload Gambar Mesin</label><br>
                                                         @if ($data_mesins->image)
                                                             <img src="{{ asset('storage/images/' . $data_mesins->image) }}"
                                                                 alt="Gambar Mesin" style="width: 100px; height: auto;">
@@ -133,20 +147,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         @endif
                                                         <input type="file" class="form-control mt-2" name="image"
                                                             id="imageInput" accept="image/*">
-                                                    </div>
-                                                    <div class="col-md-6 form-group mt-3">
-                                                        <label class="font-weight-bold">Teknisi</label>
-                                                        <select class="form-control" id="user_id" name="user_id"
-                                                            required>
-                                                            <option value="" disabled>Pilih Teknisi
-                                                            </option>
-                                                            @foreach ($teknisis as $item)
-                                                                <option value="{{ $item->id }}"
-                                                                    {{ old('user_id', isset($data_pelanggans2) ? $data_pelanggans2->user_id : null) == $item->id ? 'selected' : '' }}>
-                                                                    {{ $item->name }}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"
