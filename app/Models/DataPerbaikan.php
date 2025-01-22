@@ -35,4 +35,9 @@ class DataPerbaikan extends Model
     {
         return $this->belongsTo(DataMesin::class, 'mesin_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');  // Relasi  berdasarkan user_id
+    }
 }

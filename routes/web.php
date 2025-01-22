@@ -52,10 +52,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-mesin/export_excel', [DataMesinController::class, 'export_excel'])->name('data-mesin.export_excel');
 
     Route::resource('/data-perawatan', DataPerawatanController::class)->except(['show']);
-    Route::resource('data-perawatan-admin', DataPerawatanController::class)->except(['show']);
+    Route::resource('data-perawatan_admin', DataPerawatanController::class)->except(['show']);
+    // Route::get('data-perawatan-admin/{id}/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan_admin.edit');
+    // Route::put('data-perawatan-admin/{id}', [DataPerawatanController::class, 'update'])->name('data-perawatan_admin.update');
     Route::get('/data-perawatan/export_excel', [DataPerawatanController::class, 'export_excel'])->name('data-perawatan.export_excel');
 
     Route::resource('/data-perbaikan', DataPerbaikanController::class)->except(['show']);
+    Route::resource('data-perbaikan_admin', DataPerbaikanController::class)->except(['show']);
     Route::get('/data-perbaikan/export_excel', [DataPerbaikanController::class, 'export_excel'])->name('data-perbaikan.export_excel');
 
     Route::get('/laporan', [LaporanMesinController::class, 'index']);
