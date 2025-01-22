@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Illuminate\Support\Facades\Auth;
 
 class DataPelangganExport implements FromCollection, WithHeadings, WithEvents 
 {
@@ -22,15 +23,24 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
     */
     public function collection()
     {
+        $role_id = Auth::user()->role_id;
+        
         // Ambil hanya kolom yang diinginkan
-        // return DataPelanggan::select('nama', 'no_hp', 'alamat', 'email')->get();
-        return $this->data_pelanggans->map(function ($item) {
-            return [
+        return $this->data_pelanggans->map(function ($item) use ($role_id) {
+            // Ambil data pelanggan biasa
+            $data = [
                 'nama' => $item->nama,
                 'no_hp' => $item->no_hp,
                 'alamat' => $item->alamat,
                 'email' => $item->email,
             ];
+
+            // Jika role adalah admin, tambahkan kolom teknisi
+            if ($role_id == 2) {
+                $data['teknisi'] = $item->user->name ?? 'Tidak ada teknisi';
+            }
+
+            return $data;
         });
     }
 
@@ -41,19 +51,36 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
     */
     public function headings(): array
     {
-        return [
+        $role_id = Auth::user()->role_id;
+
+        $headings = [
             'Nama',
-            'No HP',
+            $role_id == 2 ? 'No HP Pelanggan' : 'No HP', 
             'Alamat',
             'Email',
         ];
+
+        // Jika role adalah admin, tambahkan kolom Teknisi
+        if ($role_id == 2) {
+            $headings[] = 'Teknisi';
+        }
+
+        return $headings;
     }
 
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $cellRange = 'A1:D1'; // Rentang header
+                // Menghitung jumlah kolom dengan mengonversi ColumnIterator menjadi array
+                $columns = iterator_to_array($event->sheet->getDelegate()->getColumnIterator());
+                $columnCount = count($columns);
+
+                // Rentang header dinamis
+                $columnRange = $this->getColumnName($columnCount - 1); // Kolom terakhir
+                $cellRange = 'A1:' . $columnRange . '1';  // Rentang header dinamis
+
+                // Menambahkan gaya untuk header
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -67,13 +94,12 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
                 ]);
 
                 // Mengatur lebar kolom
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(20);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(25);
-                
+                for ($col = 0; $col < $columnCount; $col++) {
+                    $event->sheet->getDelegate()->getColumnDimension($this->getColumnName($col))->setWidth(20);
+                }
+
                 // Menambahkan border ke seluruh tabel
-                $event->sheet->getDelegate()->getStyle('A1:D' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getDelegate()->getStyle('A1:' . $columnRange . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -83,5 +109,16 @@ class DataPelangganExport implements FromCollection, WithHeadings, WithEvents
                 ]);
             },
         ];
+    }
+
+    // Fungsi untuk mengubah nomor indeks kolom menjadi nama kolom Excel (A, B, ..., Z, AA, AB, ..., AZ, dll.)
+    private function getColumnName($index)
+    {
+        $letters = '';
+        while ($index >= 0) {
+            $letters = chr($index % 26 + 65) . $letters;
+            $index = floor($index / 26) - 1;
+        }
+        return $letters;
     }
 }

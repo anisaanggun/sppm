@@ -48,12 +48,10 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ Request::segment(1) == 'data' || Request::segment(1) == 'brand' || Request::segment(1) == 'teknisi' || Request::segment(1) == 'pelanggan' || Request::segment(1) == 'data-mesin' || Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ in_array(Request::segment(1), ['data', 'brand', 'teknisi', 'pelanggan', 'pelanggan_admin', 'data-mesin', 'data-perawatan', 'data-perbaikan']) ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
-
-                                {{-- {{ dd(\Illuminate\Support\Facades\Auth::user()->role_id) }} --}}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
@@ -91,7 +89,7 @@
                             @endif
                             <li class="nav-item">
                                 <a href="{{ url('/pelanggan') }}"
-                                    class="nav-link {{ Request::segment(1) == 'pelanggan' ? 'active-link' : 'nonactive-link' }}">
+                                    class="nav-link {{ (Request::segment(1) == 'pelanggan' || Request::segment(1) == 'pelanggan_admin') && (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="flowbite:users-group-solid"
                                         style="font-size: 20px;"></span>
                                     <p>
@@ -99,6 +97,7 @@
                                     </p>
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a href="{{ url('/data-mesin') }}"
                                     class="nav-link {{ Request::segment(1) == 'data-mesin' ? 'active-link' : 'nonactive-link' }}">

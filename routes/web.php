@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/profil', ProfilController::class);
 
     Route::resource('/pelanggan', DataPelangganController::class)->except(['show']);
+    Route::resource('/pelanggan_admin', DataPelangganController::class)->except(['show']);
     Route::get('/pelanggan/export_excel', [DataPelangganController::class, 'export_excel'])->name('pelanggan.export_excel');
 
     Route::resource('/teknisi', DataTeknisiController::class)->except(['show']);

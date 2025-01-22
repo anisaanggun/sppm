@@ -79,13 +79,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="inner">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
-                                                style="width: 50px; height: 50px;">
+                                            <div
+                                                class="icon-container d-flex justify-content-center align-items-center">
                                                 <span class="iconify" data-icon="gravity-ui:gear-branches"
-                                                    style="font-size: 2.5rem;"></span>
+                                                    style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out"></span>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-auto">
                                             <a href="{{ route('data-mesin.index') }}"
                                                 class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
                                                 <span class="font-weight-bold" style="color: black">Tambahkan Catatan
@@ -107,13 +107,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="inner">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
-                                                style="width: 50px; height: 50px;">
+                                            <div
+                                                class="icon-container d-flex justify-content-center align-items-center">
                                                 <span class="iconify" data-icon="fa6-solid:gears"
-                                                    style="font-size: 2.5rem;"></span>
+                                                    style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out;"></span>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-auto">
                                             <a href="{{ route('data-perawatan.index') }}"
                                                 class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
                                                 <span class="font-weight-bold" style="color: black">Tambahkan Catatan
@@ -132,13 +132,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="inner">
                                     <div class="row align-items-center">
                                         <div class="col-auto">
-                                            <div class="lingkaran d-flex justify-content-center align-items-center rounded-circle p-3 shadow-sm"
-                                                style="width: 50px; height: 50px;">
+                                            <div
+                                                class="icon-container d-flex justify-content-center align-items-center">
                                                 <span class="iconify" data-icon="tabler:manual-gearbox-filled"
-                                                    style="font-size: 2.5rem;"></span>
+                                                    style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out;"></span>
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <div class="col-auto">
                                             <a href="{{ route('data-perbaikan.index') }}"
                                                 class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
                                                 <span class="font-weight-bold" style="color: black">Tambahkan Catatan

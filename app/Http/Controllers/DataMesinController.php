@@ -44,7 +44,7 @@ class DataMesinController extends Controller
         return view('admin.datamesin.data-mesin', compact('data_mesins'));
     }
 
-        public function downloadQr($id)
+    public function downloadQr($id)
     {
         // Ambil data mesin berdasarkan ID
         $data_mesin = DataMesin::findOrFail($id);
@@ -54,7 +54,9 @@ class DataMesinController extends Controller
         $dataToEncode = $url;
 
         // Generate QR Code dalam format SVG
-        $qrCodeSvg = QrCode::size(300)->generate($dataToEncode);
+        $qrCodeSvg = QrCode::size(88)  // Mengatur ukuran QR Code menjadi lebih kecil (150px)
+                        ->margin(1)  // Mengurangi margin untuk mengecilkan canvas
+                        ->generate($dataToEncode);
 
         // Simpan QR Code sebagai file SVG
         $fileName = 'qr_code_' . $data_mesin->id . '.svg';
@@ -78,12 +80,12 @@ class DataMesinController extends Controller
         // Buat HTML untuk PDF
         $html = '<html><head><style>';
         $html .= 'body { font-family: Arial, sans-serif; text-align: center; }';
-        $html .= 'h1 { text-align: center; margin: 0; font-size: 25px; color: #333; }'; // Penataan h1
-        $html .= 'div.qr-code-container { margin-top: 20px; }'; // Memberikan jarak antara teks dan QR Code
+        $html .= 'h1 { text-align: center; margin: 0; font-size: 18px; color: #333; }'; // Penataan h1
+        $html .= 'div.qr-code-container { margin-top: 10px; }'; // Memberikan jarak antara teks dan QR Code
         $html .= '</style></head><body>';
         $html .= '<h1>QR Code ' . $data_mesin->nama_mesin . '</h1>';
         $html .= '<div class="qr-code-container">';
-        $html .= '<img src="data:image/svg+xml;base64,' . base64_encode($qrCodeSvg) . '" style="width: 300px; height: 300px;" />';
+        $html .= '<img src="data:image/svg+xml;base64,' . base64_encode($qrCodeSvg) . '" style="width: 210px; height: 210px;" />';
         $html .= '</div>';
         $html .= '</body></html>';
 
@@ -91,7 +93,7 @@ class DataMesinController extends Controller
         $dompdf->loadHtml($html);
 
         // Set ukuran kertas menjadi ukuran kustom (misalnya 5x5 cm)
-        $dompdf->setPaper([0, 40, 500, 500], 'portrait'); // [x0, y0, x1, y1] dalam satuan poin
+        $dompdf->setPaper([0, 0, 295, 255], 'portrait'); // [x0, y0, x1, y1] dalam satuan poin
 
         // Render PDF
         $dompdf->render();
@@ -124,7 +126,7 @@ class DataMesinController extends Controller
             'brand_id.required' => 'Silahkan pilih nama brand mesin.',
             'nama_mesin.required' => 'Silahkan masukkan nama mesin.',
             'model.required' => 'Silahkan pilih nama model mesin.',
-            'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
+            'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
             'deskripsi.nullable' => 'Silahkan masukkan deskripsi',
         ]);
 
