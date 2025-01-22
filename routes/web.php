@@ -32,7 +32,6 @@ Route::get('/admin', [AdminController::class, 'index']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda.index');
     Route::post('/beranda/store', [BerandaController::class, 'store'])->name('beranda.store');
