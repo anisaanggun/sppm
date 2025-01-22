@@ -117,16 +117,21 @@ class DataPerawatanController extends Controller
         ]);
 
         // Kirim email jika status perawatan diubah menjadi selesai
-        if ($request->status_perawatan == 'selesai' && $status_before != 'selesai') {
-            $pemilik = DataPelanggan::find($request->pemilik_id);
-            $data = [
-                'subject' => 'Perawatan Mesin Selesai',
-                'title' => 'Perawatan Mesin Anda Selesai',
-                'body' => 'Perawatan mesin dengan nama ' . $data_perawatans->mesin->nama_mesin . ' telah selesai. Silakan cek kembali untuk informasi lebih lanjut.',
-            ];
+        // $data = [
+        //     'subject' => 'Test Email',
+        //     'title' => 'Test Email Title',
+        //     'body' => 'This is a test email body.'
+        // ];
 
-            // Kirim email ke pelanggan
-        Mail::to($pemilik->email)->send(new PerawatanSelesaiMail($data));
+        // dd($status_before, $request->status_perawatan);
+        if ($request->status_perawatan == 1 && $status_before != 1) {
+            $pemilik = DataPelanggan::find($request->pemilik_id);
+
+            Mail::to($pemilik->email)->send(new PerawatanSelesaiMail([
+                'subject' => 'Perawatan Mesin Selesai! 🎉',
+                'title' => 'Perawatan Mesin Anda Telah Selesai! 🎉',
+                'nama'  => $pemilik->nama,
+            ]));
         }
 
         $pemilik_id = $request->input('pemilik_id');

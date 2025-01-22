@@ -19,7 +19,11 @@
                 <span class="d-lg-none">
                     <span class="badge badge-pill badge-warning"></span>
                 </span>
-                Teknisi {{ auth()->user()->name }}
+                @if (Auth::check() && Auth::user()->role_id == 2)
+                    {{ auth()->user()->name }}
+                @elseif(Auth::check() && Auth::user()->role_id == 1)
+                    Teknisi {{ auth()->user()->name }}
+                @endif
             </a>
             <!-- start dropdown -->
             <div class="dropdown-menu mr-5 mt-3" aria-labelledby="alertsDropdown"

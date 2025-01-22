@@ -76,20 +76,41 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/teknisi/export_excel', [DataTeknisiController::class, 'export_excel'])->name('teknisi.export_excel');
 
 
-    Route::get('/send-email',function(){
+    // Route::get('/send-email',function(){
+    //     $data = [
+    //         'name' => 'Anisa Anggun',
+    //         'body' => 'Testing Kirim Email'
+    //     ];
+
+    //     Mail::to('anisaanggun81471@gmail.com')->send(new SendEmail($data));
+
+    //     dd("Email Berhasil dikirim.");
+    // });
+
+    // Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+    // Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
+
+    Route::get('/mail/send', function () {
         $data = [
-            'name' => 'Anisa Anggun',
-            'body' => 'Testing Kirim Email'
+            'subject' => 'Testing Kirim Email',
+            'title' => 'Testing Kirim Email',
+            'body' => 'Ini adalah email uji coba dari Tutorial Laravel: Send Email Via SMTP GMAIL @ qadrLabs.com'
         ];
 
-        Mail::to('anisaanggun81471@gmail.com')->send(new SendEmail($data));
-
-        dd("Email Berhasil dikirim.");
+        Mail::to('anschill006@gmail.com')->send(new perawatandoneEmail($data));
     });
 
-    Route::get('/send-email', [SendEmailController::class, 'index'])->name('kirim-email');
+    Route::get('/test-email', function () {
+        $data = [
+            'subject' => 'Test Email',
+            'title' => 'Test Email Title',
+            'body' => 'This is a test email body.'
+        ];
 
-    Route::post('/post-email', [SendEmailController::class, 'store'])->name('post-email');
+        Mail::to('anschill006@gmail.com')->send(new PerawatanSelesaiMail($data));
+
+        return 'Email sent!';
+    });
 
 
 });

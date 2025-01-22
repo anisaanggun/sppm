@@ -101,6 +101,7 @@ class DataPerbaikanController extends Controller
 
         $data_perbaikans = DataPerbaikan::findOrFail($id);
 
+        $status_before = $data_perbaikans->status_perbaikan;
         $data_perbaikans->update([
             'pemilik_id' => $request->pemilik_id,
             'mesin_id' => $request->mesin_id,
@@ -109,6 +110,18 @@ class DataPerbaikanController extends Controller
             'catatan' => $request->catatan,
             'status_perbaikan' => $request->status_perbaikan,
         ]);
+
+        if ($request->status_perbaikan == 1 && $status_before != 1) {
+            $pemilik = DataPelanggan::find($request->pemilik_id);
+
+            Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
+                'subject' => 'Perbaikan Mesin Selesai! 🎉',
+                'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
+                'nama'  => $pemilik->nama,
+            ]));
+        }
+
+        $pemilik_id = $request->input('pemilik_id');
 
         return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan berhasil diubah!');
     }

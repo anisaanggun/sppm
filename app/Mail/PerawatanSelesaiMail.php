@@ -10,7 +10,9 @@ class PerawatanSelesaiMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $data;
+    public $subject;
+    public $title;
+    public $nama;
 
     /**
      * Create a new message instance.
@@ -20,7 +22,10 @@ class PerawatanSelesaiMail extends Mailable
      */
     public function __construct($data)
     {
-        $this->data = $data;
+        // Menyimpan data ke dalam properti kelas
+        $this->subject = $data['subject'];
+        $this->title = $data['title'];
+        $this->nama = $data['nama'];
     }
 
     /**
@@ -30,7 +35,13 @@ class PerawatanSelesaiMail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->data['subject'])
-                    ->view('emails.perawatan_selesai');
+        // Mengatur subjek dan tampilan email
+        return $this->subject($this->subject)
+                    ->view('emails.perawatan_selesai')
+                    ->with([
+                    'subject' => $this->subject,
+                    'title' => $this->title,
+                    'nama' => $this->nama,
+                    ]);
     }
 }

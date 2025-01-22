@@ -3,25 +3,29 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class PerbaikanSelesaiMail extends Mailable
 {
-    public $pelanggan;
+    use Queueable, SerializesModels;
+
+    public $subject;
+    public $title;
+    public $nama;
 
     /**
      * Create a new message instance.
      *
-     * @param $pelanggan
+     * @param  array  $data
      * @return void
      */
-    public function __construct($pelanggan)
+    public function __construct($data)
     {
-        $this->pelanggan = $pelanggan;
+        // Menyimpan data ke dalam properti kelas
+        $this->subject = $data['subject'];
+        $this->title = $data['title'];
+        $this->nama = $data['nama'];
     }
 
     /**
@@ -31,10 +35,13 @@ class PerbaikanSelesaiMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Perbaikan Mesin Selesai')
-            ->view('emails.perbaikan_selesai')
-            ->with([
-            'pelanggan' => $this->pelanggan,
-        ]);
+        // Mengatur subjek dan tampilan email
+        return $this->subject($this->subject)
+                    ->view('emails.perbaikan_selesai')
+                    ->with([
+                    'subject' => $this->subject,
+                    'title' => $this->title,
+                    'nama' => $this->nama,
+                    ]);
     }
 }
