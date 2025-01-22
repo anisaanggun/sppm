@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::resource('/data-mesin', DataMesinController::class)->except(['show']);
+    Route::resource('/data-mesin_admin', DataMesinController::class)->except(['show']);
     Route::get('datamesin/{id}/detail', [DataMesinController::class, 'detail'])->name('data-mesin.detail');
     // Route::get('/data-mesin/{id}', [DataMesinController::class, 'show'])->name('data-mesin.show');
     // Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
@@ -51,11 +52,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/data-mesin/export_excel', [DataMesinController::class, 'export_excel'])->name('data-mesin.export_excel');
 
     Route::resource('/data-perawatan', DataPerawatanController::class)->except(['show']);
+    Route::resource('data-perawatan-admin', DataPerawatanController::class)->except(['show']);
     Route::get('/data-perawatan/export_excel', [DataPerawatanController::class, 'export_excel'])->name('data-perawatan.export_excel');
-    Route::get('data-perawatan-admin/create', [DataPerawatanController::class, 'create'])->name('data-perawatan_admin.create');
-    Route::get('data-perawatan-admin/edit', [DataPerawatanController::class, 'edit'])->name('data-perawatan_admin.edit');
-    Route::post('data-perawatan-admin/store', [DataPerawatanController::class, 'store'])->name('data-perawatan_admin.store');
-    Route::get('data-perawatan-admin/index', [DataPerawatanController::class, 'index'])->name('data-perawatan_admin.index');
 
     Route::resource('/data-perbaikan', DataPerbaikanController::class)->except(['show']);
     Route::get('/data-perbaikan/export_excel', [DataPerbaikanController::class, 'export_excel'])->name('data-perbaikan.export_excel');
