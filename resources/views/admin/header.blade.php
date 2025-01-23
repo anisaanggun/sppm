@@ -20,7 +20,7 @@
                     <span class="badge badge-pill badge-warning"></span>
                 </span>
                 @if (Auth::check() && Auth::user()->role_id == 2)
-                    {{ auth()->user()->name }}
+                    Super Admin
                 @elseif(Auth::check() && Auth::user()->role_id == 1)
                     Teknisi {{ auth()->user()->name }}
                 @endif

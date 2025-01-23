@@ -128,7 +128,6 @@ class DataPerbaikanController extends Controller
 
             if ($role_id == 2){
                 $teknisis = User::where('role_id', 1)->get();
-                $selected_teknisi = $data_perbaikans->teknisi; // Ini untuk menampilkan teknisi yang dipilih sebelumnya
                 return view('admin.dataperbaikan.edit_admin', compact('data_perbaikans', 'data_mesins', 'data_pelanggans', 'teknisis'));
             }
             if ($role_id == 1){
@@ -142,7 +141,6 @@ class DataPerbaikanController extends Controller
 {
     if (Auth::check()){
         $role_id = Auth::user()->role_id;
-        $data_perbaikans = DataPerbaikan::findOrFail($id);
 
         // Validasi input dari form
         $this->validate($request, [
@@ -161,11 +159,14 @@ class DataPerbaikanController extends Controller
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
-        // Simpan status sebelumnya sebelum update
-        $status_before = $data_perbaikans->status_perbaikan;
-
+       
         // Cek role_id
         if ($role_id == 2) {  // Admin
+            $data_perbaikans = DataPerbaikan::findOrFail($id);
+
+             // Simpan status sebelumnya sebelum update
+            $status_before = $data_perbaikans->status_perbaikan;
+
             $data_perbaikans->update([
                 'user_id' => $request->user_id,
                 'pemilik_id' => $request->pemilik_id,
@@ -190,10 +191,21 @@ class DataPerbaikanController extends Controller
             }
 
             return redirect()->route('data-perbaikan_admin.index')->with('success', 'Data perbaikan berhasil diubah!');
+       
         } elseif ($role_id == 1) {  // Teknisi
+            $data_perbaikans = DataPerbaikan::findOrFail($id);
+
+            // Simpan status sebelumnya sebelum update
+            $status_before = $data_perbaikans->status_perbaikan;
+
             $data_perbaikans->update([
+                
+                'pemilik_id' => $request->pemilik_id,
+                'mesin_id' => $request->mesin_id,
+                'tanggal' => $request->tanggal,
                 'kerusakan' => $request->kerusakan,
                 'catatan' => $request->catatan,
+                'status_perbaikan' => $request->status_perbaikan,
             ]);
 
             // Cek jika status perbaikan berubah menjadi selesai (status 1)
@@ -233,6 +245,20 @@ class DataPerbaikanController extends Controller
 
     public function export_excel()
     {
-        return Excel::download(new DataPerbaikanExport, 'data_perbaikans.xlsx');
+        // Cek apakah pengguna sudah login
+        if (Auth::check()) {
+            // Ambil role_id dari pengguna yang sedang login
+            $role_id = Auth::user()->role_id;
+
+            if ($role_id == 2) {
+                $data_perbaikans = DataPerbaikan::with(['pemilik', 'mesin', 'user'])
+                ->get();
+            } elseif ($role_id == 1) {
+                $data_perbaikans = DataPerbaikan::with(['pemilik', 'mesin'])
+                ->where('user_id', Auth::user()->id)
+                ->get();
+            }
+            return Excel::download(new DataPerbaikanExport($data_perbaikans), 'data_perbaikans.xlsx');
+        }
     }
 }

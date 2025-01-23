@@ -3,83 +3,104 @@
 namespace App\Exports;
 
 use App\Models\DataPerbaikan;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Illuminate\Support\Facades\Auth;
 
 class DataPerbaikanExport implements FromCollection, WithHeadings, WithEvents
 {
+    protected $data_perbaikans;
+
+    public function __construct($data_perbaikans)
+    {
+        $this->data_perbaikans = $data_perbaikans;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
-{
-    $role_id = Auth::user()->role_id;
-    $statusClasses = [
-        3 => [
-            'class' => 'badge-secondary',
-            'text' => 'Pending',
-        ],
-        2 => [
-            'class' => 'badge-primary',
-            'text' => 'Diproses',
-        ],
-        1 => [
-            'class' => 'badge-success',
-            'text' => 'Selesai',
-        ],
-    ];
-
-    // Ambil data perawatan dengan relasi untuk mendapatkan nama pelanggan dan mesin
-    return DataPerbaikan::with(['pemilik', 'mesin', 'teknisi'])->get()->map(function ($item) use ($statusClasses) {
-        // Mendapatkan status perawatan dalam bentuk teks
-        $status = $statusClasses[$item->status_perbaikan] ?? [
-            'class' => 'badge-light',
-            'text' => 'Status tidak diketahui',
+    {
+        $role_id = Auth::user()->role_id;
+        $statusClasses = [
+            3 => [
+                'class' => 'badge-secondary',
+                'text' => 'Pending',
+            ],
+            2 => [
+                'class' => 'badge-primary',
+                'text' => 'Diproses',
+            ],
+            1 => [
+                'class' => 'badge-success',
+                'text' => 'Selesai',
+            ],
         ];
 
-        $data = [
-            'pemilik' => $item->pemilik ? $item->pemilik->nama : 'Tidak Ditemukan',
-            'no_hp' => $item->pemilik ? $item->pemilik->no_hp : 'Tidak Ditemukan',
-            'alamat' => $item->pemilik ? $item->pemilik->alamat : 'Tidak Ditemukan',
-            'mesin' => $item->mesin ? $item->mesin->nama_mesin : 'Tidak Ditemukan',
-            'tanggal' => $item->tanggal,
-            'kerusakan' => $item->kerusakan,
-            'catatan' => $item->catatan,
-            'status_perbaikan' => $status['text'], // Tampilkan teks status
-        ];
+        // Ambil data perbaikan dengan relasi untuk mendapatkan nama pelanggan dan mesin
+        return $this->data_perbaikans->map(function ($item) use ($statusClasses, $role_id) {
+            // Mendapatkan status perawatan dalam bentuk teks
+            $status = $statusClasses[$item->status_perbaikan] ?? [
+                'class' => 'badge-light',
+                'text' => 'Status tidak diketahui',
+            ];
 
-        // Menambahkan teknisi jika relasi teknisi ada
-        $data['teknisi'] = $item->teknisi ? $item->teknisi->name : 'Tidak ada teknisi';
+            $data = [
+                'pemilik' => $item->pemilik ? $item->pemilik->nama : 'Tidak Ditemukan',
+                'no_hp' => $item->pemilik ? $item->pemilik->no_hp : 'Tidak Ditemukan',
+                'alamat' => $item->pemilik ? $item->pemilik->alamat : 'Tidak Ditemukan',
+                'mesin' => $item->mesin ? $item->mesin->nama_mesin : 'Tidak Ditemukan',
+                'tanggal' => $item->tanggal,
+                'kerusakan' => $item->kerusakan,
+                'catatan' => $item->catatan,
+                'status_perbaikan' => $status['text'], // Tampilkan teks status
+            ];
 
-        return $data;
-    });
-}
+            if ($role_id == 2) {
+                $data['teknisi'] = $item->user->name ?? 'Tidak ada teknisi';
+            }
+        
+            return $data;
+        });
+    }
 
 
     public function headings(): array
     {
         $role_id = Auth::user()->role_id;
-        return [
+        $headings = [
             'Pelanggan',
-            'no_hp',
+            $role_id == 2 ? 'No HP Pelanggan' : 'No HP', 
             'Alamat',
             'Nama Mesin',
             'Tanggal',
             'Kerusakan',
             'Catatan',
             'Status Perbaikan',
-            'Teknisi',
         ];
+
+        if ($role_id == 2) {
+            $headings[] = 'Teknisi';
+        }
+
+        return $headings;
     }
 
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $cellRange = 'A1:I1'; // Rentang header
+                // Menghitung jumlah kolom dengan mengonversi ColumnIterator menjadi array
+                $columns = iterator_to_array($event->sheet->getDelegate()->getColumnIterator());
+                $columnCount = count($columns);
+
+                // Rentang header dinamis
+                $columnRange = $this->getColumnName($columnCount - 1); // Kolom terakhir
+                $cellRange = 'A1:' . $columnRange . '1';  // Rentang header dinamis
+
+                // Menambahkan gaya untuk header
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -93,19 +114,12 @@ class DataPerbaikanExport implements FromCollection, WithHeadings, WithEvents
                 ]);
 
                 // Mengatur lebar kolom
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(25);
-
+                for ($col = 0; $col < $columnCount; $col++) {
+                    $event->sheet->getDelegate()->getColumnDimension($this->getColumnName($col))->setWidth(20);
+                }
 
                 // Menambahkan border ke seluruh tabel
-                $event->sheet->getDelegate()->getStyle('A1:I' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getDelegate()->getStyle('A1:' . $columnRange . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -115,5 +129,16 @@ class DataPerbaikanExport implements FromCollection, WithHeadings, WithEvents
                 ]);
             },
         ];
+    }
+
+    // Fungsi untuk mengubah nomor indeks kolom menjadi nama kolom Excel (A, B, ..., Z, AA, AB, ..., AZ, dll.)
+    private function getColumnName($index)
+    {
+        $letters = '';
+        while ($index >= 0) {
+            $letters = chr($index % 26 + 65) . $letters;
+            $index = floor($index / 26) - 1;
+        }
+        return $letters;
     }
 }
