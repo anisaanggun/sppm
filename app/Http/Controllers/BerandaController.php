@@ -21,12 +21,24 @@ class BerandaController extends Controller
         // Hitung jumlah hari dalam bulan perawatan yang dipilih
         $jumlah_hari_perawatan = cal_days_in_month(CAL_GREGORIAN, $bulan_perawatan, $tahun_perawatan); // Menghitung jumlah hari
 
-        // Ambil data perawatan dari database berdasarkan user yang sedang login
-        $data_perawatans = DataPerawatan::where('user_id', Auth::user()->id)
-            ->whereYear('tanggal_perawatan', $tahun_perawatan) // Filter berdasarkan tahun
-            ->whereMonth('tanggal_perawatan', $bulan_perawatan) // Filter berdasarkan bulan
-            ->get();
-            // Siapkan array untuk menyimpan jumlah perawatan per tanggal
+        // Ambil role_id dari user yang sedang login
+        $role_id = Auth::user()->role_id;
+
+        // Query data perawatan berdasarkan role
+        if ($role_id == 2) {
+            // Jika Admin (role_id = 2), ambil semua data perawatan
+            $data_perawatans = DataPerawatan::whereYear('tanggal_perawatan', $tahun_perawatan) // Filter berdasarkan tahun
+                ->whereMonth('tanggal_perawatan', $bulan_perawatan) // Filter berdasarkan bulan
+                ->get();
+        } else {
+            // Jika Teknisi (role_id = 1), ambil hanya data perawatan milik user yang sedang login
+            $data_perawatans = DataPerawatan::where('user_id', Auth::user()->id) // Filter berdasarkan user yang sedang login
+                ->whereYear('tanggal_perawatan', $tahun_perawatan) // Filter berdasarkan tahun
+                ->whereMonth('tanggal_perawatan', $bulan_perawatan) // Filter berdasarkan bulan
+                ->get();
+        }
+
+        // Siapkan array untuk menyimpan jumlah perawatan per tanggal
         $jumlah_perawatan_per_tanggal = array_fill(1, $jumlah_hari_perawatan, 0); // Inisialisasi array dengan jumlah hari
 
         // Hitung jumlah perawatan berdasarkan tanggal
@@ -42,11 +54,19 @@ class BerandaController extends Controller
         // Hitung jumlah hari dalam bulan perbaikan yang dipilih
         $jumlah_hari_perbaikan = cal_days_in_month(CAL_GREGORIAN, $bulan_perbaikan, $tahun_perbaikan); // Menghitung jumlah hari
 
-        // Ambil data perbaikan dari database berdasarkan user yang sedang login
-        $data_perbaikans = DataPerbaikan::where('user_id', Auth::user()->id)
-            ->whereYear('tanggal', $tahun_perbaikan) // Filter berdasarkan tahun
-            ->whereMonth('tanggal', $bulan_perbaikan) // Filter berdasarkan bulan
-            ->get();
+        // Query data perbaikan berdasarkan role
+        if ($role_id == 2) {
+            // Jika Admin (role_id = 2), ambil semua data perbaikan
+            $data_perbaikans = DataPerbaikan::whereYear('tanggal', $tahun_perbaikan) // Filter berdasarkan tahun
+                ->whereMonth('tanggal', $bulan_perbaikan) // Filter berdasarkan bulan
+                ->get();
+        } else {
+            // Jika Teknisi (role_id = 1), ambil hanya data perbaikan milik user yang sedang login
+            $data_perbaikans = DataPerbaikan::where('user_id', Auth::user()->id) // Filter berdasarkan user yang sedang login
+                ->whereYear('tanggal', $tahun_perbaikan) // Filter berdasarkan tahun
+                ->whereMonth('tanggal', $bulan_perbaikan) // Filter berdasarkan bulan
+                ->get();
+        }
 
         // Siapkan array untuk menyimpan jumlah perbaikan per tanggal
         $jumlah_perbaikan_per_tanggal = array_fill(1, $jumlah_hari_perbaikan, 0); // Inisialisasi array dengan jumlah hari
@@ -67,4 +87,5 @@ class BerandaController extends Controller
             'tahun_perbaikan'
         ));
     }
+
 }

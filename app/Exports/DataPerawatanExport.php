@@ -7,14 +7,24 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Illuminate\Support\Facades\Auth;
 
 class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents 
 {
+    protected $data_perawatans;
+
+    public function __construct($data_perawatans)
+    {
+        $this->data_perawatans = $data_perawatans;
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
+        $role_id = Auth::user()->role_id;
+
         // return DataPerawatan::select('pemilik_id', 'mesin_id', 'tanggal_perawatan', 'aktivitas', 'catatan', 'status_perawatan')->get();
 
         // Definisikan status dengan teks dan kelas untuk visualisasi
@@ -34,14 +44,14 @@ class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents
         ];
 
         // Ambil data perawatan dengan relasi untuk mendapatkan nama pelanggan dan mesin
-        return DataPerawatan::with(['pemilik', 'mesin'])->get()->map(function ($item) use ($statusClasses) {
+        return $this->data_perawatans->map(function ($item) use ($statusClasses, $role_id) {
             // Mendapatkan status perawatan dalam bentuk teks
             $status = $statusClasses[$item->status_perawatan] ?? [
                 'class' => 'badge-light',
                 'text' => 'Status tidak diketahui',
             ];
-
-            return [
+        
+            $data = [
                 'pemilik' => $item->pemilik ? $item->pemilik->nama : 'Tidak Ditemukan',
                 'no_hp' => $item->pemilik ? $item->pemilik->no_hp : 'Tidak Ditemukan',
                 'alamat' => $item->pemilik ? $item->pemilik->alamat : 'Tidak Ditemukan',
@@ -51,14 +61,24 @@ class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents
                 'catatan' => $item->catatan,
                 'status_perawatan' => $status['text'], // Tampilkan teks status
             ];
+        
+            if ($role_id == 2) {
+                $data['teknisi'] = $item->user->name ?? 'Tidak ada teknisi';
+            }
+        
+            return $data;
         });
+        
+        
     }
 
     public function headings(): array
     {
-        return [
+        $role_id = Auth::user()->role_id;
+
+        $headings = [
             'Pelanggan',
-            'No Hp',
+            $role_id == 2 ? 'No HP Pelanggan' : 'No HP', 
             'Alamat',
             'Nama Mesin',
             'Tanggal',
@@ -66,13 +86,27 @@ class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents
             'Catatan',
             'Status Perawatan',
         ];
+
+        if ($role_id == 2) {
+            $headings[] = 'Teknisi';
+        }
+
+        return $headings;
     }
 
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $cellRange = 'A1:H1'; // Rentang header
+               // Menghitung jumlah kolom dengan mengonversi ColumnIterator menjadi array
+                $columns = iterator_to_array($event->sheet->getDelegate()->getColumnIterator());
+                $columnCount = count($columns);
+
+                // Rentang header dinamis
+                $columnRange = $this->getColumnName($columnCount - 1); // Kolom terakhir
+                $cellRange = 'A1:' . $columnRange . '1';  // Rentang header dinamis
+
+                // Menambahkan gaya untuk header
                 $event->sheet->getDelegate()->getStyle($cellRange)->applyFromArray([
                     'font' => [
                         'bold' => true,
@@ -86,18 +120,12 @@ class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents
                 ]);
 
                 // Mengatur lebar kolom
-                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(15);
-                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(30);
-                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(25);
-                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(25);
-
+                for ($col = 0; $col < $columnCount; $col++) {
+                    $event->sheet->getDelegate()->getColumnDimension($this->getColumnName($col))->setWidth(20);
+                }
                 
                 // Menambahkan border ke seluruh tabel
-                $event->sheet->getDelegate()->getStyle('A1:H' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getDelegate()->getStyle('A1:' . $columnRange . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -107,5 +135,16 @@ class DataPerawatanExport implements FromCollection, WithHeadings, WithEvents
                 ]);
             },
         ];
+    }
+
+    // Fungsi untuk mengubah nomor indeks kolom menjadi nama kolom Excel (A, B, ..., Z, AA, AB, ..., AZ, dll.)
+    private function getColumnName($index)
+    {
+        $letters = '';
+        while ($index >= 0) {
+            $letters = chr($index % 26 + 65) . $letters;
+            $index = floor($index / 26) - 1;
+        }
+        return $letters;
     }
 }

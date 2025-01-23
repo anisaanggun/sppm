@@ -54,7 +54,7 @@
                             @endif
                             <div class="row g-1">
                                 <div class="col-auto mb-3">
-                                    <a href="{{ route('data-mesin.create') }}" class="btn btn-md mb-0 mt-1"
+                                    <a href="{{ route('data-mesin_admin.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>
                                 </div>

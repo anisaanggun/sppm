@@ -72,8 +72,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-mesin.update', $data_mesins->id) }}" method="POST"
-                                            enctype="multipart/form-data" class="needs-validation" novalidate>
+                                        <form action="{{ route('data-mesin_admin.update', $data_mesins->id) }}"
+                                            method="POST" enctype="multipart/form-data" class="needs-validation"
+                                            novalidate>
                                             @method('PUT')
                                             <div class="container mt-2">
                                                 @csrf

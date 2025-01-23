@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">
-                                        <form action="{{ route('data-mesin.store') }}" method="POST"
+                                        <form action="{{ route('data-mesin_admin.store') }}" method="POST"
                                             enctype="multipart/form-data" class="needs-validation" novalidate>
                                             <div class="container mt-2">
                                                 @csrf

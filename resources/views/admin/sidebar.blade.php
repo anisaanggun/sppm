@@ -48,7 +48,7 @@
 
                     <li class="nav-item">
                         <a href="{{ url('/') }}"
-                            class="nav-link {{ in_array(Request::segment(1), ['data', 'brand', 'teknisi', 'pelanggan', 'pelanggan_admin', 'data-mesin', 'data-mesin_admin', 'data-perawatan', 'data-perbaikan']) ? 'active-link' : 'nonactive-link' }}">
+                            class="nav-link {{ in_array(Request::segment(1), ['data', 'brand', 'teknisi', 'pelanggan', 'pelanggan_admin', 'data-mesin', 'data-mesin_admin', 'data-perawatan', 'data-perawatan_admin', 'data-perbaikan', 'data-perbaikan_admin']) ? 'active-link' : 'nonactive-link' }}">
                             <span class="iconify mr-2" data-icon="mdi:database" style="font-size: 24px;"></span>
                             <p>
                                 Data
@@ -110,7 +110,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('/data-perawatan') }}"
-                                    class="nav-link {{ Request::segment(1) == 'data-perawatan' ? 'active-link' : 'nonactive-link' }}">
+                                    class="nav-link {{ (Request::segment(1) == 'data-perawatan' || Request::segment(1) == 'data-perawatan_admin') && (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="fa6-solid:gears"
                                         style="font-size: 18px;"></span>
                                     <p>
@@ -120,7 +120,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="{{ url('/data-perbaikan') }}"
-                                    class="nav-link {{ Request::segment(1) == 'data-perbaikan' ? 'active-link' : 'nonactive-link' }}">
+                                    class="nav-link {{ (Request::segment(1) == 'data-perbaikan' || Request::segment(1) == 'data-perbaikan_admin') && (Auth::user()->role_id == 2 || Auth::user()->role_id == 1) ? 'active-link' : 'nonactive-link' }}">
                                     <span class="iconify mr-2 ml-1" data-icon="tabler:manual-gearbox-filled"
                                         style="font-size: 20px;"></span>
                                     <p>

@@ -117,7 +117,7 @@ class DataPerawatanController extends Controller
         if ($role_id == 2) {
             // Jika role_id == 2 (Admin), set user_id dengan admin yang login
             DataPerawatan::create([
-                'user_id' => Auth::user()->id,  // Gunakan Auth::user()->id untuk admin
+                // 'user_id' => Auth::user()->id,  // Gunakan Auth::user()->id untuk admin
                 'user_id' => $request->user_id,
                 'pemilik_id' => $request->pemilik_id,
                 'mesin_id' => $request->mesin_id,
@@ -160,7 +160,7 @@ class DataPerawatanController extends Controller
         $data_perawatans = DataPerawatan::findOrFail($id);
 
         // Ambil mesin terkait dengan user yang sedang login
-        $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+        $data_mesins = DataMesin::get();
 
         // Ambil semua data pelanggan
         $data_pelanggans = DataPelanggan::get();
@@ -173,7 +173,7 @@ class DataPerawatanController extends Controller
 
         // Jika role_id = 1 (Teknisi), hanya data perawatan dan mesin yang relevan
         if ($role_id == 1) {
-            return view('admin.dataperawatan.edit_admin', compact('data_perawatans', 'data_mesins', 'data_pelanggans'));
+            return view('admin.dataperawatan.edit', compact('data_perawatans', 'data_mesins', 'data_pelanggans'));
         }
     }
 
@@ -239,23 +239,44 @@ class DataPerawatanController extends Controller
                 }
 
                 // Redirect dengan pesan sukses
-                return redirect()->route('data-perawatan_admin.index')->with('success', 'Data perawatan milik ' . $request->pemilik_id . ' berhasil diubah!');
+                return redirect()->route('data-perawatan_admin.index')->with('success', 'Data perawatan berhasil diubah!');
             }
 
             // Jika role_id adalah 1 (teknisi), hanya bisa mengedit data tertentu
             if ($role_id == 1) {
                 // Cari data perawatan berdasarkan ID yang dimiliki oleh teknisi
                 $data_perawatan = DataPerawatan::findOrFail($id);
+                // Simpan status sebelum update
+                $status_before = $data_perawatan->status_perawatan;
 
-                // Cek apakah teknisi hanya boleh mengedit status atau catatan tertentu
-                // Misalnya, teknisi hanya bisa mengubah catatan dan aktivitas, bukan pemilik atau status perawatan
+                // Update data perawatan
                 $data_perawatan->update([
+                    'pemilik_id' => $request->pemilik_id,
+                    'mesin_id' => $request->mesin_id,
+                    'tanggal_perawatan' => $request->tanggal_perawatan,
                     'aktivitas' => $request->aktivitas,
                     'catatan' => $request->catatan,
+                    'status_perawatan' => $request->status_perawatan,
                 ]);
 
+                // Kirim email jika status perawatan berubah menjadi selesai
+                if ($request->status_perawatan == 1 && $status_before != 1) {
+                    // Cari data pemilik berdasarkan ID yang baru dipilih
+                    $pemilik = DataPelanggan::find($request->pemilik_id);
+
+                    // Pastikan pemilik ada dan memiliki email
+                    if ($pemilik && $pemilik->email) {
+                        // Kirim email pemberitahuan
+                        Mail::to($pemilik->email)->send(new PerawatanSelesaiMail([
+                            'subject' => 'Perawatan Mesin Selesai! 🎉',
+                            'title' => 'Perawatan Mesin Anda Telah Selesai! 🎉',
+                            'nama' => $pemilik->nama,
+                        ]));
+                    }
+                }
+                
                 // Setelah update, redirect dengan pesan sukses
-                return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan milik ' . $request->pemilik_id . ' berhasil diperbarui oleh teknisi!');
+                return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan berhasil diubah!');
             }
         }
 
@@ -274,6 +295,20 @@ class DataPerawatanController extends Controller
 
     public function export_excel()
     {
-        return Excel::download(new DataPerawatanExport, 'data_perawatans.xlsx');
+        // Cek apakah pengguna sudah login
+        if (Auth::check()) {
+            // Ambil role_id dari pengguna yang sedang login
+            $role_id = Auth::user()->role_id;
+
+            if ($role_id == 2) {
+                $data_perawatans = DataPerawatan::with(['pemilik', 'mesin', 'user'])
+                ->get();
+            } elseif ($role_id == 1) {
+                $data_perawatans = DataPerawatan::with(['pemilik', 'mesin'])
+                ->where('user_id', Auth::user()->id)
+                ->get();
+            }
+                return Excel::download(new DataPerawatanExport($data_perawatans), 'data_perawatans.xlsx');
+        }
     }
 }
