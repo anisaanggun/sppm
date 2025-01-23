@@ -65,7 +65,7 @@ class DataPerawatanController extends Controller
             $teknisis = User::where('role_id', 1)->get();
 
             // Ambil daftar mesin untuk admin berdasarkan user_id yang sedang login
-            $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+            $data_mesins = DataMesin::get();
 
             // Ambil semua data pelanggan
             $data_pelanggans = DataPelanggan::get();

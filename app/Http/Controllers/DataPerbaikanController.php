@@ -51,7 +51,7 @@ class DataPerbaikanController extends Controller
             if ($role_id == 2){
                 $teknisis = User::where('role_id', 1)->get();
                 //Daftar nama_mesin untuk select
-                $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+                $data_mesins = DataMesin::get();
                 $data_pelanggans = DataPelanggan::get();
                 // dd($data_mesins);
                 return view('admin.dataperbaikan.create_admin', compact('data_mesins', 'data_pelanggans', 'teknisis'));
@@ -90,7 +90,7 @@ class DataPerbaikanController extends Controller
             if ($role_id == 2){
                 //create data perbaikan
                 DataPerbaikan::create([
-                    'user_id' => Auth::user()->id,
+                    // 'user_id' => Auth::user()->id,
                     'user_id' => $request->user_id,
                     'pemilik_id' => $request->pemilik_id,
                     'mesin_id' => $request->mesin_id,
@@ -123,7 +123,7 @@ class DataPerbaikanController extends Controller
         if (Auth::check()){
             $role_id = Auth::user()->role_id;
             $data_perbaikans = DataPerbaikan::findOrFail($id);
-            $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
+            $data_mesins = DataMesin::get();
             $data_pelanggans = DataPelanggan::get();
 
             if ($role_id == 2){
