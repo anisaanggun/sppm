@@ -128,6 +128,7 @@ class DataPerbaikanController extends Controller
 
             if ($role_id == 2){
                 $teknisis = User::where('role_id', 1)->get();
+                $selected_teknisi = $data_perbaikans->teknisi; // Ini untuk menampilkan teknisi yang dipilih sebelumnya
                 return view('admin.dataperbaikan.edit_admin', compact('data_perbaikans', 'data_mesins', 'data_pelanggans', 'teknisis'));
             }
             if ($role_id == 1){
@@ -138,11 +139,13 @@ class DataPerbaikanController extends Controller
     }
 
     public function update(Request $request, $id): RedirectResponse
-    {
-        if (Auth::check()){
-            $role_id = Auth::user()->role_id;
+{
+    if (Auth::check()){
+        $role_id = Auth::user()->role_id;
+        $data_perbaikans = DataPerbaikan::findOrFail($id);
 
-            $this->validate($request, [
+        // Validasi input dari form
+        $this->validate($request, [
             'pemilik_id' => 'required',
             'mesin_id' => 'required',
             'tanggal' => 'required|date',
@@ -158,10 +161,11 @@ class DataPerbaikanController extends Controller
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
-        if ($role_id == 2){
-            $data_perbaikans = DataPerbaikan::findOrFail($id);
+        // Simpan status sebelumnya sebelum update
+        $status_before = $data_perbaikans->status_perbaikan;
 
-            $status_before = $data_perbaikans->status_perbaikan;
+        // Cek role_id
+        if ($role_id == 2) {  // Admin
             $data_perbaikans->update([
                 'user_id' => $request->user_id,
                 'pemilik_id' => $request->pemilik_id,
@@ -172,31 +176,51 @@ class DataPerbaikanController extends Controller
                 'status_perbaikan' => $request->status_perbaikan,
             ]);
 
+            // Cek jika status perbaikan berubah menjadi selesai (status 1)
             if ($request->status_perbaikan == 1 && $status_before != 1) {
-            $pemilik = DataPelanggan::find($request->pemilik_id);
+                $pemilik = DataPelanggan::find($request->pemilik_id);
 
-            if ($pemilik && $pemilik->email){
-                Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
-                'subject' => 'Perbaikan Mesin Selesai! 🎉',
-                'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
-                'nama'  => $pemilik->nama,
-            ]));
+                if ($pemilik && $pemilik->email) {
+                    Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
+                        'subject' => 'Perbaikan Mesin Selesai! 🎉',
+                        'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
+                        'nama' => $pemilik->nama,
+                    ]));
+                }
             }
+
+            return redirect()->route('data-perbaikan_admin.index')->with('success', 'Data perbaikan berhasil diubah!');
+        } elseif ($role_id == 1) {  // Teknisi
+            $data_perbaikans->update([
+                'kerusakan' => $request->kerusakan,
+                'catatan' => $request->catatan,
+            ]);
+
+            // Cek jika status perbaikan berubah menjadi selesai (status 1)
+            if ($request->status_perbaikan == 1 && $status_before != 1) {
+                $pemilik = DataPelanggan::find($request->pemilik_id);
+
+                if ($pemilik && $pemilik->email) {
+                    Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
+                        'subject' => 'Perbaikan Mesin Selesai! 🎉',
+                        'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
+                        'nama' => $pemilik->nama,
+                    ]));
+                }
+            }
+
+            return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan berhasil diubah!');
         }
-        return redirect()->route('data-perbaikan_admin.index')->with('success', 'Data perbaikan berhasil diubah!');
+
+        // Jika role_id bukan 1 atau 2, tampilkan error
+        return redirect()->route('data-perbaikan.index')->with('error', 'Anda tidak memiliki izin untuk mengedit data perbaikan ini.');
     }
 
-    if ($role_id == 1){
-        $data_perbaikans = DataPerbaikan::findOrFail($id);
-        $data_perbaikans->update([
-            'kerusakan' => $request->kerusakan,
-            'catatan' => $request->catatan,
-        ]);
-        return redirect()->route('data-perbaikan.index')->with('success', 'Data perbaikan berhasil diubah!');
-    }
-    }
-    return redirect()->route('data-perbaikan.index')->with('error', 'Anda tidak memiliki izin untuk mengedit data perbaikan ini.');
-    }
+    // Jika tidak login
+    return redirect()->route('login')->with('error', 'Anda harus login untuk mengakses halaman ini.');
+}
+
+
 
     public function destroy($id): RedirectResponse
     {

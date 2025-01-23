@@ -40,4 +40,9 @@ class DataPerbaikan extends Model
     {
         return $this->belongsTo(User::class, 'user_id');  // Relasi  berdasarkan user_id
     }
+
+    public function teknisi()
+    {
+        return $this->belongsTo(User::class, 'user_id');  // Relasi  berdasarkan user_id
+    }
 }

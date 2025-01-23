@@ -143,7 +143,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             </option>
                                                             @foreach ($teknisis as $item)
                                                                 <option value="{{ $item->id }}"
-                                                                    {{ old('user_id', isset($data_perawatans) ? $data_perawatans->user_id : null) == $item->id ? 'selected' : '' }}>
+                                                                    {{ old('user_id', isset($data_perbaikans) ? $data_perbaikans->user_id : null) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->name }}
                                                                 </option>
                                                             @endforeach
