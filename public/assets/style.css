@@ -231,8 +231,65 @@
     text-decoration: none;
 } */
 
-/* beranda */
+/* Style untuk small box */
 .small-box {
+    border-radius: 15px !important;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    display: block;
+    /* Mengizinkan small-box untuk berfungsi sebagai block element */
+    position: relative;
+    padding: 15px !important;
+    text-decoration: none;
+    /* Menghapus underline dari teks di dalam small-box */
+    transition: transform 0.3s ease;
+    /* Animasi untuk efek hover */
+}
+
+/* Style saat hover pada small-box */
+.small-box:hover {
+    transform: scale(1.05);
+    /* Efek zoom saat hover */
+}
+
+/* Link hover */
+.small-box a:hover {
+    text-decoration: none;
+    /* Menghindari perubahan style saat hover */
+}
+
+/* Style untuk bagian dalam small box */
+.small-box .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Menambahkan style untuk memastikan link bersifat block */
+.small-box a {
+    display: block;
+    color: inherit;
+    /* Menghindari perubahan warna teks pada link */
+    height: 100%;
+    /* Pastikan link mengisi seluruh area */
+    width: 100%;
+    text-decoration: none;
+    /* Pastikan link tidak ter-underlined */
+}
+
+/* Efek hover untuk ikon */
+.icon-container:hover .iconify {
+    transform: scale(1.2);
+    /* Membesarkan ikon saat hover */
+    color: #1E56A0 !important;
+    /* Mengubah warna ikon menjadi biru saat hover */
+}
+
+
+
+
+/* beranda */
+/* .small-box {
     background-image: url('img/ya.png');
     border-radius: 15px !important;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
@@ -247,23 +304,24 @@
 }
 
 
-.lingkaran {
-    width: 40px;
-    height: 40px;
-    /* float: right; */
-    border-radius: 50%;
-    background-color: #FFBB5C;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .small-box .inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-}
+} */
+
+/* .lingkaran {
+    width: 40px;
+    height: 40px;
+    float: right;
+    border-radius: 50%;
+    background-color: #FFBB5C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
 
 @media (max-width:768px) {
     .lingkaran {
@@ -272,7 +330,7 @@
     }
 }
 
-.small-box-footer:hover,
+/* .small-box-footer:hover,
 .small-box-footer:focus {
     transform: scale(1.1);
 
@@ -291,23 +349,7 @@
     text-decoration: none;
     flex-wrap: wrap;
     transition: all 0.3s ease-in-out;
-}
-
-/* Efek hover untuk ikon */
-.icon-container:hover .iconify {
-    transform: scale(1.2);
-    /* Membesarkan ikon saat hover */
-    color: #1E56A0 !important;
-    /* Mengubah warna ikon menjadi biru saat hover */
-}
-
-/* Pastikan ada transisi yang halus untuk transformasi dan perubahan warna */
-.iconify {
-    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-
-
+} */
 
 .textarea {
     float: left !important;
@@ -342,9 +384,21 @@ li::marker {
 #calendar {
     background-color: #fff;
     border-radius: 10px;
-    max-width: 100%;
-    margin: 0 auto;
+    /* width: 100%; */
+    /* margin: 0 auto; */
     /* Center the calendar */
+}
+
+.fc-scroller .fc-col-header {
+    width: 100% !important;
+}
+
+.fc-scrollgrid-sync-table {
+    width: 100% !important;
+}
+
+.fc-daygrid-body.fc-daygrid-body-unbalanced {
+    width: 100% !important;
 }
 
 @media (max-width: 768px) {
