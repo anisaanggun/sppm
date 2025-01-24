@@ -226,13 +226,15 @@ class DataPerawatanController extends Controller
                 if ($request->status_perawatan == 1 && $status_before != 1) {
                     // Cari data pemilik berdasarkan ID yang baru dipilih
                     $pemilik = DataPelanggan::find($request->pemilik_id);
+                    $nama_mesin = $data_perawatan->mesin ? $data_perawatan->mesin->nama_mesin : 'Mesin Tidak Ditemukan';
 
                     // Pastikan pemilik ada dan memiliki email
                     if ($pemilik && $pemilik->email) {
+                        $data_perawatan = DataPerawatan::with('mesin')->find($request->id);
                         // Kirim email pemberitahuan
                         Mail::to($pemilik->email)->send(new PerawatanSelesaiMail([
-                            'subject' => 'Perawatan Mesin Selesai! 🎉',
-                            'title' => 'Perawatan Mesin Anda Telah Selesai! 🎉',
+                            'subject' => "Perawatan Mesin {$nama_mesin} Selesai! 🎉",
+                            'title' => "Perawatan Mesin {$nama_mesin} Anda Telah Selesai! 🎉",
                             'nama' => $pemilik->nama,
                         ]));
                     }
@@ -263,18 +265,20 @@ class DataPerawatanController extends Controller
                 if ($request->status_perawatan == 1 && $status_before != 1) {
                     // Cari data pemilik berdasarkan ID yang baru dipilih
                     $pemilik = DataPelanggan::find($request->pemilik_id);
+                    $nama_mesin = $data_perawatan->mesin ? $data_perawatan->mesin->nama_mesin : 'Mesin Tidak Ditemukan';
 
                     // Pastikan pemilik ada dan memiliki email
                     if ($pemilik && $pemilik->email) {
+                        $data_perawatan = DataPerawatan::with('mesin')->find($request->id);
                         // Kirim email pemberitahuan
                         Mail::to($pemilik->email)->send(new PerawatanSelesaiMail([
-                            'subject' => 'Perawatan Mesin Selesai! 🎉',
-                            'title' => 'Perawatan Mesin Anda Telah Selesai! 🎉',
+                            'subject' => "Perawatan Mesin {$nama_mesin} Selesai! 🎉",
+                            'title' => "Perawatan Mesin {$nama_mesin} Anda Telah Selesai! 🎉",
                             'nama' => $pemilik->nama,
                         ]));
                     }
                 }
-                
+
                 // Setelah update, redirect dengan pesan sukses
                 return redirect()->route('data-perawatan.index')->with('success', 'Data perawatan berhasil diubah!');
             }
