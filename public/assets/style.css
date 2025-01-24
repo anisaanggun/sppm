@@ -343,12 +343,15 @@ li::marker {
     background-color: #fff;
     border-radius: 10px;
     max-width: 100%;
-    margin: 0 auto;
+    width: 100% !important;
+    margin: 0;
+    padding: 0;
     /* Center the calendar */
 }
 
 @media (max-width: 768px) {
     #calendar {
+        width: 100% !important;
         font-size: 0.8em;
         /* Adjust font size for smaller screens */
     }
@@ -466,4 +469,8 @@ li::marker {
 
 .btn-primary:hover {
     background-color: #1d66b1;
+}
+
+.fc {
+    width: 100%;
 }

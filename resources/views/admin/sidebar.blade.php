@@ -5,7 +5,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar" id="sidebar">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link mb-2 mt-3">
+        <a href="{{ route('beranda.index') }}" class="brand-link mb-2 mt-3">
             <div class="row">
                 <div class="col-md-3">
                     <img src="{{ asset('/img/logo4.png') }}" alt="">

@@ -159,7 +159,7 @@ class DataPerbaikanController extends Controller
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
-       
+
         // Cek role_id
         if ($role_id == 2) {  // Admin
             $data_perbaikans = DataPerbaikan::findOrFail($id);
@@ -180,18 +180,20 @@ class DataPerbaikanController extends Controller
             // Cek jika status perbaikan berubah menjadi selesai (status 1)
             if ($request->status_perbaikan == 1 && $status_before != 1) {
                 $pemilik = DataPelanggan::find($request->pemilik_id);
+                $nama_mesin = $data_perbaikans->mesin ? $data_perbaikans->mesin->nama_mesin : 'Mesin Tidak Ditemukan';
 
                 if ($pemilik && $pemilik->email) {
+                    $data_perbaikans = DataPerbaikan::with('mesin')->find($request->id);
                     Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
-                        'subject' => 'Perbaikan Mesin Selesai! 🎉',
-                        'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
+                        'subject' => "Perbaikan Mesin {$nama_mesin} Selesai! 🎉",
+                        'title' => "Perbaikan Mesin {$nama_mesin} Anda Telah Selesai! 🎉",
                         'nama' => $pemilik->nama,
                     ]));
                 }
             }
 
             return redirect()->route('data-perbaikan_admin.index')->with('success', 'Data perbaikan berhasil diubah!');
-       
+
         } elseif ($role_id == 1) {  // Teknisi
             $data_perbaikans = DataPerbaikan::findOrFail($id);
 
@@ -199,7 +201,7 @@ class DataPerbaikanController extends Controller
             $status_before = $data_perbaikans->status_perbaikan;
 
             $data_perbaikans->update([
-                
+
                 'pemilik_id' => $request->pemilik_id,
                 'mesin_id' => $request->mesin_id,
                 'tanggal' => $request->tanggal,
@@ -211,11 +213,13 @@ class DataPerbaikanController extends Controller
             // Cek jika status perbaikan berubah menjadi selesai (status 1)
             if ($request->status_perbaikan == 1 && $status_before != 1) {
                 $pemilik = DataPelanggan::find($request->pemilik_id);
+                $nama_mesin = $data_perbaikans->mesin ? $data_perbaikans->mesin->nama_mesin : 'Mesin Tidak Ditemukan';
 
                 if ($pemilik && $pemilik->email) {
+                    $data_perbaikans = DataPerbaikan::with('mesin')->find($request->id);
                     Mail::to($pemilik->email)->send(new PerbaikanSelesaiMail([
-                        'subject' => 'Perbaikan Mesin Selesai! 🎉',
-                        'title' => 'Perbaikan Mesin Anda Telah Selesai! 🎉',
+                        'subject' => "Perbaikan Mesin {$nama_mesin} Selesai! 🎉",
+                        'title' => "Perbaikan Mesin {$nama_mesin} Anda Telah Selesai! 🎉",
                         'nama' => $pemilik->nama,
                     ]));
                 }

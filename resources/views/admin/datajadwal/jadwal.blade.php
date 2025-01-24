@@ -102,7 +102,6 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-
                                                         <div class="form-group">
                                                             <label for="tgl_mulai">Tanggal Mulai:</label>
                                                             <input type="date" name="tgl_mulai" id="tgl_mulai"
@@ -114,21 +113,15 @@
                                                             <input type="date" name="tgl_selesai" id="tgl_selesai"
                                                                 class="form-control" value="{{ $tgl_selesai }}">
                                                         </div>
-
-
-
                                                         <button type="submit" class="btn btn-primary"
                                                             id="applyFilter">Terapkan
                                                             Filter</button>
                                                     </form>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div id="calendar"></div>
-
+                                    <div id="calendar" style="width: 100% !important;"></div>
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
