@@ -73,7 +73,7 @@
                                         <table id="brandTable" class="table table-striped table-hover">
                                             <thead>
                                                 <tr class="text">
-                                                    <th scope="col">Id</th>
+                                                    <th scope="col">ID</th>
                                                     <th scope="col">Nama</th>
                                                     <th scope="col">No Hp</th>
                                                     <th scope="col">Email</th>
