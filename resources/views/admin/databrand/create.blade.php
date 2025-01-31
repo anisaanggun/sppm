@@ -57,7 +57,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <section class="content">
                 <div class="container-fluid">
                     <div class="container mt-3 mb-3">
-                        <div class="row">
+                        <div class="row ml-3 mr-3">
                             <div class="col-md-12">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
