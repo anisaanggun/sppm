@@ -79,8 +79,9 @@
                                     <!-- Modal -->
                                     <div class="modal fade" id="filterModal" tabindex="-1" role="dialog"
                                         aria-labelledby="filterModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
+                                                <!-- Modal Header -->
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="filterModalLabel">Filter Jadwal</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
@@ -88,10 +89,13 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
+
+                                                <!-- Modal Body -->
                                                 <div class="modal-body">
                                                     <form method="GET" action="{{ route('jadwal.index') }}">
-                                                        <div class="form-group">
-                                                            <label for="mesin_id">Pilih Mesin:</label>
+                                                        <div class="form-group mb-3">
+                                                            <label for="mesin_id" class="d-block"
+                                                                style="text-align:left">Pilih Mesin</label>
                                                             <select name="mesin_id" id="mesin_id" class="form-control">
                                                                 <option value="">Semua Mesin</option>
                                                                 @foreach ($data_mesins as $mesin)
@@ -103,29 +107,33 @@
                                                             </select>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="tgl_mulai">Tanggal Mulai:</label>
+                                                        <div class="form-group mb-3">
+                                                            <label for="tgl_mulai" class="d-block"
+                                                                style="text-align:left">Tanggal
+                                                                Mulai</label>
                                                             <input type="date" name="tgl_mulai" id="tgl_mulai"
                                                                 class="form-control" value="{{ $tgl_mulai }}">
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label for="tgl_selesai">Tanggal Selesai:</label>
+                                                        <div class="form-group mb-3">
+                                                            <label for="tgl_selesai" class="d-block"
+                                                                style="text-align:left">Tanggal
+                                                                Selesai</label>
                                                             <input type="date" name="tgl_selesai" id="tgl_selesai"
                                                                 class="form-control" value="{{ $tgl_selesai }}">
                                                         </div>
 
-
-
-                                                        <button type="submit" class="btn btn-primary"
-                                                            id="applyFilter">Terapkan
-                                                            Filter</button>
+                                                        <!-- Apply Filter Button -->
+                                                        <button type="submit" class="btn btn-primary btn-block mt-3"
+                                                            id="applyFilter">Terapkan Filter</button>
                                                     </form>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
 
                                     <div id="calendar"></div>
 

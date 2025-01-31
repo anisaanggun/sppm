@@ -73,84 +73,102 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
                     <div class="row ml-4 mr-4">
-                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
+                        <div class="col-sm-6 col-md-3 col-lg-3 mb-4">
                             <!-- small box -->
-                            <div class="small-box">
+                            <a href="{{ route('data-mesin.index') }}" class="small-box">
                                 <div class="inner">
                                     <div class="row align-items-center">
-                                        <div class="col-auto">
+                                        <div class="col">
                                             <div
-                                                class="icon-container d-flex justify-content-center align-items-center">
+                                                class="icon-container d-flex justify-content-center align-items-center mb-1">
                                                 <span class="iconify" data-icon="gravity-ui:gear-branches"
                                                     style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out"></span>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="{{ route('data-mesin.index') }}"
-                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
-                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
-                                                    Mesin Baru</span>
-                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
-                                            </a>
+                                            <span
+                                                class="font-weight-bold d-flex justify-content-center align-items-center"
+                                                style="color: black">Tambahkan Mesin
+                                                Baru Anda</span>
+                                            {{-- <i class="fas fa-arrow-right ml-2" style="color: black"></i> --}}
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <a href="{{ route('data-mesin.index') }}" class="small-box-footer text-center">
-                                    <span>Tambah</span>
-                                </a> --}}
-                            </div>
+                            </a>
                         </div>
-                        <!-- ./col -->
-                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
+
+                        <div class="col-sm-6 col-md-3 col-lg-3 mb-4">
                             <!-- small box -->
-                            <div class="small-box">
+                            <a href="{{ route('data-perawatan.index') }}" class="small-box">
                                 <div class="inner">
                                     <div class="row align-items-center">
-                                        <div class="col-auto">
+                                        <div class="col">
                                             <div
-                                                class="icon-container d-flex justify-content-center align-items-center">
+                                                class="icon-container d-flex justify-content-center align-items-center mb-1">
                                                 <span class="iconify" data-icon="fa6-solid:gears"
                                                     style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out;"></span>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="{{ route('data-perawatan.index') }}"
-                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
-                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
-                                                    Perawatan</span>
-                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
-                                            </a>
+                                            <span
+                                                class="font-weight-bold d-flex justify-content-center align-items-center"
+                                                style="color: black">Tambahkan Perawatan
+                                                Baru</span>
+                                            {{-- <i class="fas fa-arrow-right ml-2" style="color: black"></i> --}}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <!-- ./col -->
-                        <div class="col-sm-6 col-md-4 col-lg-4 mb-4">
+
+                        <div class="col-sm-6 col-md-3 col-lg-3 mb-4">
                             <!-- small box -->
-                            <div class="small-box">
+                            <a href="{{ route('data-perbaikan.index') }}" class="small-box">
                                 <div class="inner">
                                     <div class="row align-items-center">
-                                        <div class="col-auto">
+                                        <div class="col">
                                             <div
-                                                class="icon-container d-flex justify-content-center align-items-center">
+                                                class="icon-container d-flex justify-content-center align-items-center mb-1">
                                                 <span class="iconify" data-icon="tabler:manual-gearbox-filled"
                                                     style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out;"></span>
                                             </div>
                                         </div>
                                         <div class="col-auto">
-                                            <a href="{{ route('data-perbaikan.index') }}"
-                                                class="small-box-footer text-center py-3 d-block rounded-bottom bg-white text-info mt-2 mt-md-0">
-                                                <span class="font-weight-bold" style="color: black">Tambahkan Catatan
-                                                    Perbaikan</span>
-                                                <i class="fas fa-arrow-right ml-2" style="color: black"></i>
-                                            </a>
+                                            <span
+                                                class="font-weight-bold d-flex justify-content-center align-items-center"
+                                                style="color: black">Tambahkan Perbaikan
+                                                Baru</span>
+                                            {{-- <i class="fas fa-arrow-right ml-2" style="color: black"></i> --}}
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </div>
-                        <!-- ./col -->
+
+                        <div class="col-sm-6 col-md-3 col-lg-3 mb-4">
+                            <!-- small box -->
+                            <a href="{{ route('pelanggan.index') }}" class="small-box">
+                                <div class="inner">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <div
+                                                class="icon-container d-flex justify-content-center align-items-center mb-1">
+                                                <span class="iconify" data-icon="flowbite:users-group-solid"
+                                                    style="font-size: 2.5rem; color: #FF9B50; transition: transform 0.3s ease-in-out;"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <span
+                                                class="font-weight-bold d-flex justify-content-center align-items-center"
+                                                style="color: black">Tambahkan Pelanggan
+                                                Baru</span>
+                                            {{-- <i class="fas fa-arrow-right ml-2" style="color: black"></i> --}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
                         <div class="col-md-6 form-group">
                             <div class="card border-0"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">

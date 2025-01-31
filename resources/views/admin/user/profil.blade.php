@@ -103,7 +103,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             value="{{ old('no_hp', Auth::user()->no_hp) }}"
                                                             placeholder="">
                                                     </div>
-                                                    <div class="col-md-6 form-group mt-3">
+                                                    {{-- <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Password Lama</label>
                                                         <div class="password-wrapper">
                                                             <input type="password" id="passLama" class="form-control"
@@ -112,12 +112,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                                 id="eyeIconLama" class="fa fa-eye password-icon"
                                                                 onclick="showPass()"></i>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Password Baru</label>
                                                         <div class="password-wrapper">
                                                             <input type="password" id="passBaru" class="form-control"
-                                                                name="password_baru" value="">
+                                                                name="password_baru" value=""
+                                                                placeholder="Kosongkan jika tidak ingin mengganti password">
                                                             <i id="eyeIconBaru" class="fa fa-eye password-icon"
                                                                 onclick="showPassBaru()"></i>
                                                         </div>
