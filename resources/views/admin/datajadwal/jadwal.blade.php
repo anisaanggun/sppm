@@ -106,16 +106,11 @@
                                                                 @endforeach
                                                             </select>
                                                         </div>
-<<<<<<< HEAD
-                                                        <div class="form-group">
-                                                            <label for="tgl_mulai">Tanggal Mulai:</label>
-=======
 
                                                         <div class="form-group mb-3">
                                                             <label for="tgl_mulai" class="d-block"
                                                                 style="text-align:left">Tanggal
                                                                 Mulai</label>
->>>>>>> af240c60d4e7734fb4022c5a2b04075b783217dc
                                                             <input type="date" name="tgl_mulai" id="tgl_mulai"
                                                                 class="form-control" value="{{ $tgl_mulai }}">
                                                         </div>
@@ -127,31 +122,21 @@
                                                             <input type="date" name="tgl_selesai" id="tgl_selesai"
                                                                 class="form-control" value="{{ $tgl_selesai }}">
                                                         </div>
-<<<<<<< HEAD
-                                                        <button type="submit" class="btn btn-primary"
-                                                            id="applyFilter">Terapkan
-                                                            Filter</button>
-=======
 
                                                         <!-- Apply Filter Button -->
                                                         <button type="submit" class="btn btn-primary btn-block mt-3"
                                                             id="applyFilter">Terapkan Filter</button>
->>>>>>> af240c60d4e7734fb4022c5a2b04075b783217dc
                                                     </form>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-                                    <div id="calendar" style="width: 100% !important;"></div>
-=======
 
 
 
 
                                     <div id="calendar"></div>
 
->>>>>>> af240c60d4e7734fb4022c5a2b04075b783217dc
                                 </div>
                             </div>
                             <div class="card border-0 mt-2"
