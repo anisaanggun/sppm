@@ -45,9 +45,9 @@ class DataTeknisiController extends Controller
             // 'password' => 'required|min:6', 
             'no_hp' => 'required|numeric',
         ], [
-            'name.required' => 'Silakan masukkan nama teknisi.',
-            'email.required' => 'Silakan masukkan no hp.',
-            'no_hp.required' => 'Silakan masukkan alamat.',
+            'name.required' => 'Silahkan masukkan nama teknisi.',
+            'email.required' => 'Silahkan masukkan alamat email teknisi.',
+            'no_hp.required' => 'Silahkan masukkan no hp teknisi.',
             
         ]);
 
@@ -93,10 +93,10 @@ class DataTeknisiController extends Controller
             'no_hp' => 'required|numeric',
             'password_baru' => 'nullable|min:6', 
         ], [
-            'name.required' => 'Silakan masukkan nama teknisi.',
-            'email.required' => 'Silakan masukkan no hp.',
-            'no_hp.required' => 'Silakan masukkan alamat.',
-            'password_baru.min' => 'Password minimal 6 karakter.',
+            'name.required' => 'Silahkan masukkan nama teknisi.',
+            'email.required' => 'Silahkan masukkan alamat email teknisi.',
+            'no_hp.required' => 'Silahkan masukkan no hp teknisi.',
+            'password_baru.min' => 'Silahkan masukkan password minimal 6 karakter.',
         ]);
 
         $data_teknisis = User::findOrFail($id);

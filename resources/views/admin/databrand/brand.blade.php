@@ -52,8 +52,8 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <div class="row-md-12">
-                                <div class="col-6 mb-3">
+                            <div class="row g-1">
+                                <div class="col-auto mb-3">
                                     <a href="{{ route('brand.create') }}" class="btn btn-md mb-0 mt-1"
                                         style="background-color: #FF9B50; color: #FFFFFF; border-radius: 10px;">Tambah
                                         Data</a>

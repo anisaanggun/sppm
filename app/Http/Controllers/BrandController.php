@@ -28,7 +28,7 @@ class BrandController extends Controller
         $request->validate([
             'brand_name' => 'required|string|max:255',
         ], [
-            'brand_name.required' => 'Silakan masukan nama brand.',
+            'brand_name.required' => 'Silahkan masukkan nama brand.',
         ]);
 
         //create data mesin
@@ -51,7 +51,7 @@ class BrandController extends Controller
         $this->validate($request, [
             'brand_name' => 'required|string',
         ], [
-            'brand_name.required' => 'Silakan masukan nama brand.',
+            'brand_name.required' => 'Silahkan masukkan nama brand.',
         ]);
 
         $brands = Brand::findOrFail($id);

@@ -61,10 +61,10 @@ class DataPelangganController extends Controller
                 'alamat' => 'required|string',
                 'email' => 'required|email',
             ], [
-                'nama.required' => 'Silakan masukkan nama pelanggan.',
-                'no_hp.required' => 'Silakan masukkan no hp.',
-                'alamat.required' => 'Silakan masukkan alamat.',
-                'email.required' => 'Silakan masukkan email.',
+                'nama.required' => 'Silahkan masukkan nama pelanggan.',
+                'no_hp.required' => 'Silahkan masukkan no hp pelanggan.',
+                'alamat.required' => 'Silahkan masukkan alamat pelanggan.',
+                'email.required' => 'Silahkan masukkan alamat email pelanggan.',
             ]);
     
             // Proses data sesuai dengan role_id
@@ -133,10 +133,10 @@ class DataPelangganController extends Controller
                 'alamat' => 'required|string',
                 'email' => 'required|email',
             ], [
-                'nama.required' => 'Silakan masukkan nama pelanggan.',
-                'no_hp.required' => 'Silakan masukkan no hp.',
-                'alamat.required' => 'Silakan masukkan alamat.',
-                'email.required' => 'Silakan masukkan email.',
+                'nama.required' => 'Silahkan masukkan nama pelanggan.',
+                'no_hp.required' => 'Silahkan masukkan no hp pelanggan.',
+                'alamat.required' => 'Silahkan masukkan alamat pelanggan.',
+                'email.required' => 'Silahkan masukkan email pelanggan.',
             ]);
     
             // Proses data sesuai dengan role_id

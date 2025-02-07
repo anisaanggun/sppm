@@ -61,12 +61,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="row ml-3 mr-3">
                             <div class="col-md-12">
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
+                                    <div class="alert alert-danger d-flex justify-content-between">
+                                        <ul class="mb-0">
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
                                             @endforeach
                                         </ul>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                     </div>
                                 @endif
                                 <div class="card border-0"
@@ -125,12 +127,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Upload Gambar Mesin</label>
-                                                        @if($data_mesins->image)
-                                                            <img src="{{ asset('storage/images/' . $data_mesins->image) }}" alt="Gambar Mesin" style="width: 100px; height: auto;">
+                                                        @if ($data_mesins->image)
+                                                            <img src="{{ asset('storage/images/' . $data_mesins->image) }}"
+                                                                alt="Gambar Mesin" style="width: 100px; height: auto;">
                                                         @else
                                                             <p>Tidak ada gambar</p>
                                                         @endif
-                                                        <input type="file" class="form-control mt-2" name="image" id="imageInput" accept="image/*">
+                                                        <input type="file" class="form-control mt-2" name="image"
+                                                            id="imageInput" accept="image/*">
                                                     </div>
                                                     <div class="text-right mt-3 mb-3">
                                                         <button type="submit"

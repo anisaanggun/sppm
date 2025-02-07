@@ -175,9 +175,9 @@ class DataMesinController extends Controller
                 'deskripsi' => 'nullable|string',
                 'image' => 'image|mimes:jpeg,jpg,png|max:1999',
             ], [
-                'brand_id.required' => 'Silahkan pilih nama brand mesin.',
+                'brand_id.required' => 'Silahkan pilih brand mesin.',
                 'nama_mesin.required' => 'Silahkan masukkan nama mesin.',
-                'model.required' => 'Silahkan pilih nama model mesin.',
+                'model.required' => 'Silahkan masukkan model mesin.',
                 'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
                 'deskripsi.nullable' => 'Silahkan masukkan deskripsi',
             ]);
@@ -264,7 +264,7 @@ class DataMesinController extends Controller
             ], [
                 'brand_id.required' => 'Silahkan pilih nama brand mesin.',
                 'nama_mesin.required' => 'Silahkan masukkan nama mesin.',
-                'model.required' => 'Silahkan pilih nama model mesin.',
+                'model.required' => 'Silahkan masukkan model mesin.',
                 'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
                 'deskripsi.nullable' => 'Silahkan masukkan deskripsi',
             ]);

@@ -39,10 +39,10 @@ class ProfilController extends Controller
             'no_hp' => 'required|numeric|min:11',
             'alamat' => 'string',
         ], [
-            'name.required' => 'Masukan nama anda.',
-            'email.required' => 'Masukan email.',
-            'password_baru.required' => 'Masukan password.',
-            'no_hp.required' => 'Masukan no hp.',
+            'name.required' => 'Silahkan masukkan nama anda.',
+            'email.required' => 'Silahkan masukkan alamat email anda.',
+            'password_baru.required' => 'Silahkan masukkan password.',
+            'no_hp.required' => 'Silahkan masukkan no hp anda.',
         ]);
 
         $users = User::findOrFail($id);
