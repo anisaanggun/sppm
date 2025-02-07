@@ -106,9 +106,9 @@ class DataPerawatanController extends Controller
         ]);
         // Proses penyimpanan data berdasarkan role
         if ($role_id == 2) {
-            if (is_null($request->user_id)) {
-                return redirect()->back()->with('error', 'Silahkan pilih nama teknisi.');
-            }
+            // if (is_null($request->user_id)) {
+            //     return redirect()->back()->with('error', 'Silahkan pilih nama teknisi.');
+            // }
             
             $mesin = DataMesin::findOrFail($request->mesin_id);
             $user_id = $mesin->user_id;

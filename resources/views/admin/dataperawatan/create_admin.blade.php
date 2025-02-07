@@ -71,11 +71,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             aria-label="Close"></button>
                                     </div>
                                 @endif
-                                @if (session('message'))
+                                {{-- @if (session('message'))
                                     <div class="alert alert-danger">
                                         {{ session('message') }}
                                     </div>
-                                @endif
+                                @endif --}}
                                 <div class="card border-0"
                                     style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                     <div class="card-body">

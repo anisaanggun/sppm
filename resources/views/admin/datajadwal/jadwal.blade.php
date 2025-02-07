@@ -132,41 +132,53 @@
                                         </div>
                                     </div>
                                     <!-- Modal untuk menampilkan detail acara -->
-                                    <div class="modal fade" id="perawatanModal" tabindex="-1" role="dialog" aria-labelledby="perawatanModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="perawatanModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="perawatanModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="perawatanModalLabel"><b>Detail Perawatan</b></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
+                                                    <h5 class="modal-title" id="perawatanModalLabel"><b>Detail
+                                                            Perawatan</b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                        {{-- <span aria-hidden="true">&times;</span> --}}
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" style="text-align: left;">
                                                     <h5 id="perawatanTitle"></h5>
                                                     <p id="perawatanDescription"></p>
-                                                    <p><strong>Nama Pelanggan:</strong> <span id="nama_pelanggan"></span></p>
-                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perawatan"></span></p>
-                                                    <p><strong>Aktivitas:</strong> <span id="aktivitas_perawatan"></span></p>
+                                                    <p><strong>Nama Pelanggan:</strong> <span
+                                                            id="nama_pelanggan"></span></p>
+                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perawatan"></span>
+                                                    </p>
+                                                    <p><strong>Aktivitas:</strong> <span
+                                                            id="aktivitas_perawatan"></span></p>
                                                     <p><strong>Status:</strong> <span id="status"></span></p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade" id="perbaikanModal" tabindex="-1" role="dialog" aria-labelledby="perbaikanModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="perbaikanModal" tabindex="-1" role="dialog"
+                                        aria-labelledby="perbaikanModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="perbaikanModalLabel"><b>Detail Perbaikan</b></h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
+                                                    <h5 class="modal-title" id="perbaikanModalLabel"><b>Detail
+                                                            Perbaikan</b></h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                        {{-- <span aria-hidden="true">&times;</span> --}}
                                                     </button>
                                                 </div>
                                                 <div class="modal-body" style="text-align: left;">
                                                     <h5 id="perbaikanTitle"></h5>
                                                     <p id="perbaikanDescription"></p>
-                                                    <p><strong>Nama Pelanggan:</strong> <span id="nama_pelanggan_perbaikan"></span></p>
-                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perbaikan"></span></p>
-                                                    <p><strong>Kerusakan:</strong> <span id="kerusakan_perbaikan"></span></p>
+                                                    <p><strong>Nama Pelanggan:</strong> <span
+                                                            id="nama_pelanggan_perbaikan"></span></p>
+                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perbaikan"></span>
+                                                    </p>
+                                                    <p><strong>Kerusakan:</strong> <span
+                                                            id="kerusakan_perbaikan"></span></p>
                                                     <p><strong>Status:</strong> <span id="status_perbaikan"></span></p>
                                                 </div>
                                             </div>
@@ -248,63 +260,71 @@
         var calendar;
 
         document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+            var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'dayGridMonth',
-            headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-            navLinks: true, // Enable link for opening events
-            editable: true,
-            events: @json($events),
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                navLinks: true, // Enable link for opening events
+                editable: true,
+                events: @json($events),
 
-            eventClick: function(info) {
-                // console.log(info);
+                eventClick: function(info) {
+                    // console.log(info);
 
-            var eventObj = info.event;
-            console.log(eventObj._def.extendedProps.status['class'])
+                    var eventObj = info.event;
+                    console.log(eventObj._def.extendedProps.status['class'])
 
-            // Ambil deskripsi dari eventObj
-            // var description = eventObj._def.extendedProps.description;
-            // var nama_pelanggan = eventObj._def.extendedProps.nama_pelanggan;
-            // var aktivitas_perawatan = eventObj._def.extendedProps.aktivitas_perawatan;
-            // var status = eventObj._def.extendedProps.status;
+                    // Ambil deskripsi dari eventObj
+                    // var description = eventObj._def.extendedProps.description;
+                    // var nama_pelanggan = eventObj._def.extendedProps.nama_pelanggan;
+                    // var aktivitas_perawatan = eventObj._def.extendedProps.aktivitas_perawatan;
+                    // var status = eventObj._def.extendedProps.status;
 
 
-            // Update modal dengan informasi acara
-        if (eventObj._def.extendedProps.jenis === 'perawatan') {
-            document.getElementById('perawatanTitle').innerText = eventObj.title;
-            // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
-            document.getElementById('nama_pelanggan').innerText = eventObj._def.extendedProps.nama_pelanggan;
-            document.getElementById('tanggal_perawatan').innerText = eventObj._def.extendedProps.created_at;
-            document.getElementById('aktivitas_perawatan').innerText = eventObj._def.extendedProps.aktivitas;
-            document.getElementById('status').innerHTML = `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
-            // eventObj._def.extendedProps.status;
+                    // Update modal dengan informasi acara
+                    if (eventObj._def.extendedProps.jenis === 'perawatan') {
+                        document.getElementById('perawatanTitle').innerText = eventObj.title;
+                        // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
+                        document.getElementById('nama_pelanggan').innerText = eventObj._def
+                            .extendedProps.nama_pelanggan;
+                        document.getElementById('tanggal_perawatan').innerText = eventObj._def
+                            .extendedProps.created_at;
+                        document.getElementById('aktivitas_perawatan').innerText = eventObj._def
+                            .extendedProps.aktivitas;
+                        document.getElementById('status').innerHTML =
+                            `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
+                        // eventObj._def.extendedProps.status;
 
-            // Tampilkan modal
-            $('#perawatanModal').modal('show');
+                        // Tampilkan modal
+                        $('#perawatanModal').modal('show');
 
-        } else if (eventObj._def.extendedProps.jenis === 'perbaikan') {
-            document.getElementById('perbaikanTitle').innerText = eventObj.title;
-            // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
-            document.getElementById('nama_pelanggan_perbaikan').innerText = eventObj._def.extendedProps.nama_pelanggan;
-            document.getElementById('tanggal_perbaikan').innerText = eventObj._def.extendedProps.created_at;
-            document.getElementById('kerusakan_perbaikan').innerText = eventObj._def.extendedProps.kerusakan;
-            document.getElementById('status_perbaikan').innerHTML = `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
-            // eventObj._def.extendedProps.status;
+                    } else if (eventObj._def.extendedProps.jenis === 'perbaikan') {
+                        document.getElementById('perbaikanTitle').innerText = eventObj.title;
+                        // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
+                        document.getElementById('nama_pelanggan_perbaikan').innerText = eventObj._def
+                            .extendedProps.nama_pelanggan;
+                        document.getElementById('tanggal_perbaikan').innerText = eventObj._def
+                            .extendedProps.created_at;
+                        document.getElementById('kerusakan_perbaikan').innerText = eventObj._def
+                            .extendedProps.kerusakan;
+                        document.getElementById('status_perbaikan').innerHTML =
+                            `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
+                        // eventObj._def.extendedProps.status;
 
-            // Tampilkan modal
-            $('#perbaikanModal').modal('show');
-        }
-        }
-    });
+                        // Tampilkan modal
+                        $('#perbaikanModal').modal('show');
+                    }
+                }
+            });
 
-    // Render the calendar
-    calendar.render();
-});
+            // Render the calendar
+            calendar.render();
+        });
 
 
 
