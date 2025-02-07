@@ -50,17 +50,15 @@ class DataPerbaikanController extends Controller
 
             if ($role_id == 2){
                 $teknisis = User::where('role_id', 1)->get();
-                //Daftar nama_mesin untuk select
-                $data_mesins = DataMesin::get();
                 $data_pelanggans = DataPelanggan::get();
                 // dd($data_mesins);
-                return view('admin.dataperbaikan.create_admin', compact('data_mesins', 'data_pelanggans', 'teknisis'));
+                return view('admin.dataperbaikan.create_admin', compact('data_pelanggans', 'teknisis'));
             }
             elseif ($role_id == 1){
-                $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
-                $data_pelanggans = DataPelanggan::get();
+                $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
+                
                 // dd($data_mesins);
-                return view('admin.dataperbaikan.create', compact('data_mesins', 'data_pelanggans'));
+                return view('admin.dataperbaikan.create', compact('data_pelanggans'));
             }
         }
         return redirect()->route('login')->with('error', 'Anda harus login untuk menambahkan data perbaikan.');
@@ -79,19 +77,21 @@ class DataPerbaikanController extends Controller
                 'catatan' => 'required|string',
                 'status_perbaikan' => 'required',
             ], [
-                'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
+                'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
                 'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
                 'tanggal.required' => 'Silahkan masukkan tanggal.',
-                'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
-                'catatan.required' => 'Masukkan catatan mesin anda.',
+                'kerusakan.required' => 'Silahkan masukkan kerusakan.',
+                'catatan.required' => 'Silahkan masukkan catatan.',
                 'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
             ]);
 
             if ($role_id == 2){
+                $mesin = DataMesin::findOrFail($request->mesin_id);
+                $user_id = $mesin->user_id;
                 //create data perbaikan
                 DataPerbaikan::create([
                     // 'user_id' => Auth::user()->id,
-                    'user_id' => $request->user_id,
+                    'user_id' => $user_id,
                     'pemilik_id' => $request->pemilik_id,
                     'mesin_id' => $request->mesin_id,
                     'tanggal' => $request->tanggal,
@@ -123,15 +123,16 @@ class DataPerbaikanController extends Controller
         if (Auth::check()){
             $role_id = Auth::user()->role_id;
             $data_perbaikans = DataPerbaikan::findOrFail($id);
-            $data_mesins = DataMesin::get();
-            $data_pelanggans = DataPelanggan::get();
+            
 
             if ($role_id == 2){
+                $data_pelanggans = DataPelanggan::get();
                 $teknisis = User::where('role_id', 1)->get();
-                return view('admin.dataperbaikan.edit_admin', compact('data_perbaikans', 'data_mesins', 'data_pelanggans', 'teknisis'));
+                return view('admin.dataperbaikan.edit_admin', compact('data_perbaikans', 'data_pelanggans', 'teknisis'));
             }
             if ($role_id == 1){
-                return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_mesins', 'data_pelanggans'));
+                $data_pelanggans = DataPelanggan::where('user_id', Auth::id())->get(); 
+                return view('admin.dataperbaikan.edit', compact('data_perbaikans', 'data_pelanggans'));
             }
         }
         return redirect()->route('login')->with('error', 'Anda harus login untuk mengakses halaman ini.');
@@ -151,11 +152,11 @@ class DataPerbaikanController extends Controller
             'catatan' => 'required|string',
             'status_perbaikan' => 'required',
         ], [
-            'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
+            'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal.required' => 'Silahkan masukkan tanggal.',
-            'kerusakan.required' => 'Silahkan masukkan kerusakan mesin anda.',
-            'catatan.required' => 'Masukkan catatan mesin anda.',
+            'kerusakan.required' => 'Silahkan masukkan kerusakan.',
+            'catatan.required' => 'Silahkan masukkan catatan untuk mesin.',
             'status_perbaikan.required' => 'Silahkan pilih status perbaikan.',
         ]);
 
@@ -163,12 +164,13 @@ class DataPerbaikanController extends Controller
         // Cek role_id
         if ($role_id == 2) {  // Admin
             $data_perbaikans = DataPerbaikan::findOrFail($id);
-
+            $mesin = DataMesin::findOrFail($request->mesin_id);
+            $user_id = $mesin->user_id;
              // Simpan status sebelumnya sebelum update
             $status_before = $data_perbaikans->status_perbaikan;
 
             $data_perbaikans->update([
-                'user_id' => $request->user_id,
+                'user_id' => $user_id,
                 'pemilik_id' => $request->pemilik_id,
                 'mesin_id' => $request->mesin_id,
                 'tanggal' => $request->tanggal,

@@ -62,12 +62,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="row ml-3 mr-3">
                             <div class="col-md-12">
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger alert-dismissible fade show">
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
                                             @endforeach
                                         </ul>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                     </div>
                                 @endif
                                 <div class="card border-0"
@@ -109,15 +111,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
                                                         <label class="font-weight-bold">Nama Mesin</label>
-                                                        <select class="form-control" id="mesin_id" name="mesin_id"
-                                                            required>
-                                                            <option value="" disabled>Pilih Mesin</option>
-                                                            @foreach ($data_mesins as $item)
-                                                                <option value="{{ $item->id }}"
-                                                                    {{ old('mesin_id', $data_perawatans->mesin_id) == $item->id ? 'selected' : '' }}>
-                                                                    {{ $item->nama_mesin }}
+                                                        <select name="mesin_id" id="mesin_id" class="form-control">
+                                                            <option value="">Pilih Mesin</option>
+                                                            {{-- @foreach ($data_mesins as $mesin)
+                                                                <option value="{{ $mesin->id }}"
+                                                                    {{ $mesin->id == $data_perawatans->mesin_id ? 'selected' : '' }}>
+                                                                    {{ $mesin->nama_mesin }}
                                                                 </option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -142,12 +143,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             required>
                                                             <option value="" disabled>Pilih Teknisi
                                                             </option>
-                                                            @foreach ($teknisis as $item)
+                                                            {{-- @foreach ($teknisis as $item)
                                                                 <option value="{{ $item->id }}"
                                                                     {{ old('user_id', isset($data_perawatans) ? $data_perawatans->user_id : null) == $item->id ? 'selected' : '' }}>
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -192,6 +193,91 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let pemilikSelect = document.getElementById('pemilik_id');
+            let mesinSelect = document.getElementById('mesin_id');
+            let userSelect = document.getElementById('user_id');
+            let selectedMesinId = '{{ $data_perawatans->mesin_id }}'; // Ambil nilai mesin_id yang sudah ada
+            let selectedUserId = '{{ $data_perawatans->user_id }}'; // Ambil nilai user_id yang sudah ada
+
+            // Fungsi untuk memuat mesin berdasarkan pemilik_id
+            function loadMesins() {
+                let selectedPemilikId = pemilikSelect.value;
+
+                if (selectedPemilikId) {
+                    fetch(`/get-mesins/${selectedPemilikId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            mesinSelect.innerHTML = '<option value="" disabled selected>Pilih Mesin</option>';
+
+                            data.forEach(function(mesin) {
+                                let option = document.createElement('option');
+                                option.value = mesin.id;
+                                option.textContent = mesin.nama_mesin;
+
+                                // Cek apakah mesin_id saat ini sama dengan id mesin di looping
+                                if (mesin.id == selectedMesinId) {
+                                    option.selected = true; // Set opsi yang terpilih
+                                }
+
+                                mesinSelect.appendChild(option);
+                            });
+
+                            // Memuat teknisi berdasarkan mesin yang sudah ada
+                            loadTeknisi();
+                        })
+                        .catch(error => {
+                            console.log('Error:', error);
+                        });
+                } else {
+                    mesinSelect.innerHTML = '<option value="" disabled selected>Pilih Mesin</option>';
+                }
+            }
+
+            // Fungsi untuk memuat teknisi berdasarkan mesin_id
+            function loadTeknisi() {
+                let mesin_id = mesinSelect.value; // Ambil nilai mesin_id yang dipilih
+
+                if (mesin_id) {
+                    fetch(`/get-teknisi/${mesin_id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            userSelect.innerHTML = '<option value="" disabled>Pilih Teknisi</option>';
+
+                            if (data) {
+                                let option = document.createElement('option');
+                                option.value = data.id;
+                                option.textContent = data.name;
+                                userSelect.appendChild(option);
+                                $('#user_id').prop('disabled', true);
+
+                                // Menandai teknisi yang sudah ada sebagai terpilih
+                                if (data.id == selectedUserId) {
+                                    option.selected = true; // Set opsi yang terpilih
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            console.log('Error:', error);
+                        });
+                } else {
+                    userSelect.innerHTML = '<option value="" disabled selected>Pilih Teknisi</option>';
+                }
+            }
+
+            // Load mesin berdasarkan pemilik_id yang sudah ada saat halaman dimuat pertama kali
+            loadMesins();
+
+            // Event listener untuk perubahan pada pemilik_id
+            pemilikSelect.addEventListener('change', loadMesins);
+
+            // Event listener untuk perubahan pada mesin_id
+            mesinSelect.addEventListener('change', loadTeknisi);
+        });
+    </script>
+
 
 </body>
 

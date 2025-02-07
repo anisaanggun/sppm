@@ -60,12 +60,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="row ml-3 mr-3">
                             <div class="col-md-12">
                                 @if ($errors->any())
-                                    <div class="alert alert-danger">
+                                    <div class="alert alert-danger alert-dismissible fade show">
                                         <ul>
                                             @foreach ($errors->all() as $error)
                                                 <li>{{ $error }}</li>
                                             @endforeach
                                         </ul>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                     </div>
                                 @endif
                                 <div class="card border-0"
@@ -108,10 +110,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             required>
                                                             <option value="" disabled selected>Pilih Mesin
                                                             </option>
-                                                            @foreach ($data_mesins as $item)
+                                                            {{-- @foreach ($data_mesins as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->nama_mesin }}</option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -131,11 +133,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             required>
                                                             <option value="" disabled selected>Pilih Teknisi
                                                             </option>
-                                                            @foreach ($teknisis as $item)
+                                                            {{-- @foreach ($teknisis as $item)
                                                                 <option value="{{ $item->id }}">
                                                                     {{ $item->name }}
                                                                 </option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6 form-group mt-3">
@@ -180,6 +182,82 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // Event ketika dropdown pemilik_id berubah
+            $('#pemilik_id').on('change', function() {
+                var pemilik_id = $(this).val(); // Ambil nilai pemilik_id yang dipilih
+
+                if (pemilik_id) {
+                    // Lakukan AJAX request ke route get-mesins dengan pemilik_id di URL
+                    $.ajax({
+                        url: `/get-mesins/${pemilik_id}`, // Ganti dengan URL yang sesuai
+                        type: "GET",
+                        success: function(data) {
+                            // Kosongkan dropdown mesin_id
+                            $('#mesin_id').empty();
+                            // Tambahkan opsi default
+                            $('#mesin_id').append(
+                                '<option value="" disabled selected>Pilih Mesin</option>');
+
+                            // Isi dropdown mesin_id dengan data yang diterima
+                            $.each(data, function(key, value) {
+                                $('#mesin_id').append('<option value="' + value.id +
+                                    '">' + value.nama_mesin + '</option>');
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: " + error);
+                            console.error("Response:", xhr
+                                .responseText); // Lihat respons yang diterima
+                            alert("Terjadi kesalahan saat mengambil data mesin.\n" + xhr
+                                .responseText); // Menampilkan response error
+                        }
+                    });
+                } else {
+                    // Jika pemilik_id kosong, kosongkan dropdown mesin_id
+                    $('#mesin_id').empty();
+                    $('#mesin_id').append('<option value="" disabled selected>Pilih Mesin</option>');
+                }
+            });
+
+            // Event ketika dropdown mesin_id berubah
+            $('#mesin_id').on('change', function() {
+                var mesin_id = $(this).val(); // Ambil nilai mesin_id yang dipilih
+
+                if (mesin_id) {
+                    // Lakukan AJAX request ke route get-teknisi dengan mesin_id di URL
+                    $.ajax({
+                        url: `/get-teknisi/${mesin_id}`,
+                        type: "GET",
+                        success: function(data) {
+                            // Kosongkan dropdown user_id
+                            $('#user_id').empty();
+                            // Tambahkan opsi default
+                            $('#user_id').append(
+                                '<option value="" disabled>Pilih Teknisi</option>');
+
+                            // Isi dropdown user_id dengan data yang diterima
+                            if (data) {
+                                $('#user_id').append('<option value="' + data.id +
+                                    '" selected>' + data.name + '</option>');
+                                $('#user_id').prop('disabled', true);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: " + error);
+                            alert("Terjadi kesalahan saat mengambil data teknisi.");
+                        }
+                    });
+                } else {
+                    // Jika mesin_id kosong, kosongkan dropdown user_id
+                    $('#user_id').empty();
+                    $('#user_id').append('<option value="" disabled selected>Pilih Teknisi</option>');
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

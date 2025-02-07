@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('download.qr');
     Route::get('data-mesin/download-qr/{id}', [DataMesinController::class, 'downloadQr'])->name('data-mesin.downloadQr');
     Route::get('/data-mesin/export_excel', [DataMesinController::class, 'export_excel'])->name('data-mesin.export_excel');
+    Route::get('get-mesins/{pemilik_id}', [DataMesinController::class, 'getMesins']);
+    Route::get('get-teknisi/{mesin_id}', [DataMesinController::class, 'getTeknisiByMesin']);
 
     Route::resource('/data-perawatan', DataPerawatanController::class)->except(['show']);
     Route::resource('data-perawatan_admin', DataPerawatanController::class)->except(['show']);

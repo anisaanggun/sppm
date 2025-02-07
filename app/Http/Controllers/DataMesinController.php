@@ -396,4 +396,23 @@ class DataMesinController extends Controller
             
         }
     }
+    
+    public function getMesins($pemilik_id)
+    {
+        $mesins = DataMesin::where('pemilik_id', $pemilik_id)->get();
+
+        return response()->json($mesins);
+        
+    }
+
+    public function getTeknisiByMesin($mesin_id)
+    {
+        $mesin = DataMesin::with('user')->find($mesin_id); 
+
+        if ($mesin && $mesin->user) {
+            return response()->json($mesin->user);
+        }
+
+        return response()->json(null); 
+    }
 }

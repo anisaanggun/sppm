@@ -64,25 +64,19 @@ class DataPerawatanController extends Controller
             // Ambil data teknisi dengan role_id == 1
             $teknisis = User::where('role_id', 1)->get();
 
-            // Ambil daftar mesin untuk admin berdasarkan user_id yang sedang login
-            $data_mesins = DataMesin::get();
-
             // Ambil semua data pelanggan
             $data_pelanggans = DataPelanggan::get();
 
             // Kembalikan view untuk admin dengan data yang diperlukan
-            return view('admin.dataperawatan.create_admin', compact('data_mesins', 'data_pelanggans', 'teknisis'));
+            return view('admin.dataperawatan.create_admin', compact( 'data_pelanggans', 'teknisis'));
         }
         // Jika role_id == 1 (Teknisi)
         elseif ($role_id == 1) {
             // Ambil daftar mesin untuk teknisi berdasarkan user_id yang sedang login
-            $data_mesins = DataMesin::where('data_mesins.user_id', Auth::user()->id)->get();
-
-            // Ambil data pelanggan untuk teknisi
-            $data_pelanggans = DataPelanggan::get();
+            $data_pelanggans = DataPelanggan::where('user_id', Auth::user()->id)->get();
 
             // Kembalikan view untuk teknisi dengan data yang diperlukan
-            return view('admin.dataperawatan.create', compact('data_mesins', 'data_pelanggans'));
+            return view('admin.dataperawatan.create', compact('data_pelanggans'));
         }
     }
     // Jika user tidak login, arahkan ke halaman login
@@ -95,9 +89,7 @@ class DataPerawatanController extends Controller
     // Cek jika user sudah login
     if (Auth::check()) {
         $role_id = Auth::user()->role_id;
-
-        // Validasi form
-        $request->validate([
+        $this->validate($request, [
             'pemilik_id' => 'required',
             'mesin_id' => 'required',
             'tanggal_perawatan' => 'required|date',
@@ -105,20 +97,26 @@ class DataPerawatanController extends Controller
             'catatan' => 'required|string',
             'status_perawatan' => 'required',
         ], [
-            'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
+            'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
             'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
             'tanggal_perawatan.required' => 'Silahkan masukkan tanggal.',
-            'aktivitas.required' => 'Silahkan masukkan aktivitas mesin Pemilik.',
-            'catatan.required' => 'Silahkan masukkan catatan mesin Pemilik.',
+            'aktivitas.required' => 'Silahkan masukkan aktivitas yang dilakukan.',
+            'catatan.required' => 'Silahkan masukkan catatan untuk mesin.',
             'status_perawatan.required' => 'Silahkan pilih status perawatan.',
         ]);
-
         // Proses penyimpanan data berdasarkan role
         if ($role_id == 2) {
+            if (is_null($request->user_id)) {
+                return redirect()->back()->with('error', 'Silahkan pilih nama teknisi.');
+            }
+            
+            $mesin = DataMesin::findOrFail($request->mesin_id);
+            $user_id = $mesin->user_id;
+
             // Jika role_id == 2 (Admin), set user_id dengan admin yang login
             DataPerawatan::create([
                 // 'user_id' => Auth::user()->id,  // Gunakan Auth::user()->id untuk admin
-                'user_id' => $request->user_id,
+                'user_id' => $user_id,
                 'pemilik_id' => $request->pemilik_id,
                 'mesin_id' => $request->mesin_id,
                 'tanggal_perawatan' => $request->tanggal_perawatan,
@@ -130,6 +128,7 @@ class DataPerawatanController extends Controller
             // Redirect ke halaman data perawatan admin
             return redirect()->route('data-perawatan_admin.index')->with('success', 'Data perawatan berhasil ditambahkan!');
         } elseif ($role_id == 1) {
+            
             // Jika role_id == 1 (Teknisi), set user_id dengan teknisi yang login
             DataPerawatan::create([
                 'user_id' => Auth::user()->id,  // Gunakan Auth::user()->id untuk teknisi
@@ -156,24 +155,20 @@ class DataPerawatanController extends Controller
     if (Auth::check()) {
         $role_id = Auth::user()->role_id;
 
-        // Cari data perawatan berdasarkan ID
         $data_perawatans = DataPerawatan::findOrFail($id);
-
-        // Ambil mesin terkait dengan user yang sedang login
-        $data_mesins = DataMesin::get();
-
-        // Ambil semua data pelanggan
-        $data_pelanggans = DataPelanggan::get();
+        // $data_mesins = DataMesin::get();
 
         // Jika role_id = 2 (Admin), ambil data teknisi
         if ($role_id == 2) {
+            $data_pelanggans = DataPelanggan::get();
             $teknisis = User::where('role_id', 1)->get();
-            return view('admin.dataperawatan.edit_admin', compact('data_perawatans', 'data_mesins', 'data_pelanggans', 'teknisis'));
+            return view('admin.dataperawatan.edit_admin', compact('data_perawatans',  'data_pelanggans', 'teknisis'));
         }
 
         // Jika role_id = 1 (Teknisi), hanya data perawatan dan mesin yang relevan
         if ($role_id == 1) {
-            return view('admin.dataperawatan.edit', compact('data_perawatans', 'data_mesins', 'data_pelanggans'));
+            $data_pelanggans = DataPelanggan::where('user_id', Auth::id())->get(); 
+            return view('admin.dataperawatan.edit', compact('data_perawatans', 'data_pelanggans'));
         }
     }
 
@@ -186,7 +181,6 @@ class DataPerawatanController extends Controller
         if (Auth::check()) {
             $role_id = Auth::user()->role_id;
 
-            // Validasi input request
             $this->validate($request, [
                 'pemilik_id' => 'required',
                 'mesin_id' => 'required',
@@ -195,25 +189,28 @@ class DataPerawatanController extends Controller
                 'catatan' => 'required|string',
                 'status_perawatan' => 'required',
             ], [
-                'pemilik_id.required' => 'Silahkan masukkan nama pelanggan.',
+                'pemilik_id.required' => 'Silahkan pilih nama pelanggan.',
                 'mesin_id.required' => 'Silahkan pilih setidaknya satu nama mesin.',
                 'tanggal_perawatan.required' => 'Silahkan masukkan tanggal.',
-                'aktivitas.required' => 'Silahkan masukkan aktivitas mesin anda.',
-                'catatan.required' => 'Masukkan catatan mesin anda.',
+                'aktivitas.required' => 'Silahkan masukkan aktivitas yang dilakukan.',
+                'catatan.required' => 'Silahkan masukkan catatan untuk mesin.',
                 'status_perawatan.required' => 'Silahkan pilih status perawatan.',
             ]);
 
             // Jika role_id adalah 2 (admin)
             if ($role_id == 2) {
+                
+                
                 // Cari data perawatan berdasarkan ID
                 $data_perawatan = DataPerawatan::findOrFail($id);
-
+                $mesin = DataMesin::findOrFail($request->mesin_id);
+                $user_id = $mesin->user_id;
                 // Simpan status sebelum update
                 $status_before = $data_perawatan->status_perawatan;
 
                 // Update data perawatan
                 $data_perawatan->update([
-                    'user_id' => $request->user_id,
+                    'user_id' => $user_id,
                     'pemilik_id' => $request->pemilik_id,
                     'mesin_id' => $request->mesin_id,
                     'tanggal_perawatan' => $request->tanggal_perawatan,
@@ -246,6 +243,7 @@ class DataPerawatanController extends Controller
 
             // Jika role_id adalah 1 (teknisi), hanya bisa mengedit data tertentu
             if ($role_id == 1) {
+                
                 // Cari data perawatan berdasarkan ID yang dimiliki oleh teknisi
                 $data_perawatan = DataPerawatan::findOrFail($id);
                 // Simpan status sebelum update
