@@ -131,15 +131,51 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
+                                    <!-- Modal untuk menampilkan detail acara -->
+                                    <div class="modal fade" id="perawatanModal" tabindex="-1" role="dialog" aria-labelledby="perawatanModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="perawatanModalLabel"><b>Detail Perawatan</b></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" style="text-align: left;">
+                                                    <h5 id="perawatanTitle"></h5>
+                                                    <p id="perawatanDescription"></p>
+                                                    <p><strong>Nama Pelanggan:</strong> <span id="nama_pelanggan"></span></p>
+                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perawatan"></span></p>
+                                                    <p><strong>Aktivitas:</strong> <span id="aktivitas_perawatan"></span></p>
+                                                    <p><strong>Status:</strong> <span id="status"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="perbaikanModal" tabindex="-1" role="dialog" aria-labelledby="perbaikanModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="perbaikanModalLabel"><b>Detail Perbaikan</b></h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" style="text-align: left;">
+                                                    <h5 id="perbaikanTitle"></h5>
+                                                    <p id="perbaikanDescription"></p>
+                                                    <p><strong>Nama Pelanggan:</strong> <span id="nama_pelanggan_perbaikan"></span></p>
+                                                    <p><strong>Tanggal:</strong> <span id="tanggal_perbaikan"></span></p>
+                                                    <p><strong>Kerusakan:</strong> <span id="kerusakan_perbaikan"></span></p>
+                                                    <p><strong>Status:</strong> <span id="status_perbaikan"></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div id="calendar"></div>
-
                                 </div>
                             </div>
-                            <div class="card border-0 mt-2"
+                            {{-- <div class="card border-0 mt-2"
                                 style="border-radius: 15px !important; box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);">
                                 <div class="card-body">
                                     <h5>Buat Jadwal</h5>
@@ -188,7 +224,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div><!-- /.container-fluid -->
@@ -212,82 +248,64 @@
         var calendar;
 
         document.addEventListener('DOMContentLoaded', function() {
-            var calendarEl = document.getElementById('calendar');
+        var calendarEl = document.getElementById('calendar');
 
-            calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                navLinks: true, // Enable link for opening events
-                editable: true,
-                events: @json($events)
-                // events: function(fetchInfo, successCallback, failureCallback) {
-                //     // Ambil filter dari input di modal
-                //     var mesin_id = document.getElementById('mesin_id').value;
-                //     var tgl_mulai = document.getElementById('tgl_mulai').value;
-                //     var tgl_selesai = document.getElementById('tgl_selesai').value;
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+            navLinks: true, // Enable link for opening events
+            editable: true,
+            events: @json($events),
 
-                //     // Siapkan URL dengan query parameters untuk filter
-                //     var url = '{{ route('jadwal.events') }}' + '?mesin_id=' + mesin_id +
-                //         '&tgl_mulai=' + tgl_mulai + '&tgl_selesai=' + tgl_selesai;
+            eventClick: function(info) {
+                // console.log(info);
 
-                //     // Ambil data jadwal dari server
-                //     fetch(url)
-                //         .then(response => response.json())
-                //         .then(data => {
-                //             // console.log(data, 'data_jadwal')
-                //             var events = data.map(jadwal => {
-                //                 // Periksa apakah tanggal ada
-                //                 var startDate = jadwal.start ? moment(jadwal.start).format(
-                //                     'YYYY-MM-DDTHH:mm:ss') : null;
-                //                 var endDate = jadwal.start ? moment(jadwal.start).format(
-                //                     'YYYY-MM-DDTHH:mm:ss') : null;
+            var eventObj = info.event;
+            console.log(eventObj._def.extendedProps.status['class'])
 
-                //                 return {
-                //                     title: 'Jadwal untuk Mesin ' + jadwal.title,
-                //                     start: startDate,
-                //                     end: endDate,
-                //                     extendedProps: {
-                //                         description: 'Pemilik: ' + jadwal.extendedProps
-                //                             .description
-                //                     },
-                //                     className: 'dot-event'
-                //                 };
-                //             });
+            // Ambil deskripsi dari eventObj
+            // var description = eventObj._def.extendedProps.description;
+            // var nama_pelanggan = eventObj._def.extendedProps.nama_pelanggan;
+            // var aktivitas_perawatan = eventObj._def.extendedProps.aktivitas_perawatan;
+            // var status = eventObj._def.extendedProps.status;
 
-                //             successCallback(events); // Kirim events yang sudah diformat
-                //         })
-                //         .catch(error => {
-                //             failureCallback(error); // Tangani jika ada error
-                //         });
-                // },
 
-                // eventClassNames: function(event) {
-                //     // Periksa apakah class 'dot-event' ada dalam array classNames
-                //     if (event.classNames.includes('dot-event')) {
-                //         return [
-                //             'fc-dot'
-                //         ]; // Kelas 'fc-dot' akan ditambahkan untuk acara yang diberi 'dot-event'
-                //     }
-                //     return [];
-                // }
+            // Update modal dengan informasi acara
+        if (eventObj._def.extendedProps.jenis === 'perawatan') {
+            document.getElementById('perawatanTitle').innerText = eventObj.title;
+            // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
+            document.getElementById('nama_pelanggan').innerText = eventObj._def.extendedProps.nama_pelanggan;
+            document.getElementById('tanggal_perawatan').innerText = eventObj._def.extendedProps.created_at;
+            document.getElementById('aktivitas_perawatan').innerText = eventObj._def.extendedProps.aktivitas;
+            document.getElementById('status').innerHTML = `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
+            // eventObj._def.extendedProps.status;
 
-                // eventClassNames: function(event) {
-                //     return event.extendedProps.className ? ['fc-dot'] : [];
-                // }
+            // Tampilkan modal
+            $('#perawatanModal').modal('show');
 
-                // eventClassNames: function(event) {
-                //     return event.classNames.includes('dot-event') ? ['fc-dot'] : [];
-                // }
+        } else if (eventObj._def.extendedProps.jenis === 'perbaikan') {
+            document.getElementById('perbaikanTitle').innerText = eventObj.title;
+            // document.getElementById('eventDescription').innerText = eventObj._def.extendedProps.description;
+            document.getElementById('nama_pelanggan_perbaikan').innerText = eventObj._def.extendedProps.nama_pelanggan;
+            document.getElementById('tanggal_perbaikan').innerText = eventObj._def.extendedProps.created_at;
+            document.getElementById('kerusakan_perbaikan').innerText = eventObj._def.extendedProps.kerusakan;
+            document.getElementById('status_perbaikan').innerHTML = `<span class="badge ${eventObj._def.extendedProps.status['class']} ">${eventObj._def.extendedProps.status['text']}</span>`
+            // eventObj._def.extendedProps.status;
 
-            });
+            // Tampilkan modal
+            $('#perbaikanModal').modal('show');
+        }
+        }
+    });
 
-            // Render the calendar
-            calendar.render();
-        });
+    // Render the calendar
+    calendar.render();
+});
+
 
 
         // Event listener untuk tombol 'Terapkan Filter'
